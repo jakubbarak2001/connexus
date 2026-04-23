@@ -1,0 +1,52 @@
+---
+import Container from "./Container.astro";
+import SectionMarker from "./SectionMarker.astro";
+import CaseStudyCard from "./CaseStudyCard.astro";
+---
+
+<section id="prace" class="bg-bg-secondary py-20 md:py-32">
+  <Container>
+    <div class="space-y-14 md:space-y-20">
+      <div class="max-w-[900px] space-y-8 md:space-y-10">
+        <SectionMarker number="03" label="Práce" />
+
+        <h2 class="font-serif text-h2-sm font-medium md:text-h2">Vybrané projekty.</h2>
+
+        <p class="max-w-prose text-body-lg text-text-secondary">
+          Každý projekt je kompletní případová studie — ne jen kód.
+        </p>
+      </div>
+
+      <div class="space-y-20 md:space-y-28">
+        <CaseStudyCard
+          title="marketabarakova.cz"
+          status="Živě"
+          image="/images/marketa-screenshot.svg"
+          imageAlt="Náhled úvodní strany webu marketabarakova.cz"
+          description="Pojišťovací poradkyně ČSOB Pojišťovny. Seděla v Ústí nad Labem, měla skvělé smlouvy, ale byla limitovaná regionem. Měla 26 000 sledujících na Instagramu — téměř žádné konverze."
+          approach="Začali jsme od značky. Komu slouží. Čím se liší. Proč by vás někdo měl zvolit před kolegyní ze sousední kanceláře. Pak teprve web. Custom design, ne šablona. Copy napsaný pro její konkrétní klientelu. Analytika pro měření každého kroku návštěvníka."
+          result="Jeden den v prvním měsíci po spuštění jí zavolalo 30 potenciálních klientů. Šest týdnů po spuštění jí volají klienti z Brna, zatímco ona sedí v Ústí."
+          tags={["Astro", "TailwindCSS", "Custom Design", "Copywriting", "Branding"]}
+          ctaLabel="Zobrazit případovou studii"
+          ctaHref="/prace/marketa-barakova"
+        />
+
+        <CaseStudyCard
+          placeholder
+          title="Váš projekt zde."
+          placeholderBody="Hledám druhého klienta z finančního sektoru pro případovou studii."
+          ctaLabel="Domluvit konzultaci"
+          ctaHref="#kontakt"
+        />
+
+        <CaseStudyCard
+          placeholder
+          title="Váš projekt zde."
+          placeholderBody="Třetí místo pro zakládajícího klienta."
+          ctaLabel="Domluvit konzultaci"
+          ctaHref="#kontakt"
+        />
+      </div>
+    </div>
+  </Container>
+</section>

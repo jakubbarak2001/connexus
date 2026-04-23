@@ -1,0 +1,91 @@
+---
+import Button from "./Button.astro";
+
+interface Props {
+  title: string;
+  ctaLabel: string;
+  ctaHref: string;
+  placeholder?: boolean;
+  placeholderBody?: string;
+  image?: string;
+  imageAlt?: string;
+  status?: string;
+  description?: string;
+  approach?: string;
+  result?: string;
+  tags?: string[];
+  reverse?: boolean;
+}
+
+const {
+  title,
+  ctaLabel,
+  ctaHref,
+  placeholder = false,
+  placeholderBody,
+  image,
+  imageAlt,
+  status,
+  description,
+  approach,
+  result,
+  tags,
+  reverse = false,
+} = Astro.props;
+---
+
+{
+  placeholder ? (
+    <article class="mx-auto flex max-w-prose flex-col items-start gap-6 rounded-soft border border-dashed border-border-strong bg-bg-primary/40 p-10 md:items-center md:p-16 md:text-center">
+      <h3 class="font-serif text-h3-sm font-medium text-text-primary md:text-h3">{title}</h3>
+      <p class="text-body text-text-muted">{placeholderBody}</p>
+      <Button href={ctaHref} variant="link">
+        {ctaLabel} →
+      </Button>
+    </article>
+  ) : (
+    <article class="grid gap-10 md:grid-cols-12 md:items-center md:gap-14">
+      <div class={`md:col-span-7 ${reverse ? "md:order-2" : ""}`}>
+        <div class="overflow-hidden rounded-soft border border-border-subtle bg-bg-secondary">
+          <img src={image} alt={imageAlt ?? ""} loading="lazy" class="block h-auto w-full" />
+        </div>
+      </div>
+
+      <div class={`space-y-7 md:col-span-5 ${reverse ? "md:order-1" : ""}`}>
+        <div class="flex flex-wrap items-baseline gap-4">
+          <h3 class="font-sans text-h3-sm font-semibold text-text-primary md:text-h3">{title}</h3>
+          {status && (
+            <span class="inline-flex items-center gap-2 font-mono text-small text-accent">
+              <span class="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
+              {status}
+            </span>
+          )}
+        </div>
+
+        {description && <p class="text-body text-text-secondary">{description}</p>}
+
+        {approach && (
+          <div class="space-y-3">
+            <p class="font-mono text-small text-text-muted">Přístup</p>
+            <p class="text-body text-text-secondary">{approach}</p>
+          </div>
+        )}
+
+        {result && (
+          <blockquote class="border-l-2 border-accent bg-accent-subtle/40 px-6 py-5">
+            <p class="mb-3 font-mono text-small text-accent">Výsledek</p>
+            <p class="text-body-lg font-medium leading-snug text-text-primary">{result}</p>
+          </blockquote>
+        )}
+
+        {tags && tags.length > 0 && (
+          <p class="font-mono text-small text-text-muted">{tags.join(" · ")}</p>
+        )}
+
+        <Button href={ctaHref} variant="link">
+          {ctaLabel} →
+        </Button>
+      </div>
+    </article>
+  )
+}

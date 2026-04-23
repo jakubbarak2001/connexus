@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="Náhled webu marketabarakova.cz">
+  <rect width="1200" height="800" fill="#F2EEE6"/>
+  <rect x="40" y="40" width="1120" height="44" rx="4" fill="#EAE4D8"/>
+  <circle cx="68" cy="62" r="5" fill="#B4542A" opacity="0.45"/>
+  <circle cx="90" cy="62" r="5" fill="#B4542A" opacity="0.3"/>
+  <circle cx="112" cy="62" r="5" fill="#B4542A" opacity="0.2"/>
+  <rect x="180" y="50" width="320" height="24" rx="3" fill="#FAF8F5"/>
+  <rect x="80" y="150" width="160" height="12" rx="2" fill="#B4542A"/>
+  <rect x="80" y="200" width="720" height="48" rx="3" fill="#1A1A1A" opacity="0.82"/>
+  <rect x="80" y="268" width="560" height="48" rx="3" fill="#1A1A1A" opacity="0.82"/>
+  <rect x="80" y="370" width="640" height="12" rx="2" fill="#7A7A7A"/>
+  <rect x="80" y="394" width="580" height="12" rx="2" fill="#7A7A7A"/>
+  <rect x="80" y="418" width="600" height="12" rx="2" fill="#7A7A7A"/>
+  <rect x="80" y="500" width="220" height="56" rx="4" fill="#B4542A"/>
+  <rect x="80" y="620" width="440" height="140" rx="4" fill="#EAE4D8"/>
+  <rect x="540" y="620" width="440" height="140" rx="4" fill="#EAE4D8"/>
+  <text x="1120" y="790" font-family="ui-monospace, monospace" font-size="12" fill="#7A7A7A" text-anchor="end" opacity="0.6">placeholder</text>
+</svg>
