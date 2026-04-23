@@ -1,0 +1,27 @@
+---
+import Container from "./Container.astro";
+import Button from "./Button.astro";
+---
+
+<section id="uvod" class="relative pb-20 pt-32 md:pb-32 md:pt-44">
+  <Container>
+    <div class="max-w-[900px] space-y-8 md:space-y-10">
+      <p class="text-small font-medium tracking-[0.02em] text-accent">
+        Pro pojišťovací poradce, makléře a bankéře.
+      </p>
+
+      <h1 class="font-serif text-display-sm font-medium text-text-primary md:text-display">
+        Weby pro finanční poradce, kteří nechtějí zůstat neviditelní ve vlastním městě.
+      </h1>
+
+      <p class="max-w-prose text-body-lg text-text-secondary">
+        Stavím je osobně. Upravuji je, dokud nefungují. A nepřestanu, ani když web spustíme.
+      </p>
+
+      <div class="flex flex-col items-start gap-5 pt-4 sm:flex-row sm:items-center sm:gap-8">
+        <Button href="#kontakt" variant="primary">Domluvit konzultaci</Button>
+        <Button href="/prace/marketa-barakova" variant="link">Zobrazit případovou studii</Button>
+      </div>
+    </div>
+  </Container>
+</section>
