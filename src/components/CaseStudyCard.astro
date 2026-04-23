@@ -32,6 +32,9 @@ const {
   tags,
   reverse = false,
 } = Astro.props;
+
+const approachParagraphs = approach ? approach.split(/\n\s*\n/) : [];
+const descriptionParagraphs = description ? description.split(/\n\s*\n/) : [];
 ---
 
 {
@@ -62,12 +65,18 @@ const {
           )}
         </div>
 
-        {description && <p class="text-body text-text-secondary">{description}</p>}
+        {description && (
+          <div class="space-y-4 text-body text-text-secondary">
+            {descriptionParagraphs.map((p) => <p>{p}</p>)}
+          </div>
+        )}
 
         {approach && (
           <div class="space-y-3">
             <p class="font-mono text-small text-text-muted">Přístup</p>
-            <p class="text-body text-text-secondary">{approach}</p>
+            <div class="space-y-4 text-body text-text-secondary">
+              {approachParagraphs.map((p) => <p>{p}</p>)}
+            </div>
           </div>
         )}
 
