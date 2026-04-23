@@ -1,0 +1,58 @@
+---
+import Container from "./Container.astro";
+import SectionMarker from "./SectionMarker.astro";
+
+const pillars = [
+  {
+    label: "Pilíř 1",
+    title: "Hlubinná konzultace, než začnu",
+    body: "Než napíšu první řádek kódu, strávíme spolu 2-3 hodiny. Chci rozumět, komu prodáváte, čím se odlišujete, co vás štve na současném stavu. Web, který postavím, je výsledkem tohoto rozhovoru.",
+  },
+  {
+    label: "Pilíř 2",
+    title: "Copy psaný člověkem, ne AI",
+    body: "Vaše texty píšu sám. Ne generátor. Ne šablona. Každá věta je rozhodnutí. Vy mi řeknete, co chcete sdělit. Já vymyslím, jak to sdělit, aby to lidé četli.",
+  },
+  {
+    label: "Pilíř 3",
+    title: "Nepřestanu, dokud to nefunguje",
+    body: "Spuštění webu není konec. Je to začátek. Měřím, co funguje a co ne. Upravuji. Testuji. Vracím se k vám s daty a návrhy. Pokud web nepřivede klienty, je to můj problém — ne váš.",
+  },
+];
+---
+
+<section id="pristup" class="py-20 md:py-32">
+  <Container>
+    <div class="space-y-14 md:space-y-20">
+      <div class="max-w-[900px] space-y-8 md:space-y-10">
+        <SectionMarker number="02" label="Přístup" />
+
+        <h2 class="font-serif text-h2-sm font-medium md:text-h2">
+          Neprodávám web. Prodávám, že vás lidé uvidí.
+        </h2>
+
+        <p class="max-w-prose text-body-lg text-text-secondary">
+          Web je nástroj. Cílem je, aby vám zvonil telefon. Aby se vám ozývali klienti, kteří by
+          jinak zavolali někomu jinému. Aby vám rostla klientská báze i v městech, kam fyzicky
+          nejezdíte.
+        </p>
+      </div>
+
+      <ol class="space-y-14 border-t border-border-subtle md:space-y-0">
+        {
+          pillars.map((p) => (
+            <li class="grid gap-4 border-border-subtle pt-10 md:grid-cols-[180px_1fr] md:gap-10 md:border-b md:pb-14 md:pt-14">
+              <p class="font-mono text-small text-accent">{p.label}</p>
+              <div class="max-w-prose space-y-5">
+                <h3 class="font-sans text-h3-sm font-semibold text-text-primary md:text-h3">
+                  {p.title}
+                </h3>
+                <p class="text-body text-text-secondary">{p.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </Container>
+</section>
