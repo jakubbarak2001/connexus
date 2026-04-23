@@ -1,7 +1,6 @@
 ---
 import Container from "./Container.astro";
 import SectionMarker from "./SectionMarker.astro";
-import Button from "./Button.astro";
 ---
 
 <section id="investice" class="bg-bg-secondary py-20 md:py-32">
@@ -15,53 +14,19 @@ import Button from "./Button.astro";
         </h2>
       </div>
 
-      <div class="grid gap-12 md:grid-cols-12 md:gap-16">
-        <div class="space-y-6 md:col-span-7">
-          <p class="max-w-prose text-body-lg text-text-primary">
-            Každý projekt začíná 30minutovou konzultací. Bez poplatku, bez závazku. Zjistíme, zda
-            jsme si vzájemně dobří.
-          </p>
-          <p class="max-w-prose text-body text-text-secondary">
-            Na základě toho vám připravím konkrétní nabídku na míru.
-          </p>
-          <p class="max-w-prose text-body text-text-secondary">
-            Pro představu — pracuji s klienty, kteří vnímají svůj web jako investici, ne náklad.
-            Nejsem nejlevnější. Jsem však ten, kdo zvedne telefon, když něco nefunguje, i půl roku
-            po spuštění.
-          </p>
-        </div>
-
-        <aside
-          class="space-y-6 rounded-soft border border-border-subtle bg-bg-tertiary p-8 md:col-span-5 md:space-y-8 md:p-10"
-          aria-labelledby="founding-heading"
-        >
-          <h3
-            id="founding-heading"
-            class="font-serif text-h3-sm font-medium text-text-primary md:text-h3"
-          >
-            Zakládající klienti
-          </h3>
-
-          <p class="text-body text-text-secondary">
-            Pro první tři klienty z finančního sektoru nabízím speciální podmínky výměnou za
-            otevřenou spolupráci na případové studii.
-          </p>
-
-          <dl class="space-y-2 border-t border-border-subtle pt-6 font-mono text-small">
-            <div class="flex items-baseline justify-between gap-4">
-              <dt class="text-text-muted">Obsazeno</dt>
-              <dd class="font-medium text-text-primary">1 ze 3</dd>
-            </div>
-            <div class="flex items-baseline justify-between gap-4">
-              <dt class="text-text-muted">Dostupné</dt>
-              <dd class="font-medium text-accent">2 místa</dd>
-            </div>
-          </dl>
-
-          <Button href="#kontakt" variant="primary" class="w-full justify-center">
-            Domluvit konzultaci
-          </Button>
-        </aside>
+      <div class="max-w-prose space-y-6">
+        <p class="text-body-lg text-text-primary">
+          Každý projekt začíná 30minutovou konzultací. Bez poplatku, bez závazku. Zjistíme, zda
+          jsme si vzájemně dobří.
+        </p>
+        <p class="text-body text-text-secondary">
+          Na základě toho vám připravím konkrétní nabídku na míru.
+        </p>
+        <p class="text-body text-text-secondary">
+          Pro představu — pracuji s klienty, kteří vnímají svůj web jako investici, ne náklad.
+          Nejsem nejlevnější. Jsem však ten, kdo zvedne telefon, když něco nefunguje, i půl roku
+          po spuštění.
+        </p>
       </div>
     </div>
   </Container>
