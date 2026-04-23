@@ -9,9 +9,43 @@ import SectionAbout from "../components/SectionAbout.astro";
 import SectionPricing from "../components/SectionPricing.astro";
 import SectionContact from "../components/SectionContact.astro";
 import Footer from "../components/Footer.astro";
+
+const businessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://connexus.cz/#connexus",
+  name: "Connexus",
+  description:
+    "Premium webové stránky pro pojišťovací poradce, makléře a bankéře v Česku.",
+  url: "https://connexus.cz",
+  telephone: "+420 774 563 739",
+  email: "jakub@connexus.cz",
+  founder: {
+    "@type": "Person",
+    name: "Jakub Barák",
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Děčín",
+    addressCountry: "CZ",
+  },
+  areaServed: {
+    "@type": "Country",
+    name: "Česká republika",
+  },
+  priceRange: "$$$",
+};
 ---
 
 <Layout>
+  <Fragment slot="head">
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(businessSchema)}
+    />
+  </Fragment>
+
   <Nav />
   <main>
     <Hero />

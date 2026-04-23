@@ -1,0 +1,50 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import Container from "../components/Container.astro";
+import Button from "../components/Button.astro";
+
+const title = "Stránka nenalezena — Connexus";
+const description =
+  "Tato stránka neexistuje. Vraťte se prosím na úvod, nebo mi napište na jakub@connexus.cz.";
+---
+
+<Layout title={title} description={description}>
+  <Nav />
+
+  <main>
+    <section class="flex min-h-[80vh] items-center pt-20 md:pt-28">
+      <Container>
+        <div class="max-w-[780px] space-y-8 md:space-y-10">
+          <p class="font-mono text-small text-text-muted">
+            <span>404</span>
+            <span class="mx-2 text-border-strong">/</span>
+            <span>Stránka nenalezena</span>
+          </p>
+
+          <h1 class="font-serif text-display-sm font-medium text-text-primary md:text-display">
+            Tato stránka neexistuje.
+          </h1>
+
+          <p class="max-w-prose text-body-lg text-text-secondary">
+            Pokud jste se sem dostali kliknutím, napište mi prosím na
+            <a
+              href="mailto:jakub@connexus.cz"
+              class="text-text-primary underline decoration-border-strong decoration-[1.5px] underline-offset-[6px] transition-colors hover:decoration-accent hover:text-accent"
+            >
+              jakub@connexus.cz
+            </a> — opravím to.
+          </p>
+
+          <div class="flex flex-col items-start gap-5 pt-4 sm:flex-row sm:items-center sm:gap-8">
+            <Button href="/" variant="primary">Zpět na úvod</Button>
+            <Button href="/#prace" variant="link">Zobrazit projekty</Button>
+          </div>
+        </div>
+      </Container>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

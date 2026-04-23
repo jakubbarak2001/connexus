@@ -47,8 +47,43 @@ const ogImageUrl = new URL(ogImage, Astro.site).href;
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap"
     />
+
+    <slot name="head" />
   </head>
   <body class="bg-bg-primary text-text-primary antialiased">
     <slot />
+
+    <script is:inline>
+      (() => {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+        const sections = document.querySelectorAll("main > section");
+        if (!sections.length) return;
+
+        sections.forEach((el) => el.setAttribute("data-fade", ""));
+        document.documentElement.classList.add("fade-ready");
+
+        const observer = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                obs.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.08, rootMargin: "0px 0px -8% 0px" },
+        );
+
+        sections.forEach((el) => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight * 0.9) {
+            el.classList.add("is-visible");
+          } else {
+            observer.observe(el);
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

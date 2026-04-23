@@ -1,0 +1,39 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import Container from "../components/Container.astro";
+import Button from "../components/Button.astro";
+
+const title = "Děkuji — Connexus";
+const description = "Vaše zpráva dorazila. Ozvu se do 24 hodin.";
+---
+
+<Layout title={title} description={description}>
+  <Nav />
+
+  <main>
+    <section class="flex min-h-[80vh] items-center pt-20 md:pt-28">
+      <Container>
+        <div class="max-w-[780px] space-y-8 md:space-y-10">
+          <p class="font-mono text-small text-accent">Zpráva odeslána</p>
+
+          <h1 class="font-serif text-display-sm font-medium text-text-primary md:text-display">
+            Děkuji.
+          </h1>
+
+          <p class="max-w-prose text-body-lg text-text-secondary">
+            Zpráva dorazila. Odpovídám do 24 hodin.
+          </p>
+
+          <div class="flex flex-col items-start gap-5 pt-4 sm:flex-row sm:items-center sm:gap-8">
+            <Button href="/" variant="primary">Zpět na úvod</Button>
+            <Button href="/#prace" variant="link">Zobrazit projekty</Button>
+          </div>
+        </div>
+      </Container>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
