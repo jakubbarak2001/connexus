@@ -1,0 +1,164 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import Container from "../../components/Container.astro";
+import Button from "../../components/Button.astro";
+
+const title = "marketabarakova.cz — Případová studie | Connexus";
+const description =
+  "Pojišťovací poradkyně ČSOB Pojišťovny. Seděla v Ústí nad Labem, měla skvělé smlouvy, ale byla limitovaná regionem. Měla 26 000 sledujících na Instagramu — téměř žádné konverze.";
+---
+
+<Layout title={title} description={description}>
+  <Nav />
+
+  <main>
+    <Container class="pt-32 md:pt-40">
+      <a
+        href="/#prace"
+        class="inline-flex items-center gap-2 font-mono text-small text-text-muted transition-colors hover:text-text-primary"
+      >
+        ← Zpět na projekty
+      </a>
+    </Container>
+
+    <section class="pb-12 pt-10 md:pb-16 md:pt-14">
+      <Container>
+        <div class="max-w-[900px] space-y-8 md:space-y-10">
+          <p class="font-mono text-small text-text-muted">
+            <span>Případová studie</span>
+            <span class="mx-2 text-border-strong">/</span>
+            <span>Finanční poradenství</span>
+          </p>
+
+          <div class="flex flex-wrap items-baseline gap-5">
+            <h1 class="font-sans text-[40px] font-semibold leading-tight md:text-[56px]">
+              marketabarakova.cz
+            </h1>
+            <span
+              class="inline-flex items-center gap-2 font-mono text-small text-accent"
+              aria-label="Stav projektu: živě"
+            >
+              <span class="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true"></span>
+              Živě
+            </span>
+          </div>
+
+          <p class="max-w-prose text-body-lg text-text-secondary">
+            Pojišťovací poradkyně ČSOB Pojišťovny. Seděla v Ústí nad Labem, měla skvělé smlouvy, ale
+            byla limitovaná regionem.
+          </p>
+        </div>
+      </Container>
+    </section>
+
+    <Container>
+      <figure class="overflow-hidden rounded-soft border border-border-subtle bg-bg-secondary">
+        <img
+          src="/images/marketa-screenshot.svg"
+          alt="Celostranný náhled úvodní strany marketabarakova.cz"
+          loading="lazy"
+          class="block h-auto w-full"
+        />
+      </figure>
+    </Container>
+
+    <section class="py-20 md:py-28" aria-labelledby="cs-problem">
+      <Container>
+        <div class="grid gap-10 md:grid-cols-12 md:gap-16">
+          <div class="md:col-span-4">
+            <h2 id="cs-problem" class="font-mono text-small text-text-muted">
+              <span>01</span>
+              <span class="mx-2 text-border-strong">/</span>
+              <span>Problém</span>
+            </h2>
+          </div>
+          <div class="max-w-prose space-y-6 md:col-span-8">
+            <p class="text-body-lg text-text-primary">
+              Měla 26 000 sledujících na Instagramu — téměř žádné konverze.
+            </p>
+            <p class="text-body text-text-secondary">
+              Pojišťovací poradkyně ČSOB Pojišťovny. Seděla v Ústí nad Labem, měla skvělé smlouvy,
+              ale byla limitovaná regionem.
+            </p>
+          </div>
+        </div>
+      </Container>
+    </section>
+
+    <section class="bg-bg-secondary py-20 md:py-28" aria-labelledby="cs-pristup">
+      <Container>
+        <div class="grid gap-10 md:grid-cols-12 md:gap-16">
+          <div class="md:col-span-4">
+            <h2 id="cs-pristup" class="font-mono text-small text-text-muted">
+              <span>02</span>
+              <span class="mx-2 text-border-strong">/</span>
+              <span>Přístup</span>
+            </h2>
+          </div>
+          <div class="max-w-prose space-y-6 md:col-span-8">
+            <p class="text-body-lg text-text-primary">
+              Začali jsme od značky. Komu slouží. Čím se liší. Proč by vás někdo měl zvolit před
+              kolegyní ze sousední kanceláře.
+            </p>
+            <p class="text-body text-text-secondary">
+              Pak teprve web. Custom design, ne šablona. Copy napsaný pro její konkrétní klientelu.
+              Analytika pro měření každého kroku návštěvníka.
+            </p>
+          </div>
+        </div>
+      </Container>
+    </section>
+
+    <section class="py-20 md:py-28" aria-labelledby="cs-vysledek">
+      <Container>
+        <div class="grid gap-10 md:grid-cols-12 md:gap-16">
+          <div class="md:col-span-4">
+            <h2 id="cs-vysledek" class="font-mono text-small text-text-muted">
+              <span>03</span>
+              <span class="mx-2 text-border-strong">/</span>
+              <span>Výsledek</span>
+            </h2>
+          </div>
+          <div class="md:col-span-8">
+            <blockquote class="border-l-2 border-accent bg-accent-subtle/40 px-6 py-6 md:px-8 md:py-8">
+              <p
+                class="font-serif text-[24px] font-medium leading-snug text-text-primary md:text-[32px]"
+              >
+                Jeden den v prvním měsíci po spuštění jí zavolalo 30 potenciálních klientů. Šest
+                týdnů po spuštění jí volají klienti z Brna, zatímco ona sedí v Ústí.
+              </p>
+            </blockquote>
+          </div>
+        </div>
+      </Container>
+    </section>
+
+    <section class="bg-bg-secondary py-20 md:py-28">
+      <Container>
+        <div class="grid gap-10 md:grid-cols-12 md:gap-16">
+          <div class="md:col-span-4">
+            <p class="font-mono text-small text-text-muted">
+              <span>04</span>
+              <span class="mx-2 text-border-strong">/</span>
+              <span>Rozsah</span>
+            </p>
+          </div>
+          <div class="space-y-10 md:col-span-8">
+            <p class="font-mono text-body text-text-primary">
+              Astro · TailwindCSS · Custom Design · Copywriting · Branding
+            </p>
+
+            <div class="flex flex-col gap-5 pt-2 sm:flex-row sm:items-center sm:gap-8">
+              <Button href="/#kontakt" variant="primary">Domluvit konzultaci</Button>
+              <Button href="/#prace" variant="link">Zpět na projekty</Button>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
