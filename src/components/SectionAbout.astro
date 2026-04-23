@@ -1,0 +1,44 @@
+---
+import Container from "./Container.astro";
+import SectionMarker from "./SectionMarker.astro";
+---
+
+<section id="o-mne" class="py-20 md:py-32">
+  <Container>
+    <div class="space-y-14 md:space-y-20">
+      <SectionMarker number="04" label="O mně" />
+
+      <div class="grid gap-12 md:grid-cols-12 md:gap-16">
+        <div class="md:col-span-5 lg:col-span-4">
+          <figure
+            class="flex aspect-square w-full items-center justify-center border border-border-subtle bg-bg-tertiary"
+            aria-label="Místo pro fotografii Jakuba Baráka"
+          >
+            <span class="font-mono text-small text-text-muted">Fotka</span>
+          </figure>
+        </div>
+
+        <div class="space-y-8 md:col-span-7 md:space-y-10 lg:col-span-7 lg:col-start-6">
+          <h2 class="font-serif text-h2-sm font-medium md:text-h2">
+            Jeden člověk. Osobní zodpovědnost.
+          </h2>
+
+          <div class="max-w-prose space-y-6 text-body text-text-secondary">
+            <p class="text-body-lg text-text-primary">
+              Jmenuji se Jakub Barák. Jsem frontend developer. Bydlím v Děčíně.
+            </p>
+            <p>
+              Stavím weby pro lidi, kteří se živí tím, že jsou vidět. Nepíšu kód v izolaci. Než
+              začnu, sednu si s vámi na několik hodin a chci rozumět, čím se odlišujete od kolegů.
+              Po spuštění nezmizím — upravuji web tak dlouho, dokud nefunguje tak, jak má.
+            </p>
+            <p>
+              Pracuji s klienty, kteří nechtějí šablonu. Kteří chápou, že jejich web je investice,
+              ne náklad. Kteří jsou ochotní věnovat čas tomu, aby to bylo dobře.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>
