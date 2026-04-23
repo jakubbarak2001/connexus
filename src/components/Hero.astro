@@ -1,27 +1,69 @@
 ---
-import Container from "./Container.astro";
 import Button from "./Button.astro";
 ---
 
-<section id="uvod" class="relative pb-20 pt-32 md:pb-32 md:pt-44">
-  <Container>
-    <div class="max-w-[900px] space-y-8 md:space-y-10">
-      <p class="text-small font-medium tracking-[0.02em] text-accent">
-        Pro pojišťovací poradce, makléře a bankéře.
-      </p>
+<section id="uvod" class="hero flex items-center px-6 md:px-12 lg:px-20">
+  <div class="mx-auto w-full max-w-6xl">
+    <p class="hero__eyebrow font-mono uppercase text-accent">Pro finanční poradce</p>
 
-      <h1 class="font-serif text-display-sm font-medium text-text-primary md:text-display">
-        Weby pro finanční poradce, kteří nechtějí zůstat neviditelní ve vlastním městě.
-      </h1>
+    <h1 class="hero__h1 font-serif font-medium text-text-primary">
+      Váš web by neměl vypadat jako tisíc dalších.
+    </h1>
 
-      <p class="max-w-prose text-body-lg text-text-secondary">
-        Stavím je osobně. Upravuji je, dokud nefungují. A nepřestanu, ani když web spustíme.
-      </p>
+    <p class="hero__subhead text-text-secondary">
+      Custom design, copy psaný člověkem, dlouhodobá péče.
+    </p>
 
-      <div class="flex flex-col items-start gap-5 pt-4 sm:flex-row sm:items-center sm:gap-8">
-        <Button href="#kontakt" variant="primary">Domluvit konzultaci</Button>
-        <Button href="/prace/marketa-barakova" variant="link">Zobrazit případovou studii</Button>
-      </div>
+    <div class="hero__ctas flex flex-col items-start gap-6 sm:flex-row sm:items-center">
+      <Button href="#kontakt" variant="primary">Domluvit konzultaci</Button>
+      <Button href="/prace/marketa-barakova" variant="link">Zobrazit případovou studii</Button>
     </div>
-  </Container>
+  </div>
 </section>
+
+<style>
+  .hero {
+    min-height: 85vh;
+  }
+
+  .hero__eyebrow {
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    margin-bottom: 24px;
+  }
+
+  .hero__h1 {
+    font-size: clamp(40px, 10vw, 64px);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+  }
+
+  .hero__subhead {
+    font-size: 18px;
+    line-height: 1.5;
+    max-width: 540px;
+    margin-top: 32px;
+  }
+
+  .hero__ctas {
+    margin-top: 48px;
+  }
+
+  @media (min-width: 768px) {
+    .hero {
+      min-height: 90vh;
+    }
+
+    .hero__eyebrow {
+      font-size: 14px;
+    }
+
+    .hero__h1 {
+      font-size: clamp(80px, 8vw, 140px);
+    }
+
+    .hero__subhead {
+      font-size: 22px;
+    }
+  }
+</style>
