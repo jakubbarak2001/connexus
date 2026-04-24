@@ -1,31 +1,110 @@
 ---
 import Container from "./Container.astro";
 import SectionMarker from "./SectionMarker.astro";
+
+const cards = [
+  {
+    index: "01",
+    headline: "Nevidí vás.",
+    body: "Klient hledá na Googlu — a vy tam nejste. Nebo jste na straně šest, což je totéž.",
+  },
+  {
+    index: "02",
+    headline: "Nevěří vám.",
+    body: "Tři recenze proti osmdesáti u konkurence. Žádné články, žádný obsah. V oboru, kde prodáváte důvěru, je ticho ten nejhorší signál.",
+  },
+  {
+    index: "03",
+    headline: "Nedrží vás nikdo.",
+    body: "Agentura odevzdá web, pošle fakturu a zmizí. Aktualizace, SEO, recenze — nikdo.",
+  },
+];
 ---
 
 <section id="problem" class="bg-bg-secondary py-20 md:py-32">
   <Container>
-    <div class="max-w-[900px] space-y-10 md:space-y-14">
-      <SectionMarker number="01" label="Problém" />
+    <SectionMarker number="01" label="Problém" />
 
-      <h2 class="font-serif text-h2-sm font-medium md:text-h2">
-        Váš web je vaše druhá vizitka. Pro většinu klientů ta první.
-      </h2>
+    <h2
+      class="mt-10 max-w-[900px] font-serif text-h2-sm font-medium md:mt-14 md:text-h2"
+    >
+      Problém není v designu. Je v tom, co kolem webu chybí.
+    </h2>
 
-      <div class="max-w-prose space-y-6 text-body text-text-secondary">
-        <p>
-          Klient si vás najde online dřív, než vám zavolá. Pokud váš web vypadá, jako by ho někdo
-          před deseti lety exportoval z PowerPointu, rozhodl se ještě než zvedl telefon.
-        </p>
-        <p>
-          Většina webů pro finanční poradce v Česku je dělaná ze šablony. Tisíc poradců používá tu
-          samou. Každý vypadá stejně. Každý říká totéž.
-        </p>
-        <p>
-          V oboru, kde prodáváte důvěru, je "vypadat stejně jako všichni ostatní" konkurenční
-          nevýhoda.
-        </p>
-      </div>
+    <div
+      class="mt-14 grid grid-cols-1 gap-10 md:mt-20 md:grid-cols-3 md:gap-12"
+    >
+      {
+        cards.map((card) => (
+          <div class="problem-card border-t border-border-subtle pt-8 md:border-t-0 md:pt-0">
+            <p class="font-mono text-small text-text-muted">{card.index}</p>
+            <h3 class="mt-3 font-serif text-h3-sm font-medium text-text-primary md:text-h3">
+              {card.headline}
+            </h3>
+            <p class="mt-4 text-body text-text-secondary">{card.body}</p>
+          </div>
+        ))
+      }
     </div>
   </Container>
 </section>
+
+<style>
+  .problem-card {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .problem-card.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  /* Stagger only on desktop, where all three cards enter the viewport together.
+     On mobile they enter one at a time via scroll, so a transition-delay would
+     feel like lag on each individual card. */
+  @media (min-width: 768px) {
+    .problem-card:nth-child(2) {
+      transition-delay: 120ms;
+    }
+    .problem-card:nth-child(3) {
+      transition-delay: 240ms;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .problem-card {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const cards = document.querySelectorAll<HTMLElement>(
+    "#problem .problem-card",
+  );
+  if (cards.length) {
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (prefersReduced) {
+      cards.forEach((card) => card.classList.add("is-visible"));
+    } else {
+      const observer = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              obs.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.25, rootMargin: "0px 0px -15% 0px" },
+      );
+      cards.forEach((card) => observer.observe(card));
+    }
+  }
+</script>
