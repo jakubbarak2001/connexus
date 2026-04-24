@@ -1,24 +1,68 @@
 ---
 import Button from "./Button.astro";
+
+const heroText = "Zasloužíte si víc než jen běžný web";
+const heroChars = Array.from(heroText);
 ---
 
-<section id="uvod" class="hero flex items-center px-6 md:px-12 lg:px-20">
+<section
+  id="uvod"
+  class="hero relative flex items-center px-6 md:px-12 lg:px-20"
+>
   <div class="mx-auto w-full max-w-6xl">
-    <p class="hero__eyebrow font-mono uppercase text-accent">Pro finanční poradce</p>
-
-    <h1 class="hero__h1 font-serif font-medium text-text-primary">
-      Váš web by neměl vypadat jako tisíc dalších.
-    </h1>
-
-    <p class="hero__subhead text-text-secondary">
-      Custom design, copy psaný člověkem, dlouhodobá péče.
+    <p
+      class="hero__eyebrow font-mono uppercase text-accent"
+      data-hero-stage="eyebrow"
+    >
+      Pro finanční poradce
     </p>
 
-    <div class="hero__ctas flex flex-col items-start gap-6 sm:flex-row sm:items-center">
+    <h1
+      class="hero__h1 font-serif font-medium text-text-primary"
+      aria-label="Zasloužíte si víc než jen běžný web."
+    >
+      <span class="hero__h1-text" data-typewriter aria-hidden="true"
+        >{heroChars.map((ch) => <span class="hero__h1-char">{ch}</span>)}</span
+      ><span class="hero__h1-dot" aria-hidden="true">.</span>
+    </h1>
+
+    <p class="hero__subhead text-text-secondary" data-hero-stage="subhead">
+      Web je jen začátek. Píšeme vám SEO články, radíme s Google recenzemi a UGC, rozumíme logice vašeho podnikání — a zůstáváme, dokud to nepřináší klienty, kteří k vám patří.
+    </p>
+
+    <div
+      class="hero__ctas flex flex-col items-start gap-6 sm:flex-row sm:items-center"
+      data-hero-stage="ctas"
+    >
       <Button href="#kontakt" variant="primary">Domluvit konzultaci</Button>
-      <Button href="/prace/marketa-barakova" variant="link">Zobrazit případovou studii</Button>
+      <Button href="/prace/marketa-barakova" variant="link"
+        >Zobrazit případovou studii</Button
+      >
     </div>
   </div>
+
+  <a
+    href="#problem"
+    class="hero__chevron text-text-secondary"
+    data-hero-stage="chevron"
+    aria-label="Přejít na další sekci"
+  >
+    <span class="hero__chevron-inner">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.75"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M6 9l6 6 6-6" />
+      </svg>
+    </span>
+  </a>
 </section>
 
 <style>
@@ -34,8 +78,13 @@ import Button from "./Button.astro";
 
   .hero__h1 {
     font-size: clamp(40px, 10vw, 64px);
-    line-height: 0.95;
+    line-height: 1.1;
     letter-spacing: -0.03em;
+  }
+
+  .hero__h1-dot {
+    display: inline-block;
+    opacity: 0;
   }
 
   .hero__subhead {
@@ -66,4 +115,179 @@ import Button from "./Button.astro";
       font-size: 22px;
     }
   }
+
+  /* ===== Typewriter + staged reveal =====
+     Chars and stages are hidden from the start so the browser never
+     paints them visible. The .is-visible class reveals them with a
+     transition; the initial hidden state has no transition, so there's
+     no fade-out from 1 → 0 on load (which would cause a ghost flash). */
+
+  .hero__h1-char {
+    opacity: 0;
+  }
+  .hero__h1-char.is-visible {
+    opacity: 1;
+  }
+
+  [data-hero-stage] {
+    opacity: 0;
+    transform: translateY(12px);
+    will-change: opacity, transform;
+  }
+  [data-hero-stage="eyebrow"] {
+    transform: translateY(8px);
+  }
+  [data-hero-stage].is-visible {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 450ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .hero__chevron {
+    position: absolute;
+    left: 50%;
+    bottom: 28px;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    color: inherit;
+    transition: color 200ms ease;
+  }
+  .hero__chevron:hover {
+    color: theme("colors.text.primary");
+  }
+  /* Override the shared [data-hero-stage] transform so the reveal rises upward */
+  [data-hero-stage="chevron"] {
+    transform: translate(-50%, 16px);
+  }
+  [data-hero-stage="chevron"].is-visible {
+    transform: translate(-50%, 0);
+  }
+  .hero__chevron-inner {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero__chevron.is-bouncing .hero__chevron-inner {
+    animation: hero-chevron-bounce 2.4s ease-in-out infinite;
+  }
+  @keyframes hero-chevron-bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(5px);
+    }
+  }
+  @media (min-width: 768px) {
+    .hero__chevron {
+      bottom: 40px;
+    }
+  }
+
+  .hero__h1-dot.is-blinking {
+    animation: hero-dot-blink 1000ms steps(2, start) infinite;
+  }
+  @keyframes hero-dot-blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__h1-char,
+    [data-hero-stage] {
+      opacity: 1;
+      transform: none;
+    }
+    .hero__h1-dot {
+      opacity: 1;
+    }
+    .hero__h1-dot.is-blinking {
+      animation: none;
+    }
+    .hero__chevron.is-bouncing .hero__chevron-inner {
+      animation: none;
+    }
+  }
 </style>
+
+<script>
+  const hero = document.querySelector<HTMLElement>("#uvod");
+  const typewriter = hero?.querySelector<HTMLElement>("[data-typewriter]");
+  const dot = hero?.querySelector<HTMLElement>(".hero__h1-dot");
+  const chars = hero
+    ? Array.from(hero.querySelectorAll<HTMLElement>(".hero__h1-char"))
+    : [];
+  const stages = hero
+    ? {
+        eyebrow: hero.querySelector<HTMLElement>('[data-hero-stage="eyebrow"]'),
+        subhead: hero.querySelector<HTMLElement>('[data-hero-stage="subhead"]'),
+        ctas: hero.querySelector<HTMLElement>('[data-hero-stage="ctas"]'),
+        chevron: hero.querySelector<HTMLElement>('[data-hero-stage="chevron"]'),
+      }
+    : null;
+
+  if (hero && typewriter && dot && chars.length && stages) {
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (prefersReduced) {
+      chars.forEach((c) => c.classList.add("is-visible"));
+      Object.values(stages).forEach((el) => el?.classList.add("is-visible"));
+      dot.style.opacity = "1";
+    } else {
+      const charDelay = 28;
+      const eyebrowAt = 120;
+      const typeStartAt = 320;
+      const subheadAfterTypeEnd = 250;
+      const ctasAfterSubhead = 200;
+      const chevronAfterCtas = 220;
+      const bounceAfterChevronReveal = 550;
+
+      window.setTimeout(() => {
+        stages.eyebrow?.classList.add("is-visible");
+      }, eyebrowAt);
+
+      window.setTimeout(() => {
+        let i = 0;
+        const revealNext = () => {
+          if (i < chars.length) {
+            chars[i].classList.add("is-visible");
+            i += 1;
+            window.setTimeout(revealNext, charDelay);
+          } else {
+            dot.classList.add("is-blinking");
+            window.setTimeout(() => {
+              stages.subhead?.classList.add("is-visible");
+              window.setTimeout(() => {
+                stages.ctas?.classList.add("is-visible");
+                window.setTimeout(() => {
+                  stages.chevron?.classList.add("is-visible");
+                  window.setTimeout(() => {
+                    stages.chevron?.classList.add("is-bouncing");
+                  }, bounceAfterChevronReveal);
+                }, chevronAfterCtas);
+              }, ctasAfterSubhead);
+            }, subheadAfterTypeEnd);
+          }
+        };
+        revealNext();
+      }, typeStartAt);
+    }
+  }
+</script>
