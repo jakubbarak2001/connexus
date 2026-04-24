@@ -1,0 +1,63 @@
+---
+interface Props {
+  role: string;
+  lede: string;
+  body: string[];
+  photo?: string;
+  photoAlt: string;
+  reverse?: boolean;
+}
+
+const { role, lede, body, photo, photoAlt, reverse = false } = Astro.props;
+---
+
+<div class="grid gap-12 md:grid-cols-12 md:gap-16">
+  <div
+    class:list={[
+      "md:col-span-5 lg:col-span-4",
+      reverse && "md:col-start-8 lg:col-start-9",
+    ]}
+  >
+    {
+      photo ? (
+        <img
+          src={photo}
+          alt={photoAlt}
+          width="400"
+          height="400"
+          class="block aspect-square w-full object-cover md:max-w-[400px]"
+        />
+      ) : (
+        <figure
+          class="flex aspect-square w-full items-center justify-center border border-border-subtle bg-bg-tertiary md:max-w-[400px]"
+          aria-label={`Místo pro fotografii: ${photoAlt}`}
+        >
+          <span class="font-mono text-small text-text-muted">Fotka</span>
+        </figure>
+      )
+    }
+  </div>
+
+  <div
+    class:list={[
+      "space-y-8 md:col-span-7 md:space-y-10 lg:col-span-7",
+      reverse
+        ? "md:col-start-1 md:row-start-1 lg:col-start-1"
+        : "lg:col-start-6",
+    ]}
+  >
+    <h2 class="font-serif text-h2-sm font-medium md:text-h2">
+      {role}
+    </h2>
+
+    <div class="max-w-prose space-y-6 text-body text-text-secondary">
+      <p
+        class="text-text-primary"
+        style="font-size:22px; font-weight:500; line-height:1.5;"
+      >
+        {lede}
+      </p>
+      {body.map((p) => <p>{p}</p>)}
+    </div>
+  </div>
+</div>
