@@ -1,0 +1,194 @@
+---
+import Container from "./Container.astro";
+---
+
+<section class="bridge bg-text-primary py-24 md:py-36">
+  <Container>
+    <div class="bridge__copy max-w-[900px] space-y-6 md:space-y-8">
+      <p
+        class="bridge__eyebrow font-mono text-small uppercase tracking-[0.12em] text-accent"
+      >
+        Co je možné
+      </p>
+      <h2 class="bridge__statement font-serif font-medium text-bg-primary">
+        Sedí v Ústí.<br />Volá jí Brno.
+      </h2>
+      <p class="bridge__caption max-w-prose text-body-lg">
+        Šest týdnů. A region přestal být strop.
+      </p>
+    </div>
+
+    <a
+      href="/prace/marketa-barakova"
+      aria-label="Zobrazit případovou studii: marketabarakova.cz"
+      class="bridge__frame-link block"
+    >
+      <figure class="bridge__frame mt-14 md:mt-20">
+        <div class="browser-chrome">
+          <span class="browser-chrome__dot browser-chrome__dot--red"></span>
+          <span class="browser-chrome__dot browser-chrome__dot--yellow"></span>
+          <span class="browser-chrome__dot browser-chrome__dot--green"></span>
+          <span class="browser-chrome__url">marketabarakova.cz</span>
+        </div>
+        <picture>
+          <source srcset="/images/marketa-hero.webp" type="image/webp" />
+          <img
+            src="/images/marketa-hero.jpg"
+            alt="Hero sekce webu marketabarakova.cz — pojišťovací poradkyně Markéta Baráková"
+            width="1920"
+            height="765"
+            loading="lazy"
+            decoding="async"
+            class="bridge__img block h-auto w-full"
+          />
+        </picture>
+      </figure>
+    </a>
+  </Container>
+</section>
+
+<style>
+  .bridge__statement {
+    font-size: clamp(40px, 8vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  @media (min-width: 768px) {
+    .bridge__statement {
+      font-size: clamp(56px, 6vw, 96px);
+    }
+  }
+
+  .bridge__caption {
+    color: rgba(250, 248, 245, 0.68);
+  }
+
+  .bridge__frame {
+    border-radius: 14px;
+    overflow: hidden;
+    background: #1f1f1f;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 40px 120px -30px rgba(0, 0, 0, 0.55);
+    margin: 56px 0 0 0;
+  }
+
+  .bridge__frame-link {
+    border-radius: 14px;
+    transition:
+      box-shadow 280ms ease,
+      transform 280ms ease;
+  }
+  .bridge__frame-link:hover .bridge__frame {
+    border-color: rgba(255, 255, 255, 0.14);
+    box-shadow: 0 50px 140px -25px rgba(0, 0, 0, 0.7);
+  }
+  .bridge__frame-link:focus-visible {
+    outline: 2px solid theme("colors.accent.DEFAULT");
+    outline-offset: 6px;
+  }
+  @media (min-width: 768px) {
+    .bridge__frame {
+      margin-top: 80px;
+    }
+  }
+
+  .browser-chrome {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: #2a2a2a;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .browser-chrome__dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 999px;
+    display: inline-block;
+  }
+  .browser-chrome__dot--red {
+    background: #ff5f57;
+  }
+  .browser-chrome__dot--yellow {
+    background: #febc2e;
+  }
+  .browser-chrome__dot--green {
+    background: #28c840;
+  }
+  .browser-chrome__url {
+    margin-left: 12px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.7);
+    font-family: theme("fontFamily.mono");
+    font-size: 12px;
+    letter-spacing: 0.02em;
+  }
+  @media (min-width: 768px) {
+    .browser-chrome {
+      padding: 14px 20px;
+    }
+    .browser-chrome__url {
+      margin-left: 20px;
+      font-size: 13px;
+    }
+  }
+
+  .bridge__copy,
+  .bridge__frame {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 700ms cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 280ms ease,
+      box-shadow 280ms ease;
+    will-change: opacity, transform;
+  }
+  .bridge__frame {
+    transition-delay: 160ms;
+  }
+  .bridge__copy.is-visible,
+  .bridge__frame.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bridge__copy,
+    .bridge__frame {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const targets = document.querySelectorAll<HTMLElement>(
+    ".bridge__copy, .bridge__frame",
+  );
+  if (targets.length) {
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (prefersReduced) {
+      targets.forEach((el) => el.classList.add("is-visible"));
+    } else {
+      const observer = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              obs.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.2, rootMargin: "0px 0px -10% 0px" },
+      );
+      targets.forEach((el) => observer.observe(el));
+    }
+  }
+</script>

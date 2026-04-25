@@ -1,6 +1,6 @@
 # Connexus — AI Context
 
-Premium web studio for Czech financial advisors. Two-person team: Jakub Barák (dev & strategy) and Martin Malec (SEO & copywriting).
+Premium web studio for Czech financial advisors. Solo operator: Jakub Barák (dev, strategy, SEO & copywriting).
 
 ## Tech stack
 - Astro 4.x (static generation)
@@ -15,7 +15,7 @@ Premium web studio for Czech financial advisors. Two-person team: Jakub Barák (
 - No dark mode
 - No social media links
 - No blog
-- Two-person team voice ("we", not "I")
+- Singular voice throughout ("I/my", never "we/our")
 - Markéta Baráková is reference case study (pojišťovací poradkyně ČSOB)
 
 ## Design tokens
