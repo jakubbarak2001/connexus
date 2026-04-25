@@ -114,19 +114,19 @@ import Container from "./Container.astro";
 
   .bridge__cue {
     position: absolute;
-    top: 92px;
-    right: 14px;
+    bottom: 12px;
+    right: 12px;
     z-index: 2;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 7px 12px;
+    gap: 5px;
+    padding: 6px 10px;
     border-radius: 999px;
-    background: rgba(15, 12, 10, 0.7);
+    background: rgba(15, 12, 10, 0.78);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: rgba(250, 248, 245, 0.96);
     font-family: theme("fontFamily.mono");
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     backdrop-filter: blur(8px);
@@ -146,8 +146,9 @@ import Container from "./Container.astro";
   }
   @media (min-width: 768px) {
     .bridge__cue {
-      top: 100px;
+      bottom: 18px;
       right: 18px;
+      gap: 6px;
       padding: 8px 14px;
       font-size: 12px;
     }
