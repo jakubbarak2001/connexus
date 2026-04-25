@@ -16,10 +16,10 @@ const description =
   <main>
     <Container class="pt-32 md:pt-40">
       <a
-        href="/#prace"
+        href="/"
         class="inline-flex items-center gap-2 font-mono text-small text-text-muted transition-colors hover:text-text-primary"
       >
-        ← Zpět na projekty
+        ← Zpět na úvod
       </a>
     </Container>
 
@@ -79,8 +79,7 @@ const description =
               Měla 26 000 sledujících na Instagramu — téměř žádné konverze.
             </p>
             <p class="text-body text-text-secondary">
-              Pojišťovací poradkyně ČSOB Pojišťovny. Seděla v Ústí nad Labem, měla skvělé smlouvy,
-              ale byla limitovaná regionem.
+              Mimo pobočku a pár svých klientů, nikdo o její práci nevěděl.
             </p>
           </div>
         </div>
@@ -103,13 +102,31 @@ const description =
               kolegyní ze sousední kanceláře.
             </p>
             <p class="text-body text-text-secondary">
-              Pak teprve web. Custom design, ne šablona. Copy napsaný pro její konkrétní klientelu.
-              Analytika pro měření každého kroku návštěvníka.
+              Pak teprve web. Custom design, ne šablona. Texty napsané přímo pro její konkrétní klientelu.
+            </p>
+            <p class="text-body text-text-secondary">
+              Strategie ohledně sociálních sítí na míru. Podpora s firemním profilem na Googlu. SEO audit.
+            </p>
+            <p class="text-body text-text-secondary">
+              Analytika pro měření každého kroku návštěvníka — a následné bezplatné úpravy.
             </p>
           </div>
         </div>
       </Container>
     </section>
+
+    <Container>
+      <figure
+        class="mt-20 overflow-hidden rounded-soft border border-border-subtle bg-bg-secondary md:mt-28"
+      >
+        <img
+          src="/images/marketa_below_the_fold.png"
+          alt="marketabarakova.cz — sekce „Kde začneme?“ s oblastmi pojištění a důvěryhodnostním footerem"
+          loading="lazy"
+          class="block h-auto w-full"
+        />
+      </figure>
+    </Container>
 
     <section class="py-20 md:py-28" aria-labelledby="cs-vysledek">
       <Container>
@@ -126,8 +143,8 @@ const description =
               <p
                 class="font-serif text-[24px] font-medium leading-snug text-text-primary md:text-[32px]"
               >
-                Jeden den v prvním měsíci po spuštění jí zavolalo 30 potenciálních klientů. Šest
-                týdnů po spuštění jí volají klienti z Brna, zatímco ona sedí v Ústí.
+                Měsíc po spuštění ji v jeden den zavolalo přes 30 potenciálních klientů. 
+                Do nedávna byla omezena pouze na svou pobočku. Po 6 týdnech uzavírá smlouvy s lidmi z Brna.
               </p>
             </blockquote>
           </div>
@@ -138,21 +155,17 @@ const description =
     <section class="bg-bg-secondary py-20 md:py-28">
       <Container>
         <div class="grid gap-10 md:grid-cols-12 md:gap-16">
-          <div class="md:col-span-4">
-            <p class="font-mono text-small text-text-muted">
-              <span>04</span>
-              <span class="mx-2 text-border-strong">/</span>
-              <span>Rozsah</span>
-            </p>
-          </div>
-          <div class="space-y-10 md:col-span-8">
-            <p class="font-mono text-body text-text-primary">
-              Astro · TailwindCSS · Custom Design · Copywriting · Branding
-            </p>
-
-            <div class="flex flex-col gap-5 pt-2 sm:flex-row sm:items-center sm:gap-8">
+          <div class="md:col-span-8 md:col-start-5">
+            <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8">
               <Button href="/#kontakt" variant="primary">Domluvit konzultaci</Button>
-              <Button href="/#prace" variant="link">Zpět na projekty</Button>
+              <a
+                href="https://marketabarakova.cz"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 font-sans text-small font-medium text-text-primary transition-colors hover:text-accent"
+              >
+                Otevřít web <span aria-hidden="true">↗</span>
+              </a>
             </div>
           </div>
         </div>

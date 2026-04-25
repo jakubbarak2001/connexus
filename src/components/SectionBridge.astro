@@ -30,6 +30,22 @@ import Container from "./Container.astro";
           <span class="browser-chrome__dot browser-chrome__dot--green"></span>
           <span class="browser-chrome__url">marketabarakova.cz</span>
         </div>
+        <span class="bridge__cue" aria-hidden="true">
+          Otevřít studii
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M7 17L17 7" />
+            <path d="M8 7h9v9" />
+          </svg>
+        </span>
         <picture>
           <source srcset="/images/marketa-hero.webp" type="image/webp" />
           <img
@@ -64,6 +80,7 @@ import Container from "./Container.astro";
   }
 
   .bridge__frame {
+    position: relative;
     border-radius: 14px;
     overflow: hidden;
     background: #1f1f1f;
@@ -85,6 +102,67 @@ import Container from "./Container.astro";
   .bridge__frame-link:focus-visible {
     outline: 2px solid theme("colors.accent.DEFAULT");
     outline-offset: 6px;
+  }
+
+  .bridge__img {
+    transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: center top;
+  }
+  .bridge__frame-link:hover .bridge__img {
+    transform: scale(1.012);
+  }
+
+  .bridge__cue {
+    position: absolute;
+    top: 92px;
+    right: 14px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: rgba(15, 12, 10, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(250, 248, 245, 0.96);
+    font-family: theme("fontFamily.mono");
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    pointer-events: none;
+    transition:
+      background-color 220ms ease,
+      color 220ms ease,
+      border-color 220ms ease,
+      transform 220ms ease;
+  }
+  .bridge__frame-link:hover .bridge__cue {
+    background-color: theme("colors.accent.DEFAULT");
+    border-color: theme("colors.accent.DEFAULT");
+    color: theme("colors.bg.primary");
+    transform: scale(1.04);
+  }
+  @media (min-width: 768px) {
+    .bridge__cue {
+      top: 100px;
+      right: 18px;
+      padding: 8px 14px;
+      font-size: 12px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bridge__img,
+    .bridge__cue {
+      transition: none;
+    }
+    .bridge__frame-link:hover .bridge__img {
+      transform: none;
+    }
+    .bridge__frame-link:hover .bridge__cue {
+      transform: none;
+    }
   }
   @media (min-width: 768px) {
     .bridge__frame {
