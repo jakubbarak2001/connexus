@@ -55,14 +55,8 @@ const occupations = [
       Web je jen začátek. Píšu texty, ze kterých vás Google zviditelní, radím s recenzemi a sociálními sítěmi, <strong>rozumím vašemu byznysu</strong> — a šest měsíců po spuštění optimalizuji na reálných datech.
     </p>
 
-    <div
-      class="hero__ctas flex flex-col items-start gap-6 sm:flex-row sm:items-center"
-      data-hero-stage="ctas"
-    >
+    <div class="hero__ctas" data-hero-stage="ctas">
       <Button href="#kontakt" variant="primary">Domluvit konzultaci</Button>
-      <Button href="/prace/marketa-barakova" variant="link"
-        >Zobrazit případovou studii</Button
-      >
     </div>
   </div>
 
@@ -251,7 +245,7 @@ const occupations = [
     right: -0.15em;
     bottom: -3px;
     height: 1.5px;
-    background: #2E5DA8;
+    background: theme("colors.accent.DEFAULT");
     opacity: 0;
     transform: translateY(8px);
     pointer-events: none;

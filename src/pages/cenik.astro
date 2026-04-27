@@ -18,6 +18,7 @@ interface Tier {
   name: string;
   price: string;
   tagline: string;
+  outcome?: string;
   bullets: string[];
   highlighted?: boolean;
 }
@@ -49,10 +50,12 @@ const tiers: Tier[] = [
     name: "Growth",
     price: "5 000 Kč/měsíc",
     highlighted: true,
-    tagline: "Aktivní práce na viditelnosti a optimalizace na reálných datech.",
+    tagline: "Aby vás Google začal víc nacházet — a vy věděli proč.",
+    outcome:
+      "Po šesti měsících typicky vidíte měřitelný posun v lokálním vyhledávání a jasná data, kde web ztrácí pozornost a co s tím dál.",
     bullets: [
-      "1 SEO článek měsíčně (~1 200 slov, cílený na konkrétní klíčové slovo)",
-      "Drobné úpravy webu — texty, obrázky, změny (do 1 hodiny měsíčně)",
+      "1 SEO článek měsíčně (~1 200 slov, ručně psaný, cílený na konkrétní klíčové slovo)",
+      "Drobné úpravy webu — texty, obrázky, změny (do 2 hodin měsíčně)",
       "Měsíční post na Google profilu + reakce na všechny nové recenze do 3 prac. dní",
       "4× ročně audit chování návštěvníků: kam klikají, kde odpadávají, co opravit",
       "Měsíční report na 1 stránku: kolik lidí přišlo, odkud, kdo se ozval, co dál",
@@ -202,8 +205,9 @@ const serviceSchema = {
           </h1>
 
           <p class="max-w-prose text-body-lg text-text-secondary">
-            Ceny ukazuji rovnou. Pokud dávají smysl, povíme si o vašem byznysu.
-            Pokud ne, ušetřili jsme oba čas.
+            <strong class="text-text-primary">Ceny ukazuji rovnou.</strong>
+            Pokud dávají smysl, povíme si o vašem byznysu. Pokud ne, ušetřili
+            jsme oba čas.
           </p>
         </div>
       </Container>
@@ -277,8 +281,8 @@ const serviceSchema = {
 
             <div class="border-t border-border-subtle pt-6">
               <p class="max-w-prose font-mono text-small leading-relaxed text-text-muted">
-                Splátky jsou v pohodě. Domluvíme rytmus, který vám vyhovuje —
-                stačí říct předem.
+                <strong class="text-text-primary">Splátky jsou v pohodě.</strong>
+                Domluvíme rytmus, který vám vyhovuje — stačí říct předem.
               </p>
             </div>
           </div>
@@ -305,7 +309,8 @@ const serviceSchema = {
           <div class="md:col-span-5">
             <p class="max-w-prose text-body text-text-secondary">
               Po šestém měsíci si vyberete, jak chcete pokračovat. Mezi tarify
-              se dá kdykoli přejít — nahoru i dolů. Bez smlouvy na rok.
+              se dá kdykoli přejít — nahoru i dolů.
+              <strong class="text-text-primary">Bez smlouvy na rok.</strong>
             </p>
           </div>
         </div>
@@ -336,6 +341,11 @@ const serviceSchema = {
                   <p class="max-w-prose text-body-lg text-text-primary">
                     {tier.tagline}
                   </p>
+                  {tier.outcome && (
+                    <p class="mt-3 max-w-prose text-body text-text-secondary md:mt-4">
+                      {tier.outcome}
+                    </p>
+                  )}
                   <ul class="mt-6 space-y-3 text-body text-text-secondary md:mt-8">
                     {tier.bullets.map((bullet) => (
                       <li class="flex gap-3">
