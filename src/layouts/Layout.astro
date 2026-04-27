@@ -5,16 +5,22 @@ interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
+  // Square variant for chat-app previews (WhatsApp, iMessage, Signal,
+  // Telegram). Pass null to skip emitting the square og:image — useful
+  // for sub-pages whose primary image isn't square-friendly.
+  ogSquare?: string | null;
 }
 
 const {
   title = "Connexus — Weby pro finanční poradce",
   description = "Webové stránky pro pojišťovací poradce, hypoteční makléře a investiční poradce v Česku. Stavím je osobně. Šest měsíců po spuštění optimalizuji na reálných datech.",
   ogImage = "/images/og-default.jpg",
+  ogSquare = "/images/og-square.jpg",
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImageUrl = new URL(ogImage, Astro.site).href;
+const ogSquareUrl = ogSquare ? new URL(ogSquare, Astro.site).href : null;
 ---
 
 <!doctype html>
@@ -32,9 +38,24 @@ const ogImageUrl = new URL(ogImage, Astro.site).href;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={ogImageUrl} />
     <meta property="og:locale" content="cs_CZ" />
     <meta property="og:site_name" content="Connexus" />
+
+    {/* Landscape (1.91:1) for LinkedIn, Facebook, X, Slack large unfurl */}
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/jpeg" />
+
+    {/* Square (1:1) for WhatsApp, iMessage, Signal, Telegram thumbnails */}
+    {ogSquareUrl && (
+      <>
+        <meta property="og:image" content={ogSquareUrl} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="1200" />
+        <meta property="og:image:type" content="image/jpeg" />
+      </>
+    )}
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
