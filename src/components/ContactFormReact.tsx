@@ -1,6 +1,10 @@
 import { useState, type FormEvent } from "react";
 
+// Set this to your real Formspree endpoint (e.g. "https://formspree.io/f/abcd1234")
+// to switch from mailto fallback to direct API submission.
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/PLACEHOLDER";
+const CONTACT_EMAIL = "jakub@connexus.cz";
+const CONTACT_PHONE_DISPLAY = "+420 774 563 739";
 const MIN_DESCRIPTION = 20;
 
 const professions = [
@@ -22,7 +26,30 @@ const fieldCls =
 
 const labelCls = "mb-2 block font-mono text-small text-text-muted";
 
-type Status = "idle" | "submitting" | "error";
+type Status = "idle" | "submitting" | "error" | "mailto-opened";
+
+const isMailtoFallback = FORMSPREE_ENDPOINT.includes("PLACEHOLDER");
+
+function buildMailto(data: FormData): string {
+  const name = ((data.get("name") as string) || "").trim();
+  const email = ((data.get("email") as string) || "").trim();
+  const profession = ((data.get("profession") as string) || "").trim();
+  const currentWeb = ((data.get("currentWeb") as string) || "").trim();
+  const description = ((data.get("description") as string) || "").trim();
+
+  const subject = name ? `Connexus — ${name}` : "Connexus — poptávka";
+  const body = [
+    `Jméno: ${name}`,
+    `E-mail: ${email}`,
+    `Profese: ${profession}`,
+    `Aktuální web: ${currentWeb}`,
+    ``,
+    `Popis projektu:`,
+    description,
+  ].join("\n");
+
+  return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
 
 export default function ContactFormReact() {
   const [description, setDescription] = useState("");
@@ -34,8 +61,16 @@ export default function ContactFormReact() {
     e.preventDefault();
     if (description.length < MIN_DESCRIPTION) return;
     setStatus("submitting");
+
     const form = e.currentTarget;
     const data = new FormData(form);
+
+    if (isMailtoFallback) {
+      window.location.href = buildMailto(data);
+      setStatus("mailto-opened");
+      return;
+    }
+
     try {
       const res = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
@@ -53,7 +88,7 @@ export default function ContactFormReact() {
   };
 
   return (
-    <form onSubmit={onSubmit} className="space-y-7" noValidate>
+    <form onSubmit={onSubmit} className="space-y-7">
       <div>
         <label htmlFor="name" className={labelCls}>
           Jméno
@@ -137,7 +172,7 @@ export default function ContactFormReact() {
           rows={6}
           className={fieldCls}
         />
-        <p className="mt-2 font-mono text-small text-text-muted">
+        <p className="mt-2 font-mono text-small text-text-muted" aria-live="polite">
           {remaining > 0 ? `Ještě ${remaining} znaků` : `${description.length} znaků`}
         </p>
       </div>
@@ -146,16 +181,32 @@ export default function ContactFormReact() {
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="inline-flex items-center justify-center rounded-soft bg-accent px-7 py-3.5 font-sans text-small font-medium tracking-wide text-bg-primary transition-colors duration-200 ease-out hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-60"
+          className="inline-flex items-center justify-center rounded-soft bg-accent px-7 py-3.5 font-sans text-small font-medium tracking-wide text-bg-primary transition-colors duration-200 ease-out hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary disabled:cursor-not-allowed disabled:opacity-60"
         >
           {status === "submitting" ? "Odesílám…" : "Odeslat zprávu"}
         </button>
         {status === "error" && (
           <p className="font-mono text-small text-accent" role="alert">
-            Odeslání selhalo. Zkuste to prosím znovu nebo mi napište na jakub@connexus.cz.
+            Odeslání selhalo. Zkuste to prosím znovu, nebo mi napište přímo na{" "}
+            <a href={`mailto:${CONTACT_EMAIL}`} className="underline">
+              {CONTACT_EMAIL}
+            </a>
+            .
           </p>
         )}
-        <p className="font-mono text-small text-text-muted">Odpovídám do 1 pracovního dne.</p>
+        {status === "mailto-opened" && (
+          <p className="font-mono text-small text-text-secondary" role="status">
+            Otevírám váš e-mailový klient. Pokud se neotevřel, napište přímo
+            na{" "}
+            <a href={`mailto:${CONTACT_EMAIL}`} className="underline">
+              {CONTACT_EMAIL}
+            </a>{" "}
+            nebo zavolejte na {CONTACT_PHONE_DISPLAY}.
+          </p>
+        )}
+        <p className="font-mono text-small text-text-muted">
+          Odpovídám do 1 pracovního dne.
+        </p>
       </div>
     </form>
   );

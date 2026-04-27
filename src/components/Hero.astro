@@ -199,18 +199,6 @@ const occupations = [
     align-items: center;
     justify-content: center;
   }
-  .hero__chevron.is-bouncing .hero__chevron-inner {
-    animation: hero-chevron-bounce 2.4s ease-in-out infinite;
-  }
-  @keyframes hero-chevron-bounce {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(5px);
-    }
-  }
   @media (min-width: 768px) {
     .hero__chevron {
       bottom: 40px;
@@ -225,9 +213,6 @@ const occupations = [
     }
     .hero__h1-dot {
       opacity: 1;
-    }
-    .hero__chevron.is-bouncing .hero__chevron-inner {
-      animation: none;
     }
   }
 
@@ -395,7 +380,6 @@ const occupations = [
       const subheadAfterTypeEnd = 250;
       const ctasAfterSubhead = 200;
       const chevronAfterCtas = 220;
-      const bounceAfterChevronReveal = 550;
 
       window.setTimeout(() => {
         stages.eyebrow?.classList.add("is-visible");
@@ -416,9 +400,6 @@ const occupations = [
                 stages.ctas?.classList.add("is-visible");
                 window.setTimeout(() => {
                   stages.chevron?.classList.add("is-visible");
-                  window.setTimeout(() => {
-                    stages.chevron?.classList.add("is-bouncing");
-                  }, bounceAfterChevronReveal);
                 }, chevronAfterCtas);
               }, ctasAfterSubhead);
             }, subheadAfterTypeEnd);

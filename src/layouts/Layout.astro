@@ -51,6 +51,7 @@ const ogImageUrl = new URL(ogImage, Astro.site).href;
     <slot name="head" />
   </head>
   <body class="bg-bg-primary text-text-primary antialiased">
+    <a href="#main" class="skip-to-main">Přejít na obsah</a>
     <slot />
 
     <script is:inline>

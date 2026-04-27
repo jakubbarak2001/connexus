@@ -9,6 +9,20 @@ const title = "Jak to funguje — Connexus";
 const description =
   "Pět fází, šest měsíců spolupráce, žádné mizení po fakturaci. Přesně, co se děje od první konzultace po závěrečnou revizi v šestém měsíci. Bez šablon, bez překvapení.";
 
+const howToSchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  name: "Jak stavím web pro finančního poradce",
+  description,
+  totalTime: "P6M",
+  step: [] as Array<{
+    "@type": "HowToStep";
+    position: number;
+    name: string;
+    text: string;
+  }>,
+};
+
 interface Phase {
   index: string;
   name: string;
@@ -114,9 +128,25 @@ const phases: Phase[] = [
 ---
 
 <Layout title={title} description={description}>
+  <Fragment slot="head">
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify({
+        ...howToSchema,
+        step: phases.map((phase, i) => ({
+          "@type": "HowToStep",
+          position: i + 1,
+          name: `${phase.name} (${phase.timing})`,
+          text: phase.summary,
+        })),
+      })}
+    />
+  </Fragment>
+
   <Nav />
 
-  <main>
+  <main id="main">
     <Container class="pt-32 md:pt-40">
       <a
         href="/"

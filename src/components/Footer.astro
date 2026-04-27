@@ -1,12 +1,87 @@
 ---
 import Container from "./Container.astro";
+
+const navLinks = [
+  { href: "/", label: "Úvod" },
+  { href: "/jak-to-funguje", label: "Jak to funguje" },
+  { href: "/cenik", label: "Ceník" },
+  { href: "/#o-mne", label: "O mně" },
+  { href: "/#kontakt", label: "Kontakt" },
+];
+
+const phoneDisplay = "+420 774 563 739";
+const phoneHref = "tel:+420774563739";
+const emailDisplay = "jakub@connexus.cz";
 ---
 
-<footer class="mt-24 border-t border-border-subtle md:mt-32">
-  <Container class="py-10 md:py-12">
-    <div class="flex flex-col items-start justify-between gap-3 text-small text-text-muted md:flex-row md:items-center md:gap-6">
-      <p>© 2026 Connexus. Všechna práva vyhrazena.</p>
-      <p>Connexus · Jakub Barák · IČO 24995606 · Děčín · Česká republika</p>
+<footer class="mt-24 border-t border-border-subtle bg-bg-primary md:mt-32">
+  <Container class="py-14 md:py-20">
+    <div class="grid gap-12 md:grid-cols-12 md:gap-16">
+      <div class="md:col-span-5">
+        <p
+          class="font-serif text-h3-sm font-medium text-text-primary md:text-h3"
+        >
+          Connexus
+        </p>
+        <p class="mt-3 max-w-prose text-body text-text-secondary">
+          Webové stránky pro pojišťovací poradce, hypoteční makléře
+          a investiční poradce v Česku.
+        </p>
+      </div>
+
+      <nav class="md:col-span-3" aria-label="Patička">
+        <p
+          class="font-mono text-small uppercase tracking-[0.08em] text-text-muted"
+        >
+          Navigace
+        </p>
+        <ul class="mt-4 space-y-2">
+          {
+            navLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-body text-text-secondary transition-colors hover:text-text-primary"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="md:col-span-4">
+        <p
+          class="font-mono text-small uppercase tracking-[0.08em] text-text-muted"
+        >
+          Kontakt
+        </p>
+        <ul class="mt-4 space-y-2">
+          <li>
+            <a
+              href={`mailto:${emailDisplay}`}
+              class="text-body text-text-secondary transition-colors hover:text-accent"
+            >
+              {emailDisplay}
+            </a>
+          </li>
+          <li>
+            <a
+              href={phoneHref}
+              class="font-mono text-body text-text-secondary transition-colors hover:text-accent"
+            >
+              {phoneDisplay}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 border-t border-border-subtle pt-6 md:mt-16 md:pt-8">
+      <p class="font-mono text-small text-text-muted">
+        © 2026 Connexus · Jakub Barák · IČO 24995606 · Děčín, Česká republika
+      </p>
     </div>
   </Container>
 </footer>

@@ -8,12 +8,61 @@ import Button from "../../components/Button.astro";
 const title = "marketabarakova.cz — Případová studie | Connexus";
 const description =
   "Pojišťovací poradkyně ČSOB Pojišťovny. Seděla v Ústí nad Labem, měla skvělé smlouvy, ale byla limitovaná regionem. Měla 26 000 sledujících na Instagramu — téměř žádné konverze.";
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "marketabarakova.cz — Případová studie",
+  description,
+  datePublished: "2026-04-01",
+  author: {
+    "@type": "Person",
+    name: "Jakub Barák",
+    url: "https://connexus.cz/#o-mne",
+  },
+  publisher: {
+    "@id": "https://connexus.cz/#connexus",
+  },
+  image: "https://connexus.cz/images/marketa-screenshot.jpg",
+  mainEntityOfPage: "https://connexus.cz/prace/marketa-barakova/",
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Úvod",
+      item: "https://connexus.cz/",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Případová studie",
+      item: "https://connexus.cz/prace/marketa-barakova/",
+    },
+  ],
+};
 ---
 
 <Layout title={title} description={description}>
+  <Fragment slot="head">
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(articleSchema)}
+    />
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(breadcrumbSchema)}
+    />
+  </Fragment>
   <Nav />
 
-  <main>
+  <main id="main">
     <Container class="pt-32 md:pt-40">
       <a
         href="/"
@@ -55,12 +104,16 @@ const description =
 
     <Container>
       <figure class="overflow-hidden rounded-soft border border-border-subtle bg-bg-secondary">
-        <img
-          src="/images/marketa-screenshot.png"
-          alt="Celostranný náhled úvodní strany marketabarakova.cz"
-          loading="lazy"
-          class="block h-auto w-full"
-        />
+        <picture>
+          <source srcset="/images/marketa-screenshot.webp" type="image/webp" />
+          <img
+            src="/images/marketa-screenshot.jpg"
+            alt="Celostranný náhled úvodní strany marketabarakova.cz"
+            loading="lazy"
+            decoding="async"
+            class="block h-auto w-full"
+          />
+        </picture>
         <figcaption
           class="border-t border-border-subtle px-6 py-3 font-mono text-small uppercase tracking-[0.08em] text-text-muted md:px-8 md:py-4"
         >
@@ -124,12 +177,16 @@ const description =
       <figure
         class="mt-20 overflow-hidden rounded-soft border border-border-subtle bg-bg-secondary md:mt-28"
       >
-        <img
-          src="/images/marketa_below_the_fold.png"
-          alt="marketabarakova.cz — sekce „Kde začneme?“ s oblastmi pojištění a důvěryhodnostním footerem"
-          loading="lazy"
-          class="block h-auto w-full"
-        />
+        <picture>
+          <source srcset="/images/marketa_below_the_fold.webp" type="image/webp" />
+          <img
+            src="/images/marketa_below_the_fold.jpg"
+            alt="marketabarakova.cz — sekce „Kde začneme?“ s oblastmi pojištění a důvěryhodnostním footerem"
+            loading="lazy"
+            decoding="async"
+            class="block h-auto w-full"
+          />
+        </picture>
         <figcaption
           class="border-t border-border-subtle px-6 py-3 font-mono text-small uppercase tracking-[0.08em] text-text-muted md:px-8 md:py-4"
         >

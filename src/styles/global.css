@@ -53,6 +53,29 @@
     outline: 2px solid theme("colors.accent.DEFAULT");
     outline-offset: 2px;
   }
+
+  .skip-to-main {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 100;
+    transform: translateY(-150%);
+    padding: 12px 18px;
+    border-radius: theme("borderRadius.soft");
+    background: theme("colors.text.primary");
+    color: theme("colors.bg.primary");
+    font-family: theme("fontFamily.mono");
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    transition: transform 200ms ease;
+  }
+
+  .skip-to-main:focus,
+  .skip-to-main:focus-visible {
+    transform: translateY(0);
+    outline: 2px solid theme("colors.accent.DEFAULT");
+    outline-offset: 2px;
+  }
 }
 
 @layer utilities {
