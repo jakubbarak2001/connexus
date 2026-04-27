@@ -4,6 +4,7 @@ import Nav from "../components/Nav.astro";
 import Hero from "../components/Hero.astro";
 import SectionProblem from "../components/SectionProblem.astro";
 import SectionBridge from "../components/SectionBridge.astro";
+import SectionProcessTeaser from "../components/SectionProcessTeaser.astro";
 import SectionFounding from "../components/SectionFounding.astro";
 import SectionTeam from "../components/SectionTeam.astro";
 import SectionContact from "../components/SectionContact.astro";
@@ -15,7 +16,7 @@ const businessSchema = {
   "@id": "https://connexus.cz/#connexus",
   name: "Connexus",
   description:
-    "Premium webové stránky pro pojišťovací poradce, makléře a bankéře v Česku.",
+    "Webové stránky pro pojišťovací poradce, makléře a bankéře v Česku. Vlastní design, copywriting, SEO a šest měsíců péče po spuštění.",
   url: "https://connexus.cz",
   telephone: "+420 774 563 739",
   email: "jakub@connexus.cz",
@@ -23,6 +24,7 @@ const businessSchema = {
     "@type": "Person",
     name: "Jakub Barák",
   },
+  taxID: "24995606",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Děčín",
@@ -50,6 +52,7 @@ const businessSchema = {
     <Hero />
     <SectionProblem />
     <SectionBridge />
+    <SectionProcessTeaser />
     <SectionFounding />
     <SectionTeam />
     <SectionContact />

@@ -1,6 +1,8 @@
 ---
 const navLinks = [
-  { href: "/#uvod", label: "Úvod" },
+  { href: "/", label: "Úvod" },
+  { href: "/jak-to-funguje", label: "Jak to funguje" },
+  { href: "/cenik", label: "Ceník" },
   { href: "/#o-mne", label: "O mně" },
   { href: "/#kontakt", label: "Kontakt" },
 ];
@@ -25,7 +27,7 @@ const phoneHref = "tel:+420774563739";
       Connexus
     </a>
 
-    <ul class="hidden items-center gap-10 md:flex">
+    <ul class="hidden items-center gap-7 md:flex lg:gap-9">
       {
         navLinks.map((link) => (
           <li>

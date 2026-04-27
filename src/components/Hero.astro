@@ -3,6 +3,13 @@ import Button from "./Button.astro";
 
 const heroText = "Zasloužíte si víc než jen běžný web";
 const heroChars = Array.from(heroText);
+
+const occupations = [
+  "Realitní makléře",
+  "Pojišťovací agenty",
+  "Hypoteční makléře",
+  "Investiční poradce",
+];
 ---
 
 <section
@@ -14,7 +21,26 @@ const heroChars = Array.from(heroText);
       class="hero__eyebrow font-mono uppercase text-accent"
       data-hero-stage="eyebrow"
     >
-      Pro finanční poradce
+      <span class="sr-only"
+        >Pro realitní makléře, pojišťovací agenty, bankéře a investiční poradce.</span
+      >
+      <span aria-hidden="true">
+        Pro <span class="hero__rotator" data-rotator>
+          {
+            occupations.map((label, i) => (
+              <span
+                class:list={[
+                  "hero__rotator-word",
+                  i === 0 && "is-active",
+                  i === 0 && "is-first",
+                ]}
+              >
+                {label}
+              </span>
+            ))
+          }
+        </span>
+      </span>
     </p>
 
     <h1
@@ -27,7 +53,7 @@ const heroChars = Array.from(heroText);
     </h1>
 
     <p class="hero__subhead text-text-secondary" data-hero-stage="subhead">
-      Web je jen začátek. Píšu vám SEO články, radím s Google recenzemi a UGC, rozumím logice vašeho podnikání — a zůstávám, dokud to nepřináší klienty.
+      Web je jen začátek. Píšu SEO články, radím s Google recenzemi a UGC, rozumím logice vašeho podnikání — a šest měsíců po spuštění optimalizuji web na reálných datech.
     </p>
 
     <div
@@ -192,21 +218,6 @@ const heroChars = Array.from(heroText);
     }
   }
 
-  .hero__h1-dot.is-blinking {
-    animation: hero-dot-blink 1000ms steps(2, start) infinite;
-  }
-  @keyframes hero-dot-blink {
-    0% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .hero__h1-char,
     [data-hero-stage] {
@@ -216,11 +227,139 @@ const heroChars = Array.from(heroText);
     .hero__h1-dot {
       opacity: 1;
     }
-    .hero__h1-dot.is-blinking {
-      animation: none;
-    }
     .hero__chevron.is-bouncing .hero__chevron-inner {
       animation: none;
+    }
+  }
+
+  /* ===== Rotating eyebrow occupation =====
+     Per-word cycle (2500ms): word slides up from below, holds; underline
+     slides up below the word, holds; underline fades; word slides up and out.
+     Sequenced so the next word's entry begins only after the current word's
+     full exit. The first word skips the entry phase (it's already in place
+     when the rotator initializes). */
+
+  .hero__rotator {
+    display: inline-grid;
+    grid-template-columns: 1fr;
+    vertical-align: baseline;
+  }
+
+  .hero__rotator-word {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    position: relative;
+    opacity: 0;
+    transform: translateY(8px);
+    white-space: nowrap;
+  }
+
+  .hero__rotator-word.is-active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hero__rotator-word::after {
+    content: "";
+    position: absolute;
+    left: -0.15em;
+    right: -0.15em;
+    bottom: -3px;
+    height: 1.5px;
+    background: #2E5DA8;
+    opacity: 0;
+    transform: translateY(8px);
+    pointer-events: none;
+  }
+
+  .hero__rotator[data-rotator-init] .hero__rotator-word.is-active.is-first {
+    animation: rotator-word-first 2500ms ease-in-out forwards;
+  }
+
+  .hero__rotator[data-rotator-init]
+    .hero__rotator-word.is-active:not(.is-first) {
+    animation: rotator-word 2500ms ease-in-out forwards;
+  }
+
+  .hero__rotator[data-rotator-init] .hero__rotator-word.is-active::after {
+    animation: rotator-underline 2500ms ease-in-out forwards;
+  }
+
+  @keyframes rotator-word {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    12% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    84% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes rotator-word-first {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    84% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes rotator-underline {
+    0% {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    15% {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    26% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    72% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    80% {
+      opacity: 0;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__rotator[data-rotator-init] .hero__rotator-word.is-active,
+    .hero__rotator[data-rotator-init] .hero__rotator-word.is-active::after,
+    .hero__rotator[data-rotator-init] .hero__rotator-word.is-active.is-first {
+      animation: none;
+    }
+    .hero__rotator-word.is-active {
+      opacity: 1;
+      transform: none;
+    }
+    .hero__rotator-word.is-active::after {
+      opacity: 1;
+      transform: none;
     }
   }
 </style>
@@ -271,7 +410,7 @@ const heroChars = Array.from(heroText);
             i += 1;
             window.setTimeout(revealNext, charDelay);
           } else {
-            dot.classList.add("is-blinking");
+            dot.style.opacity = "1";
             window.setTimeout(() => {
               stages.subhead?.classList.add("is-visible");
               window.setTimeout(() => {
@@ -290,4 +429,43 @@ const heroChars = Array.from(heroText);
       }, typeStartAt);
     }
   }
+</script>
+
+<script>
+  (() => {
+    const rotator = document.querySelector<HTMLElement>(
+      ".hero__rotator[data-rotator]",
+    );
+    if (!rotator) return;
+    const words = rotator.querySelectorAll<HTMLElement>(".hero__rotator-word");
+    if (!words.length) return;
+
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (prefersReduced) {
+      rotator.setAttribute("data-rotator-init", "");
+      return;
+    }
+
+    // Defer init until just after the eyebrow's hero-stage entrance has
+    // started. The first word is server-rendered as is-active + is-first so
+    // it stays in place; only the underline animates in on the first cycle.
+    const INIT_DELAY = 200;
+    const INTERVAL_MS = 2500;
+
+    window.setTimeout(() => {
+      rotator.setAttribute("data-rotator-init", "");
+
+      let index = 0;
+      window.setInterval(() => {
+        const current = words[index];
+        current.classList.remove("is-active");
+        current.classList.remove("is-first");
+        index = (index + 1) % words.length;
+        words[index].classList.add("is-active");
+      }, INTERVAL_MS);
+    }, INIT_DELAY);
+  })();
 </script>

@@ -1,0 +1,275 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import Container from "../components/Container.astro";
+import Button from "../components/Button.astro";
+
+const title = "Jak to funguje — Connexus";
+const description =
+  "Pět fází, šest měsíců spolupráce, žádné mizení po fakturaci. Přesně, co se děje od první konzultace po závěrečnou revizi v šestém měsíci. Bez šablon, bez překvapení.";
+
+interface Phase {
+  index: string;
+  name: string;
+  timing: string;
+  summary: string;
+  description: string;
+  deliverables: string[];
+  clientRole: string;
+}
+
+const phases: Phase[] = [
+  {
+    index: "01",
+    name: "Strategie",
+    timing: "týden 1–2",
+    summary:
+      "Konzultace, konkurence, klíčová slova, strategický dokument k odsouhlasení.",
+    description:
+      "Začínáme tím, že se ptám na vaši práci — komu sloužíte, čím se lišíte od kolegů ve vedlejší kanceláři, kdo je váš ideální klient. Z toho stavím strategii: pozicování, klíčová slova, struktura webu, obsahový plán na prvních šest měsíců. Než začnu cokoli psát nebo navrhovat, dostanete strategický dokument k odsouhlasení.",
+    deliverables: [
+      "Vstupní rozhovory o vašem byznysu (typicky 3–4 hodiny celkem)",
+      "Analýza tří přímých konkurentů",
+      "SEO klíčová slova s prioritou",
+      "Strategický dokument (15–20 stran)",
+      "Obsahový plán pro prvních šest měsíců",
+    ],
+    clientRole:
+      "Investujete tři až čtyři hodiny do hovorů a den na pročtení strategie. Bez toho zbytek nedává smysl.",
+  },
+  {
+    index: "02",
+    name: "Stavba",
+    timing: "týden 3–6",
+    summary:
+      "Design, copywriting, SEO, analytika, Google profil a UGC strategie.",
+    description:
+      "Čtyři týdny soustředěné práce: design, copy, kód, SEO. Designuji v prohlížeči, ne v makete — vidíte web takový, jaký bude. Texty píšu já podle strategie, vy je revidujete. Souběžně dořeším Google firemní profil, analytiku a UGC strategii pro sociální sítě.",
+    deliverables: [
+      "Vlastní design (žádná šablona), v iteraci s vámi",
+      "Copywriting všech stránek",
+      "On-page SEO: meta tagy, schema markup, sitemap, alt texty",
+      "Analytika: GA4, Search Console, Microsoft Clarity",
+      "Založení nebo optimalizace Google firemního profilu",
+      "UGC strategie ve formátu PDF (6–8 stran)",
+      "Content style guide pro budoucí psaní",
+    ],
+    clientRole:
+      "Schvalujete design, čtete a komentujete texty. Druhá vlna vašeho času — strategická, ne technická.",
+  },
+  {
+    index: "03",
+    name: "Spuštění",
+    timing: "měsíc 2",
+    summary:
+      "Web jde živě, dva týdny ladění na reálných datech, předání přístupů.",
+    description:
+      "Web jde živě. Většina agentur tady končí — fakturu poslat, zmizet. U mě začíná to nejdůležitější. Dva týdny sleduji reálný provoz a upravuji to, co se na papíře zdálo logické, ale v praxi nefunguje.",
+    deliverables: [
+      "Migrace nebo nastavení domény a hostingu",
+      "Spuštění a 48hodinová ostraha provozu",
+      "První úpravový cyklus na základě reálných dat (do 14 dní)",
+      "Předání přístupů ke všem nástrojům",
+    ],
+    clientRole:
+      "Sledujete, kdo se ozývá. Když přijde zpráva od někoho neočekávaného, dáte mi vědět — to je signál, který se v Google Analytics nenajde.",
+  },
+  {
+    index: "04",
+    name: "Šest měsíců péče",
+    timing: "měsíc 2–6",
+    summary:
+      "Tři SEO články, kvartální optimalizace, strategický check-in a závěrečná revize.",
+    description:
+      "Šest měsíců práce zahrnuté ve vstupní ceně. Tři SEO články, které postaví organickou viditelnost, a kvartální optimalizace na reálných datech. V měsíci čtvrtém se znovu sejdeme — co funguje, co ne, co změnit. V měsíci šestém závěrečná revize a předání dat, na kterých se rozhodne další směr.",
+    deliverables: [
+      "3 SEO články (~1 200 slov, optimalizace na konkrétní klíčová slova)",
+      "Strategický check-in v měsíci 4 (90 minut)",
+      "Průběžná správa Google firemního profilu",
+      "Optimalizace webu na reálných datech (texty, struktura, CTA)",
+      "Závěrečná revize v měsíci 6 — co funguje, co dál",
+    ],
+    clientRole:
+      "Posíláte mi témata, na která dostáváte otázky od reálných klientů. To bývají nejlepší články.",
+  },
+  {
+    index: "05",
+    name: "Dlouhodobá spolupráce",
+    timing: "po šestém měsíci",
+    summary:
+      "Volba tarifu — Žádný plán, Care nebo Growth. Bez smlouvy na rok.",
+    description:
+      "Po šesti měsících se rozhodnete, jak chcete pokračovat. Tři varianty — Žádný plán, Care nebo Growth. Mezi nimi se přechází kdykoli, oběma směry. Žádná smlouva na rok, žádný výpovědní rituál. Vyhodnocení tarifu jednou ročně nebo na vyžádání.",
+    deliverables: [
+      "Volba tarifu po šesti měsících (nebo žádný plán)",
+      "Roční nebo vyžádané vyhodnocení",
+      "Možnost přejít na jiný tarif kdykoli",
+      "Detail tarifů na stránce ceník",
+    ],
+    clientRole:
+      "Rozhodujete, kolik podpory chcete po šestém měsíci. K tomu rozhodnutí dostanete data, na kterých stojí — ne dojem.",
+  },
+];
+---
+
+<Layout title={title} description={description}>
+  <Nav />
+
+  <main>
+    <Container class="pt-32 md:pt-40">
+      <a
+        href="/"
+        class="inline-flex items-center gap-2 font-mono text-small text-text-muted transition-colors hover:text-text-primary"
+      >
+        ← Zpět na úvod
+      </a>
+    </Container>
+
+    <section class="pb-12 pt-10 md:pb-20 md:pt-14">
+      <Container>
+        <div class="max-w-[900px] space-y-8 md:space-y-10">
+          <p class="font-mono text-small uppercase tracking-[0.08em] text-accent">
+            Proces
+          </p>
+
+          <h1 class="font-serif text-display-sm font-medium leading-[1.05] tracking-tight text-text-primary md:text-display">
+            Jak to funguje
+          </h1>
+
+          <p class="max-w-prose text-body-lg text-text-secondary">
+            Pět fází. Šest měsíců spolupráce — od podpisu po závěrečnou revizi.
+            Pak se společně rozhodneme, jestli má smysl pokračovat. Tady je
+            přesně, co se děje od prvního hovoru, abyste věděli, do čeho jdete,
+            ještě než mi řeknete ano.
+          </p>
+        </div>
+      </Container>
+    </section>
+
+    <section class="pb-16 md:pb-24" aria-labelledby="prehled">
+      <Container>
+        <h2 id="prehled" class="sr-only">Přehled fází</h2>
+        <ol class="border-t border-border-subtle">
+          {
+            phases.map((phase) => (
+              <li class="border-b border-border-subtle">
+                <a
+                  href={`#phase-${phase.index}`}
+                  class="group grid gap-3 py-6 transition-colors hover:bg-bg-secondary md:grid-cols-12 md:gap-8 md:py-8"
+                >
+                  <div class="md:col-span-3">
+                    <p class="font-mono text-small text-text-muted">
+                      <span>{phase.index}</span>
+                      <span class="mx-2 text-border-strong">/</span>
+                      <span class="text-text-primary">{phase.name}</span>
+                    </p>
+                  </div>
+                  <div class="md:col-span-2">
+                    <p class="font-mono text-small text-text-muted">
+                      {phase.timing}
+                    </p>
+                  </div>
+                  <div class="md:col-span-7">
+                    <p class="text-body text-text-secondary group-hover:text-text-primary">
+                      {phase.summary}
+                    </p>
+                  </div>
+                </a>
+              </li>
+            ))
+          }
+        </ol>
+      </Container>
+    </section>
+
+    {
+      phases.map((phase, i) => (
+        <section
+          class:list={[
+            "py-20 md:py-28",
+            i % 2 === 1 ? "bg-bg-secondary" : "",
+          ]}
+          aria-labelledby={`phase-${phase.index}`}
+        >
+          <Container>
+            <div class="grid gap-10 md:grid-cols-12 md:gap-16">
+              <div class="md:col-span-4">
+                <h2
+                  id={`phase-${phase.index}`}
+                  class="font-mono text-small text-text-muted"
+                >
+                  <span>{phase.index}</span>
+                  <span class="mx-2 text-border-strong">/</span>
+                  <span>{phase.name}</span>
+                </h2>
+                <p class="mt-3 font-mono text-small text-text-muted">
+                  {phase.timing}
+                </p>
+              </div>
+
+              <div class="space-y-10 md:col-span-8 md:space-y-12">
+                <p class="max-w-prose text-body-lg text-text-primary">
+                  {phase.description}
+                </p>
+
+                <div>
+                  <p class="font-mono text-small uppercase tracking-[0.08em] text-text-muted">
+                    Konkrétně dostanete
+                  </p>
+                  <ul class="mt-5 space-y-3 text-body text-text-secondary">
+                    {phase.deliverables.map((d) => (
+                      <li class="flex gap-3">
+                        <span class="text-border-strong" aria-hidden="true">
+                          —
+                        </span>
+                        <span>{d}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div class="max-w-prose border-l-2 border-border-strong pl-5">
+                  <p class="font-mono text-small uppercase tracking-[0.08em] text-text-muted">
+                    Co dělá klient
+                  </p>
+                  <p class="mt-2 text-body text-text-secondary">
+                    {phase.clientRole}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </Container>
+        </section>
+      ))
+    }
+
+    <section class="py-20 md:py-28">
+      <Container>
+        <div class="grid gap-10 md:grid-cols-12 md:gap-16">
+          <div class="md:col-span-4">
+            <p class="font-mono text-small text-text-muted">
+              <span>06</span>
+              <span class="mx-2 text-border-strong">/</span>
+              <span>Dál</span>
+            </p>
+          </div>
+          <div class="space-y-8 md:col-span-8 md:space-y-10">
+            <p class="max-w-prose text-body-lg text-text-primary">
+              Pokud to dává smysl, podívejte se na ceník. Pokud máte konkrétní
+              otázku k jednotlivé fázi, napište — vrátím se do 24 hodin.
+            </p>
+            <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8">
+              <Button href="/cenik" variant="primary">Zobrazit ceník</Button>
+              <Button href="/#kontakt" variant="link">
+                Domluvit konzultaci
+              </Button>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

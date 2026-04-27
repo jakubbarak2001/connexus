@@ -1,0 +1,517 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import Container from "../components/Container.astro";
+import SectionMarker from "../components/SectionMarker.astro";
+import Button from "../components/Button.astro";
+
+const STANDARD_PRICE_DISPLAY = "60 000";
+const STANDARD_PRICE_NUM = "60000";
+const FOUNDING_PRICE_DISPLAY = "35 000";
+const HOURLY_RATE = "1 500";
+
+const title = "Ceník — Connexus";
+const description = `Vstupní cena ${STANDARD_PRICE_DISPLAY} Kč včetně šesti měsíců péče po spuštění. Po šestém měsíci tarify od 2 500 do 5 000 Kč/měsíc, nebo bez paušálu. Bez smlouvy na rok, bez skrytých položek.`;
+
+interface Tier {
+  name: string;
+  price: string;
+  tagline: string;
+  bullets: string[];
+  highlighted?: boolean;
+}
+
+const tiers: Tier[] = [
+  {
+    name: "Žádný plán",
+    price: `${HOURLY_RATE} Kč/hod`,
+    tagline: "Bez měsíční platby. Ozvete se, jen když něco potřebujete.",
+    bullets: [
+      "Ad-hoc zásahy podle potřeby",
+      "Vyúčtování po hodině",
+      "Odpověď do 5 pracovních dní",
+      "Bez smlouvy",
+    ],
+  },
+  {
+    name: "Care",
+    price: "2 500 Kč/měsíc",
+    tagline: "Aby web žil dál a postupně rostl v Googlu.",
+    bullets: [
+      "1 SEO článek za 2 měsíce (6 ročně)",
+      "Hosting, doména, technická údržba",
+      "Drobné úpravy textů a obrázků (do 30 min/měsíčně)",
+      "Odpověď do 3 pracovních dní",
+    ],
+  },
+  {
+    name: "Growth",
+    price: "5 000 Kč/měsíc",
+    highlighted: true,
+    tagline: "Aktivní práce na viditelnosti a optimalizace na reálných datech.",
+    bullets: [
+      "1 SEO článek měsíčně",
+      "Aktivní správa Google firemního profilu",
+      "Kvartální optimalizace na základě dat",
+      "Měsíční reporting (jedna stránka, čisté závěry)",
+      "Odpověď do 2 pracovních dní",
+    ],
+  },
+];
+
+const includedItems = [
+  "Strategie a vstupní rozhovory o vašem byznysu",
+  "Vlastní design a kompletní web",
+  "Copywriting všech stránek",
+  "On-page SEO (klíčová slova, meta, schema, sitemap)",
+  "Analytika (GA4, Search Console, Microsoft Clarity)",
+  "Založení nebo optimalizace Google firemního profilu",
+  "UGC strategie ve formátu PDF (6–8 stran)",
+  "Content style guide",
+  "Nastavení domény a hostingu, pokud je potřeba",
+  "Šest měsíců péče: 3 SEO články, strategický check-in, optimalizace na datech, závěrečná revize",
+];
+
+const excludedItems = [
+  "Měsíční tarif po šesti měsících (řeší se zvlášť, viz níže)",
+  "Tisková inzerce, billboardy, video produkce",
+  "Denní správa sociálních sítí (UGC strategii ano, provoz ne)",
+];
+
+interface Faq {
+  question: string;
+  answer: string;
+}
+
+const faqs: Faq[] = [
+  {
+    question: "Proč ne šablona za dvacet tisíc?",
+    answer:
+      "Šablonový web vás dostane online — to je všechno. U mě kupujete strategii, vlastní design, copywriting podle vašeho byznysu, on-page SEO a šest měsíců péče po spuštění. Šablonu si dokáže poslat každý za týden, výsledek je plichta s tisíci dalšími poradci. Tohle je rozdíl mezi vizitkou a nástrojem, který vám reálně přivádí klienty.",
+  },
+  {
+    question: "Jak rychle uvidím, že to funguje?",
+    answer:
+      "První přímé reakce — kdo se ozval, na co se ptal — vidíte typicky v týdnech po spuštění, protože strategický web přesvědčí lidi, kteří už o vás slyšeli z doporučení. Organická viditelnost v Googlu narůstá pomaleji: lokální klíčová slova (typu „pojišťovací poradce + město“) obvykle tři až pět měsíců, obecnější dotazy déle. V měsíci 4 se sejdeme nad daty — když něco nešlape, ladíme to v rámci ceny. Smysl šesti měsíců péče je právě tohle: ne odevzdat web a zmizet, ale držet ruku na tepně, dokud nejsou výsledky vidět.",
+  },
+  {
+    question: "Co když budu chtít po šesti měsících odejít?",
+    answer:
+      "Žádný problém. Web je váš, doména je vaše, přístupy ke všem nástrojům (analytika, hosting, Google profil) jsou vaše. Žádná smlouva na rok, žádný výpovědní rituál. Po šestém měsíci si vyberete jeden ze čtyř tarifů — nebo žádný. A i pak se dá kdykoli odejít.",
+  },
+  {
+    question: "Můžu platit ve splátkách?",
+    answer:
+      "Standardně 40 / 30 / 30 — při podpisu, při schválení designu, při spuštění. Pokud máte jiný rytmus cash-flow, domluvíme individuální plán. Stačí říct předem.",
+  },
+  {
+    question: "Pracujete jen s finančními poradci?",
+    answer:
+      "Jedná se o mé hlavní zaměření — pojišťovací poradci, makléři, bankéři. Občas vezmu projekt z jiného oboru jako jednorázovou výjimku, ale za stejnou cenu. Bez výhody specializace si totiž počkám déle, než pochopím váš byznys, a to čas stojí.",
+  },
+  {
+    question: "Kdo píše texty — já vám je musím dodat?",
+    answer:
+      "Píšu je já. Ze vstupních rozhovorů a strategie napíšu první draft, vy revidujete. Není to váš domácí úkol — je to moje řemeslo. Dostanete navíc content style guide, abyste mohli psát další obsah ve stejném tónu.",
+  },
+  {
+    question: "Co když si budu chtít psát články sám?",
+    answer:
+      "Skvělá volba — nikdo nezná vaše klienty líp než vy. Z vstupních rozhovorů a strategie vznikne content style guide, který popisuje, jak psát ve vašem hlasu, na jaká klíčová slova cílit a jak článek strukturovat. Vy napíšete draft (Word, Google Docs, jak vám vyhovuje), pošlete mi ho a já ho publikuji včetně SEO úprav, obvykle do dvou pracovních dnů. Pokud budete chtít plnou samoobsluhu bez mého zásahu, řešíme to jako samostatnou úpravu webu — napojení redakčního systému — a domluvíme se na rozsahu.",
+  },
+  {
+    question: "Jak dlouho to celé trvá?",
+    answer:
+      "Šest měsíců — od podpisu po závěrečnou revizi. Strategie týden 1–2, stavba týden 3–6, web jde živě na konci šestého týdne. Pak postlaunch ladění, tři SEO články a kvartální optimalizace, závěrečná revize v šestém měsíci. Detail najdete na stránce Jak to funguje.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.answer,
+    },
+  })),
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Webová prezentace pro finanční poradce",
+  description:
+    "Kompletní webová prezentace včetně strategie, designu, copywritingu, SEO a šesti měsíců péče po spuštění.",
+  provider: {
+    "@id": "https://connexus.cz/#connexus",
+  },
+  areaServed: {
+    "@type": "Country",
+    name: "Česká republika",
+  },
+  offers: {
+    "@type": "Offer",
+    price: STANDARD_PRICE_NUM,
+    priceCurrency: "CZK",
+    description:
+      "Kompletní projekt včetně šesti měsíců péče po spuštění. Splátky jsou možné — domlouvá se individuálně.",
+  },
+};
+---
+
+<Layout title={title} description={description}>
+  <Fragment slot="head">
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(serviceSchema)}
+    />
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(faqSchema)}
+    />
+  </Fragment>
+
+  <Nav />
+
+  <main>
+    <Container class="pt-32 md:pt-40">
+      <a
+        href="/"
+        class="inline-flex items-center gap-2 font-mono text-small text-text-muted transition-colors hover:text-text-primary"
+      >
+        ← Zpět na úvod
+      </a>
+    </Container>
+
+    <section class="pb-12 pt-10 md:pb-20 md:pt-14">
+      <Container>
+        <div class="max-w-[900px] space-y-8 md:space-y-10">
+          <p class="font-mono text-small uppercase tracking-[0.08em] text-accent">
+            Ceník
+          </p>
+
+          <h1 class="font-serif text-display-sm font-medium leading-[1.05] tracking-tight text-text-primary md:text-display">
+            Ceník
+          </h1>
+
+          <p class="max-w-prose text-body-lg text-text-secondary">
+            Ceny ukazuji rovnou. Pokud dávají smysl, povíme si o vašem byznysu.
+            Pokud ne, ušetřili jsme oba čas.
+          </p>
+        </div>
+      </Container>
+    </section>
+
+    <section class="py-20 md:py-32" aria-labelledby="vstupni-cena">
+      <Container>
+        <SectionMarker number="01" label="Vstupní cena" class="" />
+
+        <h2 id="vstupni-cena" class="sr-only">Vstupní cena</h2>
+
+        <div class="mt-10 grid gap-10 md:mt-14 md:grid-cols-12 md:gap-16">
+          <div class="md:col-span-7">
+            <p class="font-mono text-small uppercase tracking-[0.08em] text-text-muted">
+              <span
+                class="cenik-strike"
+                aria-label={`Běžná cena ${STANDARD_PRICE_DISPLAY} korun`}
+              >
+                Běžně {STANDARD_PRICE_DISPLAY} Kč
+              </span>
+            </p>
+            <p class="cenik-price mt-3 font-serif font-medium text-text-primary md:mt-4">
+              {FOUNDING_PRICE_DISPLAY} <span class="cenik-price-unit">Kč</span>
+            </p>
+            <p class="mt-4 max-w-prose text-body-lg text-accent md:mt-6">
+              Pro zakládající klienty. Z původních tří míst zbývají dvě.
+            </p>
+            <p class="mt-4 max-w-prose text-body text-text-secondary">
+              Za kompletní projekt včetně šesti měsíců péče po spuštění.
+              Po naplnění tří míst se cena vrací na běžnou.
+            </p>
+          </div>
+
+          <div class="space-y-10 md:col-span-5 md:space-y-12">
+            <div>
+              <p class="font-mono text-small uppercase tracking-[0.08em] text-text-muted">
+                Co je v ceně
+              </p>
+              <ul class="mt-5 space-y-3 text-body text-text-secondary">
+                {
+                  includedItems.map((item) => (
+                    <li class="flex gap-3">
+                      <span class="text-border-strong" aria-hidden="true">
+                        —
+                      </span>
+                      <span>{item}</span>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+
+            <div>
+              <p class="font-mono text-small uppercase tracking-[0.08em] text-text-muted">
+                Co v ceně není
+              </p>
+              <ul class="mt-5 space-y-3 text-body text-text-secondary">
+                {
+                  excludedItems.map((item) => (
+                    <li class="flex gap-3">
+                      <span class="text-border-strong" aria-hidden="true">
+                        —
+                      </span>
+                      <span>{item}</span>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+
+            <div class="border-t border-border-subtle pt-6">
+              <p class="max-w-prose font-mono text-small leading-relaxed text-text-muted">
+                Splátky jsou v pohodě. Domluvíme rytmus, který vám vyhovuje —
+                stačí říct předem.
+              </p>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+
+    <section
+      class="bg-bg-secondary py-20 md:py-32"
+      aria-labelledby="dlouhodoba"
+    >
+      <Container>
+        <SectionMarker number="02" label="Dlouhodobá spolupráce" />
+
+        <div class="mt-10 grid gap-10 md:mt-14 md:grid-cols-12 md:gap-16">
+          <div class="md:col-span-7">
+            <h2
+              id="dlouhodoba"
+              class="font-serif text-h2-sm font-medium md:text-h2"
+            >
+              Co po šesti měsících.
+            </h2>
+          </div>
+          <div class="md:col-span-5">
+            <p class="max-w-prose text-body text-text-secondary">
+              Po šestém měsíci si vyberete, jak chcete pokračovat. Mezi tarify
+              se dá kdykoli přejít — nahoru i dolů. Bez smlouvy na rok.
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-14 border-t border-border-subtle md:mt-20">
+          {
+            tiers.map((tier) => (
+              <article class="grid gap-6 border-b border-border-subtle py-10 md:grid-cols-12 md:gap-12 md:py-14">
+                <div class="md:col-span-4">
+                  {tier.highlighted && (
+                    <p class="font-mono text-small uppercase tracking-[0.08em] text-accent">
+                      Doporučuji
+                    </p>
+                  )}
+                  <h3
+                    class:list={[
+                      "font-serif text-h2-sm font-medium text-text-primary md:text-h2",
+                      tier.highlighted ? "mt-3" : "",
+                    ]}
+                  >
+                    {tier.name}
+                  </h3>
+                  <p class="mt-3 font-mono text-body text-text-secondary md:mt-4">
+                    {tier.price}
+                  </p>
+                </div>
+                <div class="md:col-span-8 md:pt-2">
+                  <p class="max-w-prose text-body-lg text-text-primary">
+                    {tier.tagline}
+                  </p>
+                  <ul class="mt-6 space-y-3 text-body text-text-secondary md:mt-8">
+                    {tier.bullets.map((bullet) => (
+                      <li class="flex gap-3">
+                        <span class="text-border-strong" aria-hidden="true">
+                          —
+                        </span>
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </Container>
+    </section>
+
+    <section class="py-20 md:py-32" aria-labelledby="faq">
+      <Container>
+        <SectionMarker number="03" label="Časté otázky" />
+
+        <div class="mt-10 grid gap-10 md:mt-14 md:grid-cols-12 md:gap-16">
+          <div class="md:col-span-4">
+            <h2
+              id="faq"
+              class="font-serif text-h2-sm font-medium md:text-h2"
+            >
+              Na co se nejčastěji ptají.
+            </h2>
+          </div>
+          <div class="md:col-span-8">
+            <div class="border-t border-border-subtle">
+              {
+                faqs.map((faq) => (
+                  <details class="faq-item border-b border-border-subtle">
+                    <summary class="faq-summary flex cursor-pointer items-start justify-between gap-6 py-6 md:py-8">
+                      <span class="font-serif text-h3-sm font-medium text-text-primary md:text-h3">
+                        {faq.question}
+                      </span>
+                      <span
+                        class="faq-icon mt-2 shrink-0 font-mono text-body text-text-muted md:mt-3"
+                        aria-hidden="true"
+                      ></span>
+                    </summary>
+                    <div class="faq-answer pb-6 md:pb-8">
+                      <p class="max-w-prose text-body text-text-secondary">
+                        {faq.answer}
+                      </p>
+                    </div>
+                  </details>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+
+    <section class="bg-bg-secondary py-20 md:py-32" aria-labelledby="filozofie">
+      <Container>
+        <SectionMarker number="04" label="Filozofie ceny" />
+
+        <div class="mt-10 grid gap-10 md:mt-14 md:grid-cols-12 md:gap-16">
+          <div class="md:col-span-4">
+            <h2
+              id="filozofie"
+              class="font-serif text-h2-sm font-medium md:text-h2"
+            >
+              Proč ukazuji ceny rovnou.
+            </h2>
+          </div>
+          <div class="space-y-8 md:col-span-8">
+            <p class="max-w-prose text-body-lg text-text-primary">
+              Ceny ukazuji rovnou, protože si myslím, že byste měli vědět, do
+              čeho jdete, ještě než mi napíšete. Nikdo se nemá dozvídat cenu až
+              po hodinovém hovoru s obchodníkem. Pokud cena dává smysl, povíme
+              si o vašem byznysu. Pokud ne, ušetřili jsme oba čas.
+            </p>
+            <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8">
+              <Button href="/#kontakt" variant="primary"
+                >Domluvit konzultaci</Button
+              >
+              <Button href="/jak-to-funguje" variant="link"
+                >Jak to funguje</Button
+              >
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .cenik-price {
+    font-size: clamp(72px, 12vw, 144px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .cenik-price-unit {
+    font-size: 0.55em;
+    color: theme("colors.text.secondary");
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  .cenik-strike {
+    position: relative;
+    display: inline-block;
+  }
+  .cenik-strike::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    transform: translateY(-50%);
+    animation: cenik-strike-draw 700ms cubic-bezier(0.65, 0, 0.35, 1) 600ms
+      forwards;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cenik-strike::after {
+      animation: none;
+      width: 100%;
+    }
+  }
+  @keyframes cenik-strike-draw {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  .faq-item > summary {
+    list-style: none;
+  }
+  .faq-item > summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-icon {
+    display: inline-block;
+    min-width: 1ch;
+    text-align: center;
+    transition: color 200ms ease;
+  }
+  .faq-icon::before {
+    content: "+";
+  }
+  .faq-item[open] .faq-icon::before {
+    content: "−";
+  }
+  .faq-answer {
+    animation: faq-fade-in 250ms ease-out;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .faq-icon,
+    .faq-answer {
+      animation: none;
+      transition: none;
+    }
+  }
+  @keyframes faq-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .faq-summary:hover .faq-icon {
+    color: theme("colors.text.primary");
+  }
+</style>
