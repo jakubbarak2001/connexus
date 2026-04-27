@@ -1,9 +1,6 @@
 ---
 import Button from "./Button.astro";
 
-const heroText = "Zasloužíte si víc než jen běžný web";
-const heroChars = Array.from(heroText);
-
 const occupations = [
   "Pojišťovací poradce",
   "Hypoteční makléře",
@@ -16,10 +13,7 @@ const occupations = [
   class="hero relative flex items-center px-6 md:px-12 lg:px-20"
 >
   <div class="mx-auto w-full max-w-6xl">
-    <p
-      class="hero__eyebrow font-mono uppercase text-accent"
-      data-hero-stage="eyebrow"
-    >
+    <p class="hero__eyebrow font-mono uppercase text-accent">
       <span class="sr-only"
         >Pro pojišťovací poradce, hypoteční makléře a investiční poradce.</span
       >
@@ -42,20 +36,17 @@ const occupations = [
       </span>
     </p>
 
-    <h1
-      class="hero__h1 font-serif font-medium text-text-primary"
-      aria-label="Zasloužíte si víc než jen běžný web."
-    >
-      <span class="hero__h1-text" data-typewriter aria-hidden="true"
-        >{heroChars.map((ch) => <span class="hero__h1-char">{ch}</span>)}</span
-      ><span class="hero__h1-dot" aria-hidden="true">.</span>
+    <h1 class="hero__h1 font-serif font-medium text-text-primary">
+      Zasloužíte si víc než jen běžný web.
     </h1>
 
-    <p class="hero__subhead text-text-secondary" data-hero-stage="subhead">
-      Web je jen začátek. Píšu texty, ze kterých vás Google zviditelní, radím s recenzemi a sociálními sítěmi, <strong>rozumím vašemu byznysu</strong> — a šest měsíců po spuštění optimalizuji na reálných datech.
+    <p class="hero__subhead text-text-secondary">
+      Web je jen začátek. Píšu texty, ze kterých vás Google zviditelní, radím
+      s recenzemi a sociálními sítěmi, <strong>rozumím vašemu byznysu</strong>
+      — a šest měsíců po spuštění optimalizuji na reálných datech.
     </p>
 
-    <div class="hero__ctas" data-hero-stage="ctas">
+    <div class="hero__ctas">
       <Button href="#kontakt" variant="primary">Domluvit konzultaci</Button>
     </div>
   </div>
@@ -63,24 +54,21 @@ const occupations = [
   <a
     href="#problem"
     class="hero__chevron text-text-secondary"
-    data-hero-stage="chevron"
     aria-label="Přejít na další sekci"
   >
-    <span class="hero__chevron-inner">
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.75"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M6 9l6 6 6-6" />
-      </svg>
-    </span>
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.75"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M6 9l6 6 6-6"></path>
+    </svg>
   </a>
 </section>
 
@@ -99,11 +87,6 @@ const occupations = [
     font-size: clamp(40px, 10vw, 64px);
     line-height: 1.1;
     letter-spacing: -0.03em;
-  }
-
-  .hero__h1-dot {
-    display: inline-block;
-    opacity: 0;
   }
 
   .hero__subhead {
@@ -135,35 +118,6 @@ const occupations = [
     }
   }
 
-  /* ===== Typewriter + staged reveal =====
-     Chars and stages are hidden from the start so the browser never
-     paints them visible. The .is-visible class reveals them with a
-     transition; the initial hidden state has no transition, so there's
-     no fade-out from 1 → 0 on load (which would cause a ghost flash). */
-
-  .hero__h1-char {
-    opacity: 0;
-  }
-  .hero__h1-char.is-visible {
-    opacity: 1;
-  }
-
-  [data-hero-stage] {
-    opacity: 0;
-    transform: translateY(12px);
-    will-change: opacity, transform;
-  }
-  [data-hero-stage="eyebrow"] {
-    transform: translateY(8px);
-  }
-  [data-hero-stage].is-visible {
-    opacity: 1;
-    transform: none;
-    transition:
-      opacity 450ms cubic-bezier(0.16, 1, 0.3, 1),
-      transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
   .hero__chevron {
     position: absolute;
     left: 50%;
@@ -181,41 +135,15 @@ const occupations = [
   .hero__chevron:hover {
     color: theme("colors.text.primary");
   }
-  /* Override the shared [data-hero-stage] transform so the reveal rises upward */
-  [data-hero-stage="chevron"] {
-    transform: translate(-50%, 16px);
-  }
-  [data-hero-stage="chevron"].is-visible {
-    transform: translate(-50%, 0);
-  }
-  .hero__chevron-inner {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
   @media (min-width: 768px) {
     .hero__chevron {
       bottom: 40px;
     }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .hero__h1-char,
-    [data-hero-stage] {
-      opacity: 1;
-      transform: none;
-    }
-    .hero__h1-dot {
-      opacity: 1;
-    }
-  }
-
   /* ===== Rotating eyebrow occupation =====
-     Per-word cycle (2500ms): word slides up from below, holds; underline
-     slides up below the word, holds; underline fades; word slides up and out.
-     Sequenced so the next word's entry begins only after the current word's
-     full exit. The first word skips the entry phase (it's already in place
-     when the rotator initializes). */
+     Underline is statically visible from page load (a quiet anchor).
+     Cycling begins after a short delay so the H1 has reading time first. */
 
   .hero__rotator {
     display: inline-grid;
@@ -251,19 +179,12 @@ const occupations = [
     pointer-events: none;
   }
 
-  /* Init only (page load, before cycling starts):
-     show the first word's underline statically — quiet anchor, no draw-in.
-     Word and underline animations stay dormant until cycling begins. */
   .hero__rotator[data-rotator-init]:not([data-rotator-cycling])
     .hero__rotator-word.is-active::after {
     opacity: 1;
     transform: translateY(0);
   }
 
-  /* Cycling started (after H1 typewriter completes).
-     First word uses a shorter 1500ms cycle so the first transition
-     happens sooner (~1.7s after H1 done). Subsequent words run the
-     full 2500ms cycle. */
   .hero__rotator[data-rotator-cycling]
     .hero__rotator-word.is-active.is-first {
     animation: rotator-word-first 1500ms ease-in-out forwards;
@@ -274,97 +195,43 @@ const occupations = [
     animation: rotator-word 2500ms ease-in-out forwards;
   }
 
-  /* First word's underline during cycling: was already visible —
-     just hold and fade out with the word. No re-draw-in flash. */
   .hero__rotator[data-rotator-cycling]
     .hero__rotator-word.is-active.is-first::after {
     animation: rotator-underline-first 1500ms ease-in-out forwards;
   }
 
-  /* Subsequent words: full underline draw-in + hold + fade out */
   .hero__rotator[data-rotator-cycling]
     .hero__rotator-word.is-active:not(.is-first)::after {
     animation: rotator-underline 2500ms ease-in-out forwards;
   }
 
-  @keyframes rotator-underline-first {
-    0% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    72% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    80% {
-      opacity: 0;
-      transform: translateY(0);
-    }
-    100% {
-      opacity: 0;
-      transform: translateY(0);
-    }
-  }
-
   @keyframes rotator-word {
-    0% {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    12% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    84% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    100% {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
+    0% { opacity: 0; transform: translateY(10px); }
+    12% { opacity: 1; transform: translateY(0); }
+    84% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-10px); }
   }
 
   @keyframes rotator-word-first {
-    0% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    84% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    100% {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
+    0% { opacity: 1; transform: translateY(0); }
+    84% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-10px); }
   }
 
   @keyframes rotator-underline {
-    0% {
-      opacity: 0;
-      transform: translateY(8px);
-    }
-    15% {
-      opacity: 0;
-      transform: translateY(8px);
-    }
-    26% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    72% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    80% {
-      opacity: 0;
-      transform: translateY(0);
-    }
-    100% {
-      opacity: 0;
-      transform: translateY(0);
-    }
+    0% { opacity: 0; transform: translateY(8px); }
+    15% { opacity: 0; transform: translateY(8px); }
+    26% { opacity: 1; transform: translateY(0); }
+    72% { opacity: 1; transform: translateY(0); }
+    80% { opacity: 0; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(0); }
+  }
+
+  @keyframes rotator-underline-first {
+    0% { opacity: 1; transform: translateY(0); }
+    72% { opacity: 1; transform: translateY(0); }
+    80% { opacity: 0; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(0); }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -385,128 +252,45 @@ const occupations = [
 </style>
 
 <script>
-  const hero = document.querySelector<HTMLElement>("#uvod");
-  const typewriter = hero?.querySelector<HTMLElement>("[data-typewriter]");
-  const dot = hero?.querySelector<HTMLElement>(".hero__h1-dot");
-  const chars = hero
-    ? Array.from(hero.querySelectorAll<HTMLElement>(".hero__h1-char"))
-    : [];
-  const stages = hero
-    ? {
-        eyebrow: hero.querySelector<HTMLElement>('[data-hero-stage="eyebrow"]'),
-        subhead: hero.querySelector<HTMLElement>('[data-hero-stage="subhead"]'),
-        ctas: hero.querySelector<HTMLElement>('[data-hero-stage="ctas"]'),
-        chevron: hero.querySelector<HTMLElement>('[data-hero-stage="chevron"]'),
-      }
-    : null;
+  // Eyebrow rotator — cycles through professions. Hero content is fully
+  // visible on first paint (no entry animations) for fastest LCP. The
+  // rotator's underline is statically visible from page load; the word
+  // cycling waits 1500ms so the reader's first beat lands on the H1.
+  const rotator = document.querySelector<HTMLElement>(
+    ".hero__rotator[data-rotator]",
+  );
 
-  if (hero && typewriter && dot && chars.length && stages) {
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    if (prefersReduced) {
-      chars.forEach((c) => c.classList.add("is-visible"));
-      Object.values(stages).forEach((el) => el?.classList.add("is-visible"));
-      dot.style.opacity = "1";
-    } else {
-      const charDelay = 28;
-      const eyebrowAt = 120;
-      const typeStartAt = 320;
-      const subheadAfterTypeEnd = 250;
-      const ctasAfterSubhead = 200;
-      const chevronAfterCtas = 220;
-
-      window.setTimeout(() => {
-        stages.eyebrow?.classList.add("is-visible");
-      }, eyebrowAt);
-
-      window.setTimeout(() => {
-        let i = 0;
-        const revealNext = () => {
-          if (i < chars.length) {
-            chars[i].classList.add("is-visible");
-            i += 1;
-            window.setTimeout(revealNext, charDelay);
-          } else {
-            dot.style.opacity = "1";
-            // Fire hero:settled right after the H1 finishes typing.
-            // Eyebrow rotator listens for this and begins its cycle.
-            // The first word's keyframe just holds + fades (no entry
-            // motion), so cycling "starting" produces no visible motion
-            // until the first word transition — which lands cleanly after
-            // subhead/CTAs/chevron have settled.
-            window.setTimeout(() => {
-              document.dispatchEvent(new Event("hero:settled"));
-            }, 250);
-            window.setTimeout(() => {
-              stages.subhead?.classList.add("is-visible");
-              window.setTimeout(() => {
-                stages.ctas?.classList.add("is-visible");
-                window.setTimeout(() => {
-                  stages.chevron?.classList.add("is-visible");
-                }, chevronAfterCtas);
-              }, ctasAfterSubhead);
-            }, subheadAfterTypeEnd);
-          }
-        };
-        revealNext();
-      }, typeStartAt);
-    }
-  }
-</script>
-
-<script>
-  (() => {
-    const rotator = document.querySelector<HTMLElement>(
-      ".hero__rotator[data-rotator]",
-    );
-    if (!rotator) return;
+  if (rotator) {
     const words = rotator.querySelectorAll<HTMLElement>(".hero__rotator-word");
-    if (!words.length) return;
-
     const prefersReduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
 
-    if (prefersReduced) {
+    if (!prefersReduced && words.length) {
       rotator.setAttribute("data-rotator-init", "");
-      return;
-    }
 
-    // Init immediately on page load — first word's underline becomes a
-    // quiet static anchor under the eyebrow, no motion yet.
-    rotator.setAttribute("data-rotator-init", "");
+      const FIRST_INTERVAL = 1500;
+      const INTERVAL_MS = 2500;
 
-    const FIRST_INTERVAL = 1500; // first transition is faster — gets motion in earlier
-    const INTERVAL_MS = 2500;
-
-    const startCycling = () => {
-      if (rotator.hasAttribute("data-rotator-cycling")) return;
-      rotator.setAttribute("data-rotator-cycling", "");
-
-      let index = 0;
       const transition = () => {
-        const current = words[index];
+        const current = Array.from(words).find((w) =>
+          w.classList.contains("is-active"),
+        );
+        if (!current) return;
+        const currentIndex = Array.from(words).indexOf(current);
+        const nextIndex = (currentIndex + 1) % words.length;
         current.classList.remove("is-active");
         current.classList.remove("is-first");
-        index = (index + 1) % words.length;
-        words[index].classList.add("is-active");
+        words[nextIndex].classList.add("is-active");
       };
 
       window.setTimeout(() => {
+        rotator.setAttribute("data-rotator-cycling", "");
         transition();
         window.setInterval(transition, INTERVAL_MS);
       }, FIRST_INTERVAL);
-    };
-
-    // Cycling waits for the hero entry sequence to settle before starting.
-    // Underline stays statically visible until then; no motion competing
-    // with the H1 typewriter and stage reveals.
-    document.addEventListener("hero:settled", startCycling, { once: true });
-
-    // Safety fallback: if hero:settled never fires (e.g. typewriter errored),
-    // start cycling after a generous delay so the page never feels frozen.
-    window.setTimeout(startCycling, 4000);
-  })();
+    } else if (prefersReduced) {
+      rotator.setAttribute("data-rotator-init", "");
+    }
+  }
 </script>

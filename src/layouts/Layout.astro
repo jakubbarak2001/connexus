@@ -115,9 +115,13 @@ const ogSquareUrl = ogSquare ? new URL(ogSquare, Astro.site).href : null;
         const sections = document.querySelectorAll("main > section");
         if (!sections.length) return;
 
+        // Mark sections + fade-ready in one pass (single style invalidation).
         sections.forEach((el) => el.setAttribute("data-fade", ""));
         document.documentElement.classList.add("fade-ready");
 
+        // Use IntersectionObserver for ALL sections — fires synchronously
+        // on observe with current intersection state. No manual
+        // getBoundingClientRect calls = no forced reflow loop.
         const observer = new IntersectionObserver(
           (entries, obs) => {
             entries.forEach((entry) => {
@@ -130,14 +134,7 @@ const ogSquareUrl = ogSquare ? new URL(ogSquare, Astro.site).href : null;
           { threshold: 0.08, rootMargin: "0px 0px -8% 0px" },
         );
 
-        sections.forEach((el) => {
-          const rect = el.getBoundingClientRect();
-          if (rect.top < window.innerHeight * 0.9) {
-            el.classList.add("is-visible");
-          } else {
-            observer.observe(el);
-          }
-        });
+        sections.forEach((el) => observer.observe(el));
       })();
     </script>
   </body>

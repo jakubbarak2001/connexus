@@ -9,5 +9,10 @@ export default defineConfig({
     prefetchAll: true,
     defaultStrategy: "hover",
   },
+  build: {
+    // Inline all stylesheets into HTML — eliminates render-blocking
+    // CSS network requests. Critical for LCP on a small static site.
+    inlineStylesheets: "always",
+  },
   integrations: [tailwind(), react(), sitemap()],
 });
