@@ -7,7 +7,6 @@ const professions = [
   "Pojišťovací poradce",
   "Hypoteční makléř",
   "Investiční poradce",
-  "Bankéř",
   "Jiné",
 ];
 
@@ -156,7 +155,7 @@ export default function ContactFormReact() {
             Odeslání selhalo. Zkuste to prosím znovu nebo mi napište na jakub@connexus.cz.
           </p>
         )}
-        <p className="font-mono text-small text-text-muted">Odpovídám do 24 hodin.</p>
+        <p className="font-mono text-small text-text-muted">Odpovídám do 1 pracovního dne.</p>
       </div>
     </form>
   );

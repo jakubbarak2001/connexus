@@ -2,62 +2,131 @@
 import Container from "./Container.astro";
 import SectionMarker from "./SectionMarker.astro";
 import Button from "./Button.astro";
+
+interface Slot {
+  number: string;
+  status: "obsazeno" | "volné";
+  name?: string;
+  meta?: string;
+}
+
+const FOUNDING_PRICE_DISPLAY = "35 000";
+const STANDARD_PRICE_DISPLAY = "60 000";
+
+const slots: Slot[] = [
+  {
+    number: "01",
+    status: "obsazeno",
+    name: "Markéta Baráková",
+    meta: "Pojišťovací poradkyně · uzavřeno 03/2026",
+  },
+  {
+    number: "02",
+    status: "volné",
+  },
+  {
+    number: "03",
+    status: "volné",
+  },
+];
 ---
 
 <section id="zakladajici" class="bg-bg-tertiary py-20 md:py-32">
   <Container>
-    <div class="grid gap-12 md:grid-cols-12 md:gap-16">
-      <div class="space-y-8 md:col-span-7 md:space-y-10">
-        <SectionMarker number="03" label="Zakládající klienti" />
+    <SectionMarker number="03" label="Zakládající klienti" />
 
-        <h2 class="font-serif text-h2-sm font-medium md:text-h2">
-          Tři místa. Dlouhodobé partnerství.
-        </h2>
+    <div class="mt-10 max-w-[900px] md:mt-14">
+      <h2 class="font-serif text-h2-sm font-medium leading-[1.05] md:text-h2">
+        Tři místa.<br />
+        <span class="text-accent">Dvě jsou volná.</span>
+      </h2>
+    </div>
 
+    <p
+      class="mt-10 font-mono text-small uppercase tracking-[0.08em] text-text-muted md:mt-14"
+    >
+      Zaváděcí cena · platná do naplnění tří míst
+    </p>
+
+    <ol class="mt-6 border-t border-border-strong">
+      {
+        slots.map((slot) => (
+          <li class="grid grid-cols-12 items-baseline gap-4 border-b border-border-strong py-6 md:gap-8 md:py-8">
+            <span class="col-span-2 font-mono text-small text-text-muted md:col-span-1">
+              {slot.number}
+            </span>
+
+            {slot.status === "obsazeno" ? (
+              <Fragment>
+                <div class="col-span-7 md:col-span-8">
+                  <p class="font-serif text-h3-sm font-medium text-text-primary md:text-h3">
+                    {slot.name}
+                  </p>
+                  <p class="mt-1 font-mono text-small text-text-muted">
+                    {slot.meta}
+                  </p>
+                </div>
+                <span class="col-span-3 justify-self-end font-mono text-small uppercase tracking-[0.08em] text-accent">
+                  ✓ Obsazeno
+                </span>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <div class="col-span-7 md:col-span-8">
+                  <p class="font-serif text-h3-sm font-medium text-text-muted md:text-h3">
+                    — Volné místo —
+                  </p>
+                  <p class="mt-1 font-mono text-small text-text-muted">
+                    K dispozici pro zakládajícího klienta
+                  </p>
+                </div>
+                <div class="col-span-3 justify-self-end text-right">
+                  <p class="font-serif text-h3-sm font-medium text-text-primary md:text-h3">
+                    {FOUNDING_PRICE_DISPLAY} Kč
+                  </p>
+                  <p class="mt-1 font-mono text-small text-text-muted line-through">
+                    {STANDARD_PRICE_DISPLAY} Kč
+                  </p>
+                </div>
+              </Fragment>
+            )}
+          </li>
+        ))
+      }
+    </ol>
+
+    <div class="mt-12 grid gap-10 md:mt-16 md:grid-cols-12 md:gap-16">
+      <div class="md:col-span-7">
         <div class="max-w-prose space-y-6 text-body text-text-secondary">
           <p>
-            Beru si v tomto roce tři zakládající klienty. Vybudovat případové studie
-            pořádně chce čas a pozornost, kterou nemůžu rozdělit mezi víc lidí. Pokud
-            jeden z těch tří budete vy, dostanete za sníženou cenu šest měsíců péče
-            v základu a prioritní dostupnost.
+            Beru si v tomto roce tři zakládající klienty. Vybudovat případové
+            studie pořádně chce čas a pozornost, kterou nemůžu rozdělit mezi víc
+            lidí. Pokud jeden z těch tří budete vy, dostanete za sníženou cenu
+            šest měsíců péče v základu a prioritní dostupnost.
           </p>
           <p>
-            Není to sleva. Je to dohoda: vy mi dáte šanci postavit portfolio na reálných
-            datech, já vám dám pozornost, kterou si v plném diáři nemůžu dovolit.
+            <strong>Není to sleva. Je to dohoda:</strong> vy mi dáte šanci postavit
+            portfolio na reálných datech, já vám dám pozornost, kterou s plnou klientelou
+            později nemůžu nabídnout.
           </p>
         </div>
       </div>
 
-      <div class="space-y-8 md:col-span-5">
-        <div class="space-y-3">
-          <p class="founding-counter font-serif font-medium text-accent">2 / 3</p>
-          <p
-            class="font-mono uppercase text-text-muted"
-            style="font-size:14px; letter-spacing:0.08em;"
-          >
-            míst dostupných
-          </p>
-        </div>
-
-        <div class="h-px w-[60px] bg-border-subtle" aria-hidden="true"></div>
-
-        <ul class="space-y-3 text-body text-text-secondary">
-          <li>Základní cena projektu</li>
-          <li>Šest měsíců pozáruční péče v ceně</li>
+      <div class="md:col-span-5">
+        <p class="font-mono text-small uppercase tracking-[0.08em] text-text-muted">
+          Co dostanete
+        </p>
+        <ul class="mt-4 space-y-2 text-body text-text-secondary">
+          <li>Šest měsíců péče po spuštění</li>
           <li>Prioritní dostupnost a přímý kontakt</li>
-          <li>Kvartální reporty a optimalizace</li>
+          <li>Strategický check-in v měsíci 4</li>
+          <li>Závěrečná revize v měsíci 6</li>
         </ul>
-
-        <Button href="#kontakt" variant="primary">Domluvit konzultaci</Button>
       </div>
+    </div>
+
+    <div class="mt-12 md:mt-16">
+      <Button href="#kontakt" variant="primary">Domluvit konzultaci</Button>
     </div>
   </Container>
 </section>
-
-<style>
-  .founding-counter {
-    font-size: clamp(120px, 14vw, 200px);
-    line-height: 1;
-    letter-spacing: -0.02em;
-  }
-</style>

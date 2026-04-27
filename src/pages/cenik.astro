@@ -12,7 +12,7 @@ const FOUNDING_PRICE_DISPLAY = "35 000";
 const HOURLY_RATE = "1 500";
 
 const title = "Ceník — Connexus";
-const description = `Vstupní cena ${STANDARD_PRICE_DISPLAY} Kč včetně šesti měsíců péče po spuštění. Po šestém měsíci tarify od 2 500 do 5 000 Kč/měsíc, nebo bez paušálu. Bez smlouvy na rok, bez skrytých položek.`;
+const description = `Vstupní cena ${STANDARD_PRICE_DISPLAY} Kč včetně šesti měsíců péče po spuštění. Po šestém měsíci tarify od 1 500 do 5 000 Kč/měsíc, nebo žádný plán (po hodině). Bez smlouvy na rok, bez skrytých položek.`;
 
 interface Tier {
   name: string;
@@ -35,14 +35,14 @@ const tiers: Tier[] = [
     ],
   },
   {
-    name: "Care",
-    price: "2 500 Kč/měsíc",
-    tagline: "Aby web žil dál a postupně rostl v Googlu.",
+    name: "Údržba",
+    price: "1 500 Kč/měsíc",
+    tagline: "Pro klienty, kteří si web spravují sami a chtějí mě po ruce.",
     bullets: [
-      "1 SEO článek za 2 měsíce (6 ročně)",
-      "Hosting, doména, technická údržba",
-      "Drobné úpravy textů a obrázků (do 30 min/měsíčně)",
+      "Drobné úpravy webu (do 1 hodiny měsíčně)",
+      "Technický monitoring (formuláře, výpadky, chyby)",
       "Odpověď do 3 pracovních dní",
+      "Bez článků a aktivního marketingu — to je Growth",
     ],
   },
   {
@@ -51,10 +51,11 @@ const tiers: Tier[] = [
     highlighted: true,
     tagline: "Aktivní práce na viditelnosti a optimalizace na reálných datech.",
     bullets: [
-      "1 SEO článek měsíčně",
-      "Aktivní správa Google firemního profilu",
-      "Kvartální optimalizace na základě dat",
-      "Měsíční reporting (jedna stránka, čisté závěry)",
+      "1 SEO článek měsíčně (~1 200 slov, cílený na konkrétní klíčové slovo)",
+      "Drobné úpravy webu — texty, obrázky, změny (do 1 hodiny měsíčně)",
+      "Měsíční post na Google profilu + reakce na všechny nové recenze do 3 prac. dní",
+      "4× ročně audit chování návštěvníků: kam klikají, kde odpadávají, co opravit",
+      "Měsíční report na 1 stránku: kolik lidí přišlo, odkud, kdo se ozval, co dál",
       "Odpověď do 2 pracovních dní",
     ],
   },
@@ -63,12 +64,12 @@ const tiers: Tier[] = [
 const includedItems = [
   "Strategie a vstupní rozhovory o vašem byznysu",
   "Vlastní design a kompletní web",
-  "Copywriting všech stránek",
+  "Texty pro všechny stránky",
   "On-page SEO (klíčová slova, meta, schema, sitemap)",
   "Analytika (GA4, Search Console, Microsoft Clarity)",
   "Založení nebo optimalizace Google firemního profilu",
-  "UGC strategie ve formátu PDF (6–8 stran)",
-  "Content style guide",
+  "Rámcová UGC strategie pro sociální sítě",
+  "Pravidla pro psaní vlastních článků v jednotném stylu",
   "Nastavení domény a hostingu, pokud je potřeba",
   "Šest měsíců péče: 3 SEO články, strategický check-in, optimalizace na datech, závěrečná revize",
 ];
@@ -88,42 +89,42 @@ const faqs: Faq[] = [
   {
     question: "Proč ne šablona za dvacet tisíc?",
     answer:
-      "Šablonový web vás dostane online — to je všechno. U mě kupujete strategii, vlastní design, copywriting podle vašeho byznysu, on-page SEO a šest měsíců péče po spuštění. Šablonu si dokáže poslat každý za týden, výsledek je plichta s tisíci dalšími poradci. Tohle je rozdíl mezi vizitkou a nástrojem, který vám reálně přivádí klienty.",
+      "Šablonový web vás dostane online — to je všechno. U mě kupujete strategii, vlastní design, texty psané podle vašeho byznysu, on-page SEO a šest měsíců péče po spuštění. Šablonu si dokáže poslat každý za týden, výsledek je plichta s tisíci dalšími poradci. Tohle je <strong>rozdíl mezi vizitkou a nástrojem</strong>, který vám reálně přivádí klienty.",
   },
   {
     question: "Jak rychle uvidím, že to funguje?",
     answer:
-      "První přímé reakce — kdo se ozval, na co se ptal — vidíte typicky v týdnech po spuštění, protože strategický web přesvědčí lidi, kteří už o vás slyšeli z doporučení. Organická viditelnost v Googlu narůstá pomaleji: lokální klíčová slova (typu „pojišťovací poradce + město“) obvykle tři až pět měsíců, obecnější dotazy déle. V měsíci 4 se sejdeme nad daty — když něco nešlape, ladíme to v rámci ceny. Smysl šesti měsíců péče je právě tohle: ne odevzdat web a zmizet, ale držet ruku na tepně, dokud nejsou výsledky vidět.",
+      "První přímé reakce — kdo se ozval, na co se ptal — vidíte typicky v týdnech po spuštění, protože strategický web přesvědčí lidi, kteří už o vás slyšeli z doporučení. Organická viditelnost v Googlu narůstá pomaleji: lokální klíčová slova (typu „pojišťovací poradce + město“) obvykle tři až pět měsíců, obecnější dotazy déle. V měsíci 4 se sejdeme nad daty — když něco nešlape, ladíme to v rámci ceny. Šest měsíců péče je právě o tomhle: <strong>po spuštění nezmizím a jsem tu s vámi</strong>, dokud výsledky nepřijdou.",
   },
   {
     question: "Co když budu chtít po šesti měsících odejít?",
     answer:
-      "Žádný problém. Web je váš, doména je vaše, přístupy ke všem nástrojům (analytika, hosting, Google profil) jsou vaše. Žádná smlouva na rok, žádný výpovědní rituál. Po šestém měsíci si vyberete jeden ze čtyř tarifů — nebo žádný. A i pak se dá kdykoli odejít.",
+      "Žádný problém. Doména je registrovaná na vaše jméno, Google firemní profil pod vámi, do analytiky máte plný přístup, zdrojový kód webu vám předám — můžete ho přesunout na libovolný hosting. Žádná smlouva na rok, žádný výpovědní rituál. Po šestém měsíci si vyberete tarif — Žádný plán (po hodině), Údržbu nebo Growth. A i pak se dá kdykoli odejít.",
   },
   {
     question: "Můžu platit ve splátkách?",
     answer:
-      "Standardně 40 / 30 / 30 — při podpisu, při schválení designu, při spuštění. Pokud máte jiný rytmus cash-flow, domluvíme individuální plán. Stačí říct předem.",
+      "Ano. Standardně 40 / 30 / 30 — při podpisu, při schválení designu, při spuštění — ale pokud máte jiný rytmus cash-flow, domluvíme individuální plán. Stačí říct předem.",
   },
   {
     question: "Pracujete jen s finančními poradci?",
     answer:
-      "Jedná se o mé hlavní zaměření — pojišťovací poradci, makléři, bankéři. Občas vezmu projekt z jiného oboru jako jednorázovou výjimku, ale za stejnou cenu. Bez výhody specializace si totiž počkám déle, než pochopím váš byznys, a to čas stojí.",
+      "Ne. Jedná se o mé hlavní zaměření — pojišťovací poradci, hypoteční makléři a investiční poradci — ale občas vezmu projekt z jiného oboru jako výjimku za stejnou cenu.",
   },
   {
-    question: "Kdo píše texty — já vám je musím dodat?",
+    question: "Kdo píše texty — musím vám je dodat?",
     answer:
-      "Píšu je já. Ze vstupních rozhovorů a strategie napíšu první draft, vy revidujete. Není to váš domácí úkol — je to moje řemeslo. Dostanete navíc content style guide, abyste mohli psát další obsah ve stejném tónu.",
+      "Ne, nemusíte. Píšu je já — ze vstupních rozhovorů a strategie napíšu první návrh, vy revidujete. Není to váš domácí úkol, je to moje řemeslo. Dostanete navíc pravidla pro psaní vlastních článků, abyste v dalším obsahu udrželi jednotný styl.",
   },
   {
     question: "Co když si budu chtít psát články sám?",
     answer:
-      "Skvělá volba — nikdo nezná vaše klienty líp než vy. Z vstupních rozhovorů a strategie vznikne content style guide, který popisuje, jak psát ve vašem hlasu, na jaká klíčová slova cílit a jak článek strukturovat. Vy napíšete draft (Word, Google Docs, jak vám vyhovuje), pošlete mi ho a já ho publikuji včetně SEO úprav, obvykle do dvou pracovních dnů. Pokud budete chtít plnou samoobsluhu bez mého zásahu, řešíme to jako samostatnou úpravu webu — napojení redakčního systému — a domluvíme se na rozsahu.",
+      "Skvělá volba — nikdo nezná vaše klienty líp než vy. Ze vstupních rozhovorů a strategie vzniknou pravidla pro psaní v jednotném stylu — jakým hlasem psát, na jaká slova v Googlu cílit a jak článek strukturovat. Vy napíšete první verzi (Word, Google Docs, jak vám vyhovuje), pošlete mi ji a já ji publikuji včetně úprav pro vyhledávání, obvykle do dvou pracovních dnů. Pokud budete chtít plnou samoobsluhu bez mého zásahu, řešíme to jako samostatnou úpravu webu — napojení redakčního systému — a domluvíme se na rozsahu.",
   },
   {
     question: "Jak dlouho to celé trvá?",
     answer:
-      "Šest měsíců — od podpisu po závěrečnou revizi. Strategie týden 1–2, stavba týden 3–6, web jde živě na konci šestého týdne. Pak postlaunch ladění, tři SEO články a kvartální optimalizace, závěrečná revize v šestém měsíci. Detail najdete na stránce Jak to funguje.",
+      "Šest měsíců — od podpisu po závěrečnou revizi. Strategie týden 1–2, stavba týden 3–6, web jde živě na konci šestého týdne. Pak postlaunch ladění, tři SEO články a strategický check-in v měsíci 4, závěrečná revize v šestém měsíci. Detail najdete na stránce Jak to funguje.",
   },
 ];
 
@@ -145,7 +146,7 @@ const serviceSchema = {
   "@type": "Service",
   name: "Webová prezentace pro finanční poradce",
   description:
-    "Kompletní webová prezentace včetně strategie, designu, copywritingu, SEO a šesti měsíců péče po spuštění.",
+    "Kompletní webová prezentace včetně strategie, designu, textů, SEO a šesti měsíců péče po spuštění.",
   provider: {
     "@id": "https://connexus.cz/#connexus",
   },
@@ -228,7 +229,8 @@ const serviceSchema = {
               {FOUNDING_PRICE_DISPLAY} <span class="cenik-price-unit">Kč</span>
             </p>
             <p class="mt-4 max-w-prose text-body-lg text-accent md:mt-6">
-              Pro zakládající klienty. Z původních tří míst zbývají dvě.
+              Pro zakládající klienty.
+              <strong>Z původních tří míst zbývají dvě.</strong>
             </p>
             <p class="mt-4 max-w-prose text-body text-text-secondary">
               Za kompletní projekt včetně šesti měsíců péče po spuštění.
@@ -380,9 +382,10 @@ const serviceSchema = {
                       ></span>
                     </summary>
                     <div class="faq-answer pb-6 md:pb-8">
-                      <p class="max-w-prose text-body text-text-secondary">
-                        {faq.answer}
-                      </p>
+                      <p
+                        class="max-w-prose text-body text-text-secondary"
+                        set:html={faq.answer}
+                      />
                     </div>
                   </details>
                 ))
@@ -393,35 +396,17 @@ const serviceSchema = {
       </Container>
     </section>
 
-    <section class="bg-bg-secondary py-20 md:py-32" aria-labelledby="filozofie">
+    <section
+      class="bg-bg-secondary py-16 md:py-20"
+      aria-labelledby="dalsi-krok"
+    >
       <Container>
-        <SectionMarker number="04" label="Filozofie ceny" />
-
-        <div class="mt-10 grid gap-10 md:mt-14 md:grid-cols-12 md:gap-16">
-          <div class="md:col-span-4">
-            <h2
-              id="filozofie"
-              class="font-serif text-h2-sm font-medium md:text-h2"
-            >
-              Proč ukazuji ceny rovnou.
-            </h2>
-          </div>
-          <div class="space-y-8 md:col-span-8">
-            <p class="max-w-prose text-body-lg text-text-primary">
-              Ceny ukazuji rovnou, protože si myslím, že byste měli vědět, do
-              čeho jdete, ještě než mi napíšete. Nikdo se nemá dozvídat cenu až
-              po hodinovém hovoru s obchodníkem. Pokud cena dává smysl, povíme
-              si o vašem byznysu. Pokud ne, ušetřili jsme oba čas.
-            </p>
-            <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8">
-              <Button href="/#kontakt" variant="primary"
-                >Domluvit konzultaci</Button
-              >
-              <Button href="/jak-to-funguje" variant="link"
-                >Jak to funguje</Button
-              >
-            </div>
-          </div>
+        <h2 id="dalsi-krok" class="sr-only">Další krok</h2>
+        <div
+          class="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8"
+        >
+          <Button href="/#kontakt" variant="primary">Domluvit konzultaci</Button>
+          <Button href="/jak-to-funguje" variant="link">Jak to funguje</Button>
         </div>
       </Container>
     </section>

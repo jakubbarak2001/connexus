@@ -57,7 +57,7 @@ const { role, lede, body, photo, photoAlt, reverse = false } = Astro.props;
       >
         {lede}
       </p>
-      {body.map((p) => <p>{p}</p>)}
+      {body.map((p) => <p set:html={p} />)}
     </div>
   </div>
 </div>
