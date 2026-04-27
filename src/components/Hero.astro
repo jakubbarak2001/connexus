@@ -251,17 +251,59 @@ const occupations = [
     pointer-events: none;
   }
 
-  .hero__rotator[data-rotator-init] .hero__rotator-word.is-active.is-first {
-    animation: rotator-word-first 2500ms ease-in-out forwards;
+  /* Init only (page load, before cycling starts):
+     show the first word's underline statically — quiet anchor, no draw-in.
+     Word and underline animations stay dormant until cycling begins. */
+  .hero__rotator[data-rotator-init]:not([data-rotator-cycling])
+    .hero__rotator-word.is-active::after {
+    opacity: 1;
+    transform: translateY(0);
   }
 
-  .hero__rotator[data-rotator-init]
+  /* Cycling started (after H1 typewriter completes).
+     First word uses a shorter 1500ms cycle so the first transition
+     happens sooner (~1.7s after H1 done). Subsequent words run the
+     full 2500ms cycle. */
+  .hero__rotator[data-rotator-cycling]
+    .hero__rotator-word.is-active.is-first {
+    animation: rotator-word-first 1500ms ease-in-out forwards;
+  }
+
+  .hero__rotator[data-rotator-cycling]
     .hero__rotator-word.is-active:not(.is-first) {
     animation: rotator-word 2500ms ease-in-out forwards;
   }
 
-  .hero__rotator[data-rotator-init] .hero__rotator-word.is-active::after {
+  /* First word's underline during cycling: was already visible —
+     just hold and fade out with the word. No re-draw-in flash. */
+  .hero__rotator[data-rotator-cycling]
+    .hero__rotator-word.is-active.is-first::after {
+    animation: rotator-underline-first 1500ms ease-in-out forwards;
+  }
+
+  /* Subsequent words: full underline draw-in + hold + fade out */
+  .hero__rotator[data-rotator-cycling]
+    .hero__rotator-word.is-active:not(.is-first)::after {
     animation: rotator-underline 2500ms ease-in-out forwards;
+  }
+
+  @keyframes rotator-underline-first {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    72% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    80% {
+      opacity: 0;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(0);
+    }
   }
 
   @keyframes rotator-word {
@@ -326,9 +368,9 @@ const occupations = [
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero__rotator[data-rotator-init] .hero__rotator-word.is-active,
-    .hero__rotator[data-rotator-init] .hero__rotator-word.is-active::after,
-    .hero__rotator[data-rotator-init] .hero__rotator-word.is-active.is-first {
+    .hero__rotator .hero__rotator-word.is-active,
+    .hero__rotator .hero__rotator-word.is-active::after,
+    .hero__rotator .hero__rotator-word.is-active.is-first {
       animation: none;
     }
     .hero__rotator-word.is-active {
@@ -388,6 +430,15 @@ const occupations = [
             window.setTimeout(revealNext, charDelay);
           } else {
             dot.style.opacity = "1";
+            // Fire hero:settled right after the H1 finishes typing.
+            // Eyebrow rotator listens for this and begins its cycle.
+            // The first word's keyframe just holds + fades (no entry
+            // motion), so cycling "starting" produces no visible motion
+            // until the first word transition — which lands cleanly after
+            // subhead/CTAs/chevron have settled.
+            window.setTimeout(() => {
+              document.dispatchEvent(new Event("hero:settled"));
+            }, 250);
             window.setTimeout(() => {
               stages.subhead?.classList.add("is-visible");
               window.setTimeout(() => {
@@ -423,23 +474,39 @@ const occupations = [
       return;
     }
 
-    // Defer init until just after the eyebrow's hero-stage entrance has
-    // started. The first word is server-rendered as is-active + is-first so
-    // it stays in place; only the underline animates in on the first cycle.
-    const INIT_DELAY = 200;
+    // Init immediately on page load — first word's underline becomes a
+    // quiet static anchor under the eyebrow, no motion yet.
+    rotator.setAttribute("data-rotator-init", "");
+
+    const FIRST_INTERVAL = 1500; // first transition is faster — gets motion in earlier
     const INTERVAL_MS = 2500;
 
-    window.setTimeout(() => {
-      rotator.setAttribute("data-rotator-init", "");
+    const startCycling = () => {
+      if (rotator.hasAttribute("data-rotator-cycling")) return;
+      rotator.setAttribute("data-rotator-cycling", "");
 
       let index = 0;
-      window.setInterval(() => {
+      const transition = () => {
         const current = words[index];
         current.classList.remove("is-active");
         current.classList.remove("is-first");
         index = (index + 1) % words.length;
         words[index].classList.add("is-active");
-      }, INTERVAL_MS);
-    }, INIT_DELAY);
+      };
+
+      window.setTimeout(() => {
+        transition();
+        window.setInterval(transition, INTERVAL_MS);
+      }, FIRST_INTERVAL);
+    };
+
+    // Cycling waits for the hero entry sequence to settle before starting.
+    // Underline stays statically visible until then; no motion competing
+    // with the H1 typewriter and stage reveals.
+    document.addEventListener("hero:settled", startCycling, { once: true });
+
+    // Safety fallback: if hero:settled never fires (e.g. typewriter errored),
+    // start cycling after a generous delay so the page never feels frozen.
+    window.setTimeout(startCycling, 4000);
   })();
 </script>
