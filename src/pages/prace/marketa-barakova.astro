@@ -109,23 +109,49 @@ const breadcrumbSchema = {
     </section>
 
     <Container>
-      <figure class="overflow-hidden rounded-soft border border-border-subtle bg-bg-secondary">
-        <picture>
-          <source srcset="/images/marketa-screenshot.webp" type="image/webp" />
-          <img
-            src="/images/marketa-screenshot.jpg"
-            alt="Celostranný náhled úvodní strany marketabarakova.cz"
-            loading="lazy"
-            decoding="async"
-            class="block h-auto w-full"
-          />
-        </picture>
-        <figcaption
-          class="border-t border-border-subtle px-6 py-3 font-mono text-small uppercase tracking-[0.08em] text-text-muted md:px-8 md:py-4"
+      <a
+        href="https://marketabarakova.cz"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Otevřít živý web marketabarakova.cz v novém okně"
+        class="screenshot-link block"
+      >
+        <figure
+          class="screenshot-frame relative overflow-hidden rounded-soft border border-border-subtle bg-bg-secondary"
         >
-          Ukázka webu
-        </figcaption>
-      </figure>
+          <picture>
+            <source srcset="/images/marketa-screenshot.webp" type="image/webp" />
+            <img
+              src="/images/marketa-screenshot.jpg"
+              alt="Celostranný náhled úvodní strany marketabarakova.cz"
+              loading="lazy"
+              decoding="async"
+              class="screenshot-img block h-auto w-full"
+            />
+          </picture>
+          <span class="screenshot-cue" aria-hidden="true">
+            Otevřít web
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M7 17L17 7"></path>
+              <path d="M8 7h9v9"></path>
+            </svg>
+          </span>
+          <figcaption
+            class="border-t border-border-subtle px-6 py-3 font-mono text-small uppercase tracking-[0.08em] text-text-muted md:px-8 md:py-4"
+          >
+            Ukázka webu
+          </figcaption>
+        </figure>
+      </a>
     </Container>
 
     <section class="py-20 md:py-28" aria-labelledby="cs-problem">
@@ -187,25 +213,49 @@ const breadcrumbSchema = {
     </section>
 
     <Container>
-      <figure
-        class="mt-20 overflow-hidden rounded-soft border border-border-subtle bg-bg-secondary md:mt-28"
+      <a
+        href="https://marketabarakova.cz"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Otevřít živý web marketabarakova.cz v novém okně"
+        class="screenshot-link mt-20 block md:mt-28"
       >
-        <picture>
-          <source srcset="/images/marketa_below_the_fold.webp" type="image/webp" />
-          <img
-            src="/images/marketa_below_the_fold.jpg"
-            alt="marketabarakova.cz — sekce „Kde začneme?“ s oblastmi pojištění a důvěryhodnostním footerem"
-            loading="lazy"
-            decoding="async"
-            class="block h-auto w-full"
-          />
-        </picture>
-        <figcaption
-          class="border-t border-border-subtle px-6 py-3 font-mono text-small uppercase tracking-[0.08em] text-text-muted md:px-8 md:py-4"
+        <figure
+          class="screenshot-frame relative overflow-hidden rounded-soft border border-border-subtle bg-bg-secondary"
         >
-          Ukázka webu
-        </figcaption>
-      </figure>
+          <picture>
+            <source srcset="/images/marketa_below_the_fold.webp" type="image/webp" />
+            <img
+              src="/images/marketa_below_the_fold.jpg"
+              alt="marketabarakova.cz — sekce „Kde začneme?“ s oblastmi pojištění a důvěryhodnostním footerem"
+              loading="lazy"
+              decoding="async"
+              class="screenshot-img block h-auto w-full"
+            />
+          </picture>
+          <span class="screenshot-cue" aria-hidden="true">
+            Otevřít web
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M7 17L17 7"></path>
+              <path d="M8 7h9v9"></path>
+            </svg>
+          </span>
+          <figcaption
+            class="border-t border-border-subtle px-6 py-3 font-mono text-small uppercase tracking-[0.08em] text-text-muted md:px-8 md:py-4"
+          >
+            Ukázka webu
+          </figcaption>
+        </figure>
+      </a>
     </Container>
 
     <section class="py-20 md:py-28" aria-labelledby="cs-vysledek">
@@ -260,3 +310,96 @@ const breadcrumbSchema = {
 
   <Footer />
 </Layout>
+
+<style>
+  .screenshot-link {
+    border-radius: theme("borderRadius.soft");
+    transition:
+      box-shadow 280ms ease,
+      transform 280ms ease;
+  }
+  .screenshot-link:focus-visible {
+    outline: 2px solid theme("colors.accent.DEFAULT");
+    outline-offset: 6px;
+  }
+
+  .screenshot-frame {
+    transition:
+      border-color 280ms ease,
+      box-shadow 280ms ease;
+    box-shadow:
+      0 30px 90px -30px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+  }
+  .screenshot-link:hover .screenshot-frame {
+    border-color: theme("colors.border.strong");
+    box-shadow:
+      0 40px 120px -25px rgba(0, 0, 0, 0.65),
+      0 0 80px -20px rgba(255, 122, 69, 0.25),
+      0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+  }
+
+  .screenshot-img {
+    transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: center top;
+  }
+  .screenshot-link:hover .screenshot-img {
+    transform: scale(1.012);
+  }
+
+  .screenshot-cue {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(10, 14, 20, 0.72);
+    border: 1px solid rgba(242, 240, 236, 0.14);
+    color: theme("colors.text.primary");
+    font-family: theme("fontFamily.mono");
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    pointer-events: none;
+    transition:
+      background-color 220ms ease,
+      color 220ms ease,
+      border-color 220ms ease,
+      transform 220ms ease;
+  }
+  .screenshot-link:hover .screenshot-cue {
+    background-color: theme("colors.accent.DEFAULT");
+    border-color: theme("colors.accent.DEFAULT");
+    color: theme("colors.bg.primary");
+    transform: scale(1.04);
+  }
+  @media (min-width: 768px) {
+    .screenshot-cue {
+      top: 18px;
+      right: 18px;
+      gap: 6px;
+      padding: 8px 14px;
+      font-size: 12px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .screenshot-link,
+    .screenshot-frame,
+    .screenshot-img,
+    .screenshot-cue {
+      transition: none;
+    }
+    .screenshot-link:hover .screenshot-img {
+      transform: none;
+    }
+    .screenshot-link:hover .screenshot-cue {
+      transform: none;
+    }
+  }
+</style>
