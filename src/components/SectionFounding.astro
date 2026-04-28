@@ -90,15 +90,10 @@ const slots: Slot[] = [
                         href={slot.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="inline-flex items-baseline gap-2 transition-colors hover:text-accent"
+                        aria-label={`Otevřít ${slot.url.replace(/^https?:\/\//, "")} v novém okně`}
+                        class="founding-link"
                       >
                         {slot.name}
-                        <span
-                          aria-hidden="true"
-                          class="font-mono text-small text-text-muted"
-                        >
-                          ↗
-                        </span>
                       </a>
                     ) : (
                       slot.name
@@ -169,3 +164,33 @@ const slots: Slot[] = [
     </div>
   </Container>
 </section>
+
+<style>
+  .founding-link {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 122, 69, 0.45);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 6px;
+    transition:
+      color 220ms ease,
+      text-decoration-color 220ms ease,
+      text-decoration-thickness 220ms ease;
+  }
+  .founding-link:hover,
+  .founding-link:focus-visible {
+    color: theme("colors.accent.DEFAULT");
+    text-decoration-color: theme("colors.accent.DEFAULT");
+    text-decoration-thickness: 2px;
+  }
+  .founding-link:focus-visible {
+    outline: 2px solid theme("colors.accent.DEFAULT");
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .founding-link {
+      transition: none;
+    }
+  }
+</style>
