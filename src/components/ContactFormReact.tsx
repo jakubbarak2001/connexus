@@ -1,8 +1,6 @@
 import { useState, type FormEvent } from "react";
 
-// Set this to your real Formspree endpoint (e.g. "https://formspree.io/f/abcd1234")
-// to switch from mailto fallback to direct API submission.
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/PLACEHOLDER";
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xwvajaol";
 const CONTACT_EMAIL = "jakub@connexus.cz";
 const CONTACT_PHONE_DISPLAY = "+420 774 563 739";
 const MIN_DESCRIPTION = 20;
