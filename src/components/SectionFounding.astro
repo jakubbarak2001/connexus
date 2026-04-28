@@ -8,6 +8,7 @@ interface Slot {
   status: "obsazeno" | "volné";
   name?: string;
   meta?: string;
+  url?: string;
 }
 
 const FOUNDING_PRICE_DISPLAY = "35 000";
@@ -19,6 +20,7 @@ const slots: Slot[] = [
     status: "obsazeno",
     name: "Markéta Baráková",
     meta: "Pojišťovací poradkyně · uzavřeno 03/2026",
+    url: "https://marketabarakova.cz",
   },
   {
     number: "02",
@@ -60,7 +62,24 @@ const slots: Slot[] = [
               <Fragment>
                 <div class="mt-2 md:col-span-8 md:mt-0">
                   <p class="font-serif text-h3-sm font-medium text-text-primary md:text-h3">
-                    {slot.name}
+                    {slot.url ? (
+                      <a
+                        href={slot.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-baseline gap-2 transition-colors hover:text-accent"
+                      >
+                        {slot.name}
+                        <span
+                          aria-hidden="true"
+                          class="font-mono text-small text-text-muted"
+                        >
+                          ↗
+                        </span>
+                      </a>
+                    ) : (
+                      slot.name
+                    )}
                   </p>
                   <p class="mt-1 font-mono text-small text-text-muted">
                     {slot.meta}
