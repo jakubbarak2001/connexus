@@ -2,18 +2,19 @@
 import Container from "./Container.astro";
 ---
 
-<section class="bridge bg-text-primary py-24 md:py-36">
-  <Container>
+<section class="bridge relative overflow-hidden bg-bg-tertiary py-24 md:py-36">
+  <div class="bridge__glow" aria-hidden="true"></div>
+  <Container class="relative">
     <div class="bridge__copy max-w-[900px] space-y-6 md:space-y-8">
       <p
         class="bridge__eyebrow font-mono text-small uppercase tracking-[0.12em] text-accent"
       >
         Co je možné
       </p>
-      <h2 class="bridge__statement font-serif font-medium text-bg-primary">
-        Sedí v Ústí.<br />Volá jí Brno.
+      <h2 class="bridge__statement font-serif font-medium text-text-primary">
+        Sedí v Ústí.<br />Volá jí <em class="text-accent not-italic">Brno</em>.
       </h2>
-      <p class="bridge__caption max-w-prose text-body-lg">
+      <p class="bridge__caption max-w-prose text-body-lg text-text-secondary">
         Šest týdnů. A region přestal být strop.
       </p>
     </div>
@@ -66,7 +67,7 @@ import Container from "./Container.astro";
         href="https://marketabarakova.cz"
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center gap-2 font-mono text-small uppercase tracking-[0.08em] text-bg-primary/70 transition-colors hover:text-accent"
+        class="inline-flex items-center gap-2 font-mono text-small uppercase tracking-[0.08em] text-text-secondary transition-colors hover:text-accent"
       >
         Otevřít živý web
         <span aria-hidden="true">↗</span>
@@ -87,17 +88,33 @@ import Container from "./Container.astro";
     }
   }
 
-  .bridge__caption {
-    color: rgba(250, 248, 245, 0.68);
+  .bridge__glow {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    width: min(900px, 90vw);
+    height: 600px;
+    transform: translate(-50%, -10%);
+    background: radial-gradient(
+      ellipse at center,
+      rgba(255, 122, 69, 0.18) 0%,
+      rgba(255, 122, 69, 0.06) 35%,
+      transparent 70%
+    );
+    pointer-events: none;
+    filter: blur(40px);
+    z-index: 0;
   }
 
   .bridge__frame {
     position: relative;
     border-radius: 14px;
     overflow: hidden;
-    background: #1f1f1f;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    box-shadow: 0 40px 120px -30px rgba(0, 0, 0, 0.55);
+    background: theme("colors.chrome.frame");
+    border: 1px solid theme("colors.border.subtle");
+    box-shadow:
+      0 40px 120px -30px rgba(0, 0, 0, 0.6),
+      0 0 0 1px rgba(255, 255, 255, 0.02) inset;
     margin: 56px 0 0 0;
   }
 
@@ -108,8 +125,11 @@ import Container from "./Container.astro";
       transform 280ms ease;
   }
   .bridge__frame-link:hover .bridge__frame {
-    border-color: rgba(255, 255, 255, 0.14);
-    box-shadow: 0 50px 140px -25px rgba(0, 0, 0, 0.7);
+    border-color: theme("colors.border.strong");
+    box-shadow:
+      0 50px 140px -25px rgba(0, 0, 0, 0.75),
+      0 0 80px -20px rgba(255, 122, 69, 0.25),
+      0 0 0 1px rgba(255, 255, 255, 0.04) inset;
   }
   .bridge__frame-link:focus-visible {
     outline: 2px solid theme("colors.accent.DEFAULT");
@@ -134,15 +154,15 @@ import Container from "./Container.astro";
     gap: 5px;
     padding: 6px 10px;
     border-radius: 999px;
-    background: rgba(15, 12, 10, 0.78);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgba(250, 248, 245, 0.96);
+    background: rgba(10, 14, 20, 0.72);
+    border: 1px solid rgba(242, 240, 236, 0.14);
+    color: theme("colors.text.primary");
     font-family: theme("fontFamily.mono");
     font-size: 10px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     pointer-events: none;
     transition:
       background-color 220ms ease,
@@ -188,7 +208,7 @@ import Container from "./Container.astro";
     align-items: center;
     gap: 8px;
     padding: 12px 16px;
-    background: #2a2a2a;
+    background: theme("colors.chrome.bar");
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   }
   .browser-chrome__dot {

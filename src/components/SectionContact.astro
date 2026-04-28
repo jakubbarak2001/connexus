@@ -4,14 +4,20 @@ import SectionMarker from "./SectionMarker.astro";
 import ContactForm from "./ContactForm.astro";
 ---
 
-<section id="kontakt" class="py-20 md:py-32">
-  <Container>
+<section
+  id="kontakt"
+  class="contact-section relative overflow-hidden py-20 md:py-32"
+>
+  <div class="contact-glow" aria-hidden="true"></div>
+  <Container class="relative">
     <div class="space-y-14 md:space-y-20">
       <SectionMarker number="05" label="Kontakt" />
 
       <div class="grid gap-12 md:grid-cols-12 md:gap-16">
         <div class="space-y-10 md:col-span-5">
-          <h2 class="font-serif text-h2-sm font-medium md:text-h2">Váš tah.</h2>
+          <h2 class="font-serif text-h2-sm font-medium md:text-h2">
+            Váš <em class="not-italic text-accent">tah</em>.
+          </h2>
 
           <p class="max-w-prose text-body-lg text-text-secondary">
             Třicet minut hovoru — bez poplatku, bez závazku. Mluvíme o tom, co
@@ -52,9 +58,46 @@ import ContactForm from "./ContactForm.astro";
         </div>
 
         <div class="md:col-span-7">
-          <ContactForm />
+          <div class="contact-form-panel">
+            <ContactForm />
+          </div>
         </div>
       </div>
     </div>
   </Container>
 </section>
+
+<style>
+  .contact-glow {
+    position: absolute;
+    bottom: -20%;
+    left: 50%;
+    width: min(1100px, 100vw);
+    height: 700px;
+    transform: translateX(-50%);
+    background: radial-gradient(
+      ellipse at center,
+      rgba(255, 122, 69, 0.12) 0%,
+      rgba(255, 122, 69, 0.04) 40%,
+      transparent 75%
+    );
+    pointer-events: none;
+    filter: blur(60px);
+    z-index: 0;
+  }
+
+  .contact-form-panel {
+    position: relative;
+    border-radius: 8px;
+    padding: 28px;
+    background: rgba(27, 34, 48, 0.55);
+    border: 1px solid theme("colors.border.subtle");
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  @media (min-width: 768px) {
+    .contact-form-panel {
+      padding: 36px;
+    }
+  }
+</style>

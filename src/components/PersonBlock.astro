@@ -20,13 +20,17 @@ const { role, lede, body, photo, photoAlt, reverse = false } = Astro.props;
   >
     {
       photo ? (
-        <img
-          src={photo}
-          alt={photoAlt}
-          width="400"
-          height="400"
-          class="block aspect-square w-full object-cover md:max-w-[400px]"
-        />
+        <div class="person-photo-frame relative md:max-w-[400px]">
+          <img
+            src={photo}
+            alt={photoAlt}
+            width="400"
+            height="400"
+            class="block aspect-square w-full object-cover"
+          />
+          <span class="person-photo-corner person-photo-corner--tl" aria-hidden="true" />
+          <span class="person-photo-corner person-photo-corner--br" aria-hidden="true" />
+        </div>
       ) : (
         <figure
           class="flex aspect-square w-full items-center justify-center border border-border-subtle bg-bg-tertiary md:max-w-[400px]"
@@ -61,3 +65,29 @@ const { role, lede, body, photo, photoAlt, reverse = false } = Astro.props;
     </div>
   </div>
 </div>
+
+<style>
+  .person-photo-frame {
+    border: 1px solid theme("colors.border.subtle");
+    box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.6);
+  }
+  .person-photo-corner {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid theme("colors.accent.DEFAULT");
+    pointer-events: none;
+  }
+  .person-photo-corner--tl {
+    top: -1px;
+    left: -1px;
+    border-right: none;
+    border-bottom: none;
+  }
+  .person-photo-corner--br {
+    bottom: -1px;
+    right: -1px;
+    border-left: none;
+    border-top: none;
+  }
+</style>

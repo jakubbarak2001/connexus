@@ -5,23 +5,28 @@ export default {
     extend: {
       colors: {
         bg: {
-          primary: "#FAF8F5",
-          secondary: "#F2EEE6",
-          tertiary: "#EAE4D8",
+          primary: "#0E1218",
+          secondary: "#141923",
+          tertiary: "#1B2230",
+          elevated: "#222B3B",
         },
         text: {
-          primary: "#1A1A1A",
-          secondary: "#4A4A4A",
-          muted: "#7A7A7A",
+          primary: "#F2F0EC",
+          secondary: "#B5B7BD",
+          muted: "#838894",
         },
         accent: {
-          DEFAULT: "#B4542A",
-          hover: "#9A4523",
-          subtle: "#E8D5C7",
+          DEFAULT: "#FF7A45",
+          hover: "#FF9366",
+          subtle: "#3A2820",
         },
         border: {
-          subtle: "#E0DCD4",
-          strong: "#C9C2B5",
+          subtle: "#262C38",
+          strong: "#3A4150",
+        },
+        chrome: {
+          frame: "#0A0E14",
+          bar: "#161B24",
         },
       },
       fontFamily: {

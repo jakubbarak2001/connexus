@@ -20,7 +20,7 @@ const webOptions = [
 ];
 
 const fieldCls =
-  "w-full rounded-soft border border-border-strong bg-bg-primary px-4 py-3 font-sans text-body text-text-primary placeholder:text-text-muted transition-colors focus:border-accent focus:outline-none";
+  "w-full rounded-soft border border-border-strong bg-bg-tertiary px-4 py-3 font-sans text-body text-text-primary placeholder:text-text-muted transition-colors hover:border-text-muted focus:border-accent focus:outline-none";
 
 const labelCls = "mb-2 block font-mono text-small text-text-muted";
 
