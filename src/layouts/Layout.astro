@@ -14,8 +14,8 @@ interface Props {
 const {
   title = "Connexus — Weby pro finanční poradce",
   description = "Webové stránky pro pojišťovací poradce, hypoteční makléře a investiční poradce v Česku. Stavím je osobně. Šest měsíců po spuštění optimalizuji na reálných datech.",
-  ogImage = "/images/og-default.jpg",
-  ogSquare = "/images/og-square.jpg",
+  ogImage = "/images/og-default.png",
+  ogSquare = "/images/og-square.png",
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
@@ -45,7 +45,7 @@ const ogSquareUrl = ogSquare ? new URL(ogSquare, Astro.site).href : null;
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:type" content="image/png" />
 
     {/* Square (1:1) for WhatsApp, iMessage, Signal, Telegram thumbnails */}
     {ogSquareUrl && (
@@ -53,7 +53,7 @@ const ogSquareUrl = ogSquare ? new URL(ogSquare, Astro.site).href : null;
         <meta property="og:image" content={ogSquareUrl} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="1200" />
-        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:type" content="image/png" />
       </>
     )}
 
