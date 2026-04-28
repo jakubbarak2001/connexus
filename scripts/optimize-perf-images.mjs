@@ -12,8 +12,10 @@ const portraits = [
 const heroes = [
   {
     base: "public/images/marketa-hero",
-    width: 1280,
-    height: 510,
+    width: 1920,
+    height: 765,
+    jpegQuality: 92,
+    webpQuality: 90,
   },
 ];
 
@@ -32,11 +34,11 @@ for (const t of heroes) {
   const sourceWebp = readFileSync(`${t.base}.webp`);
   const jpg = await sharp(sourceJpg)
     .resize(t.width, t.height, { fit: "cover" })
-    .jpeg({ quality: 86, progressive: true, mozjpeg: true })
+    .jpeg({ quality: t.jpegQuality ?? 86, progressive: true, mozjpeg: true })
     .toBuffer();
   const webp = await sharp(sourceWebp)
     .resize(t.width, t.height, { fit: "cover" })
-    .webp({ quality: 84 })
+    .webp({ quality: t.webpQuality ?? 84 })
     .toBuffer();
   writeFileSync(`${t.base}.jpg`, jpg);
   writeFileSync(`${t.base}.webp`, webp);
