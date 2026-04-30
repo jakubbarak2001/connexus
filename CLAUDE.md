@@ -18,6 +18,11 @@ Premium web studio for Czech financial advisors. Solo operator: Jakub Barák (de
 - Singular voice throughout ("I/my", never "we/our")
 - Markéta Baráková is reference case study (pojišťovací poradkyně ČSOB)
 
+## Copy rules (hard, no exceptions)
+- **Důsledné vykání napříč celým webem.** Vždy vy / vás / vám / vašem / abyste / potřebujete / vidíte. Nikdy ty / tě / abys / potřebuješ / vidíš — ani v FAQ, ani v sekcích, které mohou znít neformálně.
+- **Sloveso pro googlení: vygooglí / vygoogluje / vygooglit.** Nikdy zagooglí / zagoogluje / zagooglit. Platí pro všechny tvary včetně odvozenin (vygooglení, ne googlení).
+- **Žádné krátké response-time SLAs typu „do X hodin".** Používat pracovní dny („do 3 pracovních dní") nebo kvalitativní formulace. Nikdy ne hodinové sliby.
+
 ## Design tokens
 See tailwind.config.mjs
 

@@ -40,14 +40,16 @@ const occupations = [
     </p>
 
     <h1 class="hero__h1 font-serif font-medium text-text-primary">
-      Zasloužíte si <em class="hero__accent-word">víc</em> než jen běžný web.
+      Web, který<br class="hero__h1-break" /> <em class="hero__accent-word"
+        >přivádí</em
+      > klienty.
     </h1>
 
     <p class="hero__subhead text-text-secondary">
-      Web je jen začátek. Píšu texty, ze kterých vás Google zviditelní, radím
-      s recenzemi a sociálními sítěmi, <strong class="text-text-primary"
-        >rozumím vašemu byznysu</strong
-      > — a šest měsíců po spuštění optimalizuji na reálných datech.
+      Klient z doporučení vám po vygooglení neodejde ke konkurenci. Cizí
+      člověk, který hledá poradce ve vašem kraji, vás najde sám. <strong
+        class="text-text-primary">Tohle web reálně dělá.</strong
+      >
     </p>
 
     <div class="hero__ctas">
@@ -148,10 +150,15 @@ const occupations = [
     letter-spacing: -0.035em;
   }
 
+  .hero__h1-break {
+    display: none;
+  }
+
   .hero__accent-word {
     color: theme("colors.accent.DEFAULT");
     font-style: italic;
     font-weight: 500;
+    padding-right: 0.06em;
   }
 
   .hero__subhead {
@@ -238,6 +245,10 @@ const occupations = [
 
     .hero__h1 {
       font-size: clamp(80px, 9vw, 132px);
+    }
+
+    .hero__h1-break {
+      display: inline;
     }
 
     .hero__subhead {
