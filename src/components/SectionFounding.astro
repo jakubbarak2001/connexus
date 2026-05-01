@@ -6,30 +6,15 @@ import Button from "./Button.astro";
 interface Slot {
   number: string;
   status: "obsazeno" | "volné";
-  name?: string;
-  meta?: string;
-  url?: string;
 }
 
 const FOUNDING_PRICE_DISPLAY = "35 000";
 const STANDARD_PRICE_DISPLAY = "60 000";
 
 const slots: Slot[] = [
-  {
-    number: "01",
-    status: "obsazeno",
-    name: "Markéta Baráková",
-    meta: "Pojišťovací poradkyně · uzavřeno 03/2026",
-    url: "https://marketabarakova.cz",
-  },
-  {
-    number: "02",
-    status: "volné",
-  },
-  {
-    number: "03",
-    status: "volné",
-  },
+  { number: "01/03", status: "obsazeno" },
+  { number: "02/03", status: "volné" },
+  { number: "03/03", status: "volné" },
 ];
 ---
 
@@ -83,35 +68,28 @@ const slots: Slot[] = [
 
             {slot.status === "obsazeno" ? (
               <Fragment>
-                <div class="space-y-2">
-                  <p class="font-serif text-h3-sm font-medium text-text-primary md:text-h3">
-                    {slot.url ? (
-                      <a
-                        href={slot.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`Otevřít ${slot.url.replace(/^https?:\/\//, "")} v novém okně`}
-                        class="founding-link"
-                      >
-                        {slot.name}
-                      </a>
-                    ) : (
-                      slot.name
-                    )}
-                  </p>
-                  <p class="font-mono text-small text-text-muted">
-                    {slot.meta}
-                  </p>
-                </div>
+                <svg
+                  class="pointer-events-none absolute inset-0 z-10 h-full w-full text-accent/50"
+                  preserveAspectRatio="none"
+                  viewBox="0 0 100 100"
+                  aria-hidden="true"
+                >
+                  <line
+                    x1="0"
+                    y1="100"
+                    x2="100"
+                    y2="0"
+                    stroke="currentColor"
+                    stroke-width="1"
+                    vector-effect="non-scaling-stroke"
+                  />
+                </svg>
               </Fragment>
             ) : (
               <Fragment>
-                <div class="space-y-2">
+                <div>
                   <p class="font-serif text-h3-sm font-medium text-text-primary md:text-h3">
                     — Volné místo —
-                  </p>
-                  <p class="font-mono text-small text-text-muted">
-                    K dispozici pro zakládajícího klienta
                   </p>
                 </div>
                 <div class="mt-auto flex items-baseline gap-3 border-t border-border-subtle pt-5">
@@ -165,32 +143,3 @@ const slots: Slot[] = [
   </Container>
 </section>
 
-<style>
-  .founding-link {
-    color: inherit;
-    text-decoration: underline;
-    text-decoration-color: rgba(255, 122, 69, 0.45);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 6px;
-    transition:
-      color 220ms ease,
-      text-decoration-color 220ms ease,
-      text-decoration-thickness 220ms ease;
-  }
-  .founding-link:hover,
-  .founding-link:focus-visible {
-    color: theme("colors.accent.DEFAULT");
-    text-decoration-color: theme("colors.accent.DEFAULT");
-    text-decoration-thickness: 2px;
-  }
-  .founding-link:focus-visible {
-    outline: 2px solid theme("colors.accent.DEFAULT");
-    outline-offset: 4px;
-    border-radius: 2px;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .founding-link {
-      transition: none;
-    }
-  }
-</style>
