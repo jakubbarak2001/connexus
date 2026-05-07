@@ -9,10 +9,10 @@ import Button from "../components/Button.astro";
 const STANDARD_PRICE_DISPLAY = "60 000";
 const STANDARD_PRICE_NUM = "60000";
 const FOUNDING_PRICE_DISPLAY = "35 000";
-const HOURLY_RATE = "1 500";
+const HOURLY_RATE = "1 000";
 
 const title = "Ceník — Connexus";
-const description = `Vstupní cena ${STANDARD_PRICE_DISPLAY} Kč včetně šesti měsíců péče po spuštění. Po šestém měsíci tarify od 1 500 do 5 000 Kč/měsíc, nebo žádný plán (po hodině). Bez smlouvy na rok, bez skrytých položek.`;
+const description = `Vstupní cena ${STANDARD_PRICE_DISPLAY} Kč včetně šesti měsíců péče po spuštění. Po šestém měsíci tarify od 800 do 5 000 Kč/měsíc, nebo žádný plán (po hodině). Bez smlouvy na rok, bez skrytých položek.`;
 
 interface Tier {
   name: string;
@@ -37,7 +37,7 @@ const tiers: Tier[] = [
   },
   {
     name: "Údržba",
-    price: "1 500 Kč/měsíc",
+    price: "800 Kč/měsíc",
     tagline: "Pro klienty, kteří si web spravují sami a chtějí mě po ruce.",
     bullets: [
       "Drobné úpravy webu (do 1 hodiny měsíčně)",
