@@ -6,13 +6,10 @@ import Container from "../components/Container.astro";
 import SectionMarker from "../components/SectionMarker.astro";
 import Button from "../components/Button.astro";
 
-const STANDARD_PRICE_DISPLAY = "60 000";
-const STANDARD_PRICE_NUM = "60000";
-const FOUNDING_PRICE_DISPLAY = "35 000";
 const HOURLY_RATE = "1 000";
 
-const title = "Ceník — Connexus";
-const description = `Vstupní cena ${STANDARD_PRICE_DISPLAY} Kč včetně šesti měsíců péče po spuštění. Po šestém měsíci tarify od 800 do 5 000 Kč/měsíc, nebo žádný plán (po hodině). Bez smlouvy na rok, bez skrytých položek.`;
+const title = "Ceník · Connexus";
+const description = `Hodinová sazba ${HOURLY_RATE} Kč/hod a typické rozsahy projektů. Po spuštění tarify od 800 do 5 000 Kč/měsíc, nebo žádný plán. Bez smlouvy na rok, bez skrytých položek.`;
 
 interface Tier {
   name: string;
@@ -43,19 +40,19 @@ const tiers: Tier[] = [
       "Drobné úpravy webu (do 1 hodiny měsíčně)",
       "Technický monitoring (formuláře, výpadky, chyby)",
       "Odpověď do 3 pracovních dní",
-      "Bez článků a aktivního marketingu — to je Growth",
+      "Bez článků a aktivního marketingu, to řeší Growth",
     ],
   },
   {
     name: "Growth",
     price: "5 000 Kč/měsíc",
     highlighted: true,
-    tagline: "Aby vás Google začal víc nacházet — a vy věděli proč.",
+    tagline: "Aby vás Google začal víc nacházet, a vy věděli proč.",
     outcome:
       "Po šesti měsících typicky vidíte měřitelný posun v lokálním vyhledávání a jasná data, kde web ztrácí pozornost a co s tím dál.",
     bullets: [
       "1 SEO článek měsíčně (~1 200 slov, ručně psaný, cílený na konkrétní klíčové slovo)",
-      "Drobné úpravy webu — texty, obrázky, změny (do 2 hodin měsíčně)",
+      "Drobné úpravy webu, texty, obrázky, změny (do 2 hodin měsíčně)",
       "Měsíční post na Google profilu + reakce na všechny nové recenze do 3 prac. dní",
       "4× ročně audit chování návštěvníků: kam klikají, kde odpadávají, co opravit",
       "Měsíční report na 1 stránku: kolik lidí přišlo, odkud, kdo se ozval, co dál",
@@ -65,22 +62,11 @@ const tiers: Tier[] = [
 ];
 
 const includedItems = [
-  "Strategie a vstupní rozhovory o vašem byznysu",
   "Vlastní design a kompletní web",
-  "Texty pro všechny stránky",
-  "Aby vás Google začal ukazovat lidem hledajícím poradce ve vašem kraji (on-page SEO)",
-  "Abyste viděli, kolik lidí přišlo a co je zajímalo — ne jen tipovali (GA4 + Clarity)",
+  "Texty pro všechny stránky podle vašeho byznysu",
+  "Aby vás Google začal nacházet (SEO)",
+  "Měření, kdo přišel a co je zajímalo (analytika)",
   "Založení nebo optimalizace Google firemního profilu",
-  "Plán, co a kdy postnout na FB, aby vám to nesežralo neděle (rámcová UGC strategie)",
-  "Pravidla pro psaní vlastních článků v jednotném stylu",
-  "Nastavení domény a hostingu, pokud je potřeba",
-  "Šest měsíců péče: 3 SEO články, strategický check-in, optimalizace na datech, závěrečná revize",
-];
-
-const excludedItems = [
-  "Měsíční tarif po šesti měsících (řeší se zvlášť, viz níže)",
-  "Tisková inzerce, billboardy, video produkce",
-  "Denní správa sociálních sítí (UGC strategii ano, provoz ne)",
 ];
 
 interface Faq {
@@ -90,34 +76,34 @@ interface Faq {
 
 const faqs: Faq[] = [
   {
-    question: "Proč ne šablona za dvacet tisíc?",
+    question: "V čem je rozdíl proti šabloně z internetu?",
     answer:
-      "Šablonový web vás dostane online — to je všechno. U mě kupujete strategii, vlastní design, texty psané podle vašeho byznysu, on-page SEO a šest měsíců péče po spuštění. Šablonu si dokáže každý splácat sám za týden, výsledek je plichta s tisíci dalšími poradci. Tohle je <strong>rozdíl mezi vizitkou a nástrojem</strong>, který vám reálně přivádí klienty.",
+      "Šablonový web vás dostane online a tím to končí. U mě kupujete strategii, vlastní design, texty psané podle vašeho byznysu a SEO, které šablona nemá. Šablonu si dokáže každý splácat sám za týden, výsledek je plichta s tisíci dalšími. Tohle je <strong>rozdíl mezi vizitkou a nástrojem</strong>, který lidem dává důvod ozvat se právě vám.",
   },
   {
     question: "Jak rychle uvidím, že to funguje?",
     answer:
-      "První přímé reakce — kdo se ozval, na co se ptal — vidíte typicky v týdnech po spuštění, protože strategický web přesvědčí lidi, kteří už o vás slyšeli z doporučení. Organická viditelnost v Googlu narůstá pomaleji: lokální klíčová slova (typu „pojišťovací poradce + město“) obvykle tři až pět měsíců, obecnější dotazy déle. V měsíci 4 se sejdeme nad daty — když něco nešlape, ladíme to v rámci ceny. Šest měsíců péče je právě o tomhle: <strong>po spuštění nezmizím a jsem tu s vámi</strong>, dokud výsledky nepřijdou.<br /><br />U Markéty přišla první poptávka během prvních týdnů po spuštění a web se jí v hrubém ROI zaplatil za necelé dva měsíce. Tohle strategický web reálně dělá.",
+      "První přímé reakce vidíte typicky v týdnech po spuštění. Strategický web přesvědčí lidi, kteří už o vás slyšeli z doporučení, takže se začnou ozývat hned. Organická viditelnost v Googlu narůstá pomaleji: <strong>tři až pět měsíců na konkrétnější dotazy, déle na obecnější</strong>. Proto doporučuju tarif Growth alespoň na prvních šest měsíců. Pravidelné články a optimalizace na datech jsou to, co posun reálně přinese.",
   },
   {
-    question: "Co když budu chtít po šesti měsících odejít?",
+    question: "Co když budu chtít přestat?",
     answer:
-      "Žádný problém. Doména je registrovaná na vaše jméno, Google firemní profil pod vámi, do analytiky máte plný přístup, zdrojový kód webu vám předám — můžete ho přesunout na libovolný hosting. Žádná smlouva na rok, žádný výpovědní rituál. Po šestém měsíci si vyberete tarif — Žádný plán (po hodině), Údržbu nebo Growth. A i pak se dá kdykoli odejít.",
+      "Žádný problém. Doména je registrovaná na vaše jméno, Google firemní profil pod vámi, do analytiky máte plný přístup, zdrojový kód webu vám předám. Můžete ho přesunout na libovolný hosting. Žádná smlouva na rok, žádný výpovědní rituál. Mezi tarify se dá kdykoli přejít, nahoru i dolů, a kdykoli odejít úplně.",
   },
   {
     question: "Můžu platit ve splátkách?",
     answer:
-      "Ano. Standardně 40 / 30 / 30 — při podpisu, při schválení designu, při spuštění — ale pokud máte jiný rytmus cash-flow, domluvíme individuální plán. Stačí říct předem.",
+      "Ano. Jakmile po prvním hovoru odhadneme rozsah, rozdělíme platbu standardně na tři milníky: <strong>40 % při podpisu, 30 % při schválení designu, 30 % při spuštění</strong>. Pokud máte jiný rytmus cash-flow, domluvíme individuální plán. Stačí říct předem.",
   },
   {
-    question: "Pracujete jen s finančními poradci?",
+    question: "S kým pracujete?",
     answer:
-      "Ne. Mé hlavní zaměření jsou pojišťovací poradci, hypoteční makléři a investiční poradci, ale projekty z jiných oborů beru bez problému — strategický web funguje stejně, ať jde o jakýkoli expertní byznys postavený na důvěře a doporučeních.",
+      "Se solo podnikateli a malými studii v jakémkoli expertním oboru postaveném na důvěře a doporučeních: poradci, řemeslníci, terapeuti, advokáti, kouči, drobné firmy. Strategický web funguje stejně, ať jde o jakoukoli profesi, kde si lidi nejdřív ověřují, kdo jste, než se vám ozvou.",
   },
   {
     question: "Jak dlouho to celé trvá?",
     answer:
-      "Šest měsíců — od podpisu po závěrečnou revizi. Strategie týden 1–2, stavba týden 3–6, web jde živě na konci šestého týdne. Pak postlaunch ladění, tři SEO články a strategický check-in v měsíci 4, závěrečná revize v šestém měsíci. Detail najdete na stránce Jak to funguje.",
+      "Záleží na rozsahu. <strong>Menší prezentace typicky 2–3 týdny</strong>: krátká strategie, design a stavba v jednom sledu. <strong>Plnohodnotný strategický web 5–6 týdnů</strong>: týden 1–2 strategie, týden 3–6 stavba, pak web jde živě. Po spuštění následuje postlaunch ladění a podle zvoleného tarifu pokračující péče.",
   },
 ];
 
@@ -137,9 +123,9 @@ const faqSchema = {
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  name: "Webová prezentace pro finanční poradce",
+  name: "Vlastní web, SEO a péče po spuštění",
   description:
-    "Kompletní webová prezentace včetně strategie, designu, textů, SEO a šesti měsíců péče po spuštění.",
+    "Kompletní webová prezentace včetně strategie, designu, textů, SEO a péče po spuštění. Pro solo podnikatele a malá studia.",
   provider: {
     "@id": "https://connexus.cz/#connexus",
   },
@@ -149,10 +135,15 @@ const serviceSchema = {
   },
   offers: {
     "@type": "Offer",
-    price: STANDARD_PRICE_NUM,
-    priceCurrency: "CZK",
+    priceSpecification: {
+      "@type": "UnitPriceSpecification",
+      price: "1000",
+      priceCurrency: "CZK",
+      unitCode: "HUR",
+      unitText: "hodina",
+    },
     description:
-      "Kompletní projekt včetně šesti měsíců péče po spuštění. Splátky jsou možné — domlouvá se individuálně.",
+      "Hodinová sazba 1 000 Kč. Menší prezentace typicky 15–25 tis. Kč, plnohodnotný strategický web 35–60 tis. Kč podle rozsahu. Splátky individuálně.",
   },
 };
 ---
@@ -195,86 +186,58 @@ const serviceSchema = {
           </h1>
 
           <p class="max-w-prose text-body-lg text-text-secondary">
-            <strong class="text-text-primary">Ceny ukazuji rovnou.</strong>
-            Pokud dávají smysl, povíme si o vašem byznysu. Pokud ne, ušetřili
+            <strong class="text-text-primary">Sazbu ukazuju rovnou.</strong>
+            Pokud dává smysl, povíme si o vašem byznysu. Pokud ne, ušetřili
             jsme oba čas.
           </p>
         </div>
       </Container>
     </section>
 
-    <section class="py-20 md:py-32" aria-labelledby="vstupni-cena">
+    <section class="py-20 md:py-32" aria-labelledby="sazba">
       <Container>
-        <SectionMarker number="01" label="Vstupní cena" class="" />
+        <SectionMarker number="01" label="Sazba a rozsah" />
 
-        <h2 id="vstupni-cena" class="sr-only">Vstupní cena</h2>
+        <h2 id="sazba" class="sr-only">Sazba a rozsah</h2>
 
         <div class="mt-10 grid gap-10 md:mt-14 md:grid-cols-12 md:gap-16">
           <div class="md:col-span-7">
             <p class="font-mono text-small uppercase tracking-[0.08em] text-text-muted">
-              <span
-                class="cenik-strike"
-                aria-label={`Běžná cena ${STANDARD_PRICE_DISPLAY} korun`}
-              >
-                Běžně {STANDARD_PRICE_DISPLAY} Kč
-              </span>
+              Hodinová sazba
             </p>
             <p class="cenik-price mt-3 font-serif font-medium text-text-primary md:mt-4">
-              {FOUNDING_PRICE_DISPLAY} <span class="cenik-price-unit">Kč</span>
+              {HOURLY_RATE} <span class="cenik-price-unit">Kč/hod</span>
             </p>
-            <p class="mt-4 max-w-prose text-body-lg text-accent md:mt-6">
-              Pro zakládající klienty.
-              <strong>Z původních tří míst zbývají dvě.</strong>
+            <p class="mt-6 max-w-prose text-body-lg text-text-secondary md:mt-8">
+              <strong class="text-text-primary"
+                >Menší prezentace typicky 15–25 tis. Kč.</strong
+              > Plnohodnotný strategický web s vlastními texty a SEO obvykle
+              35–60 tis. Kč podle rozsahu. Přesnou cenu řekneme po prvním
+              hovoru, bez závazku.
             </p>
-            <p class="mt-4 max-w-prose text-body text-text-secondary">
-              Za kompletní projekt včetně šesti měsíců péče po spuštění.
-              Po naplnění tří míst se cena vrací na běžnou.
+            <p class="mt-6 max-w-prose text-body text-text-secondary">
+              Splátky standardně 40 / 30 / 30: při podpisu, při schválení
+              designu, při spuštění. Jiný rytmus cash-flow domluvíme
+              individuálně.
             </p>
           </div>
 
-          <div class="space-y-10 md:col-span-5 md:space-y-12">
-            <div>
-              <p class="font-mono text-small uppercase tracking-[0.08em] text-text-muted">
-                Co je v ceně
-              </p>
-              <ul class="mt-5 space-y-3 text-body text-text-secondary">
-                {
-                  includedItems.map((item) => (
-                    <li class="flex gap-3">
-                      <span class="text-border-strong" aria-hidden="true">
-                        —
-                      </span>
-                      <span>{item}</span>
-                    </li>
-                  ))
-                }
-              </ul>
-            </div>
-
-            <div>
-              <p class="font-mono text-small uppercase tracking-[0.08em] text-text-muted">
-                Co v ceně není
-              </p>
-              <ul class="mt-5 space-y-3 text-body text-text-secondary">
-                {
-                  excludedItems.map((item) => (
-                    <li class="flex gap-3">
-                      <span class="text-border-strong" aria-hidden="true">
-                        —
-                      </span>
-                      <span>{item}</span>
-                    </li>
-                  ))
-                }
-              </ul>
-            </div>
-
-            <div class="border-t border-border-subtle pt-6">
-              <p class="max-w-prose font-mono text-small leading-relaxed text-text-muted">
-                <strong class="text-text-primary">Splátky jsou v pohodě.</strong>
-                Domluvíme rytmus, který vám vyhovuje — stačí říct předem.
-              </p>
-            </div>
+          <div class="md:col-span-5">
+            <p class="font-mono text-small uppercase tracking-[0.08em] text-text-muted">
+              Co je v projektu
+            </p>
+            <ul class="mt-5 space-y-3 text-body text-text-secondary">
+              {
+                includedItems.map((item) => (
+                  <li class="flex gap-3">
+                    <span class="text-border-strong" aria-hidden="true">
+                      —
+                    </span>
+                    <span>{item}</span>
+                  </li>
+                ))
+              }
+            </ul>
           </div>
         </div>
       </Container>
@@ -285,7 +248,7 @@ const serviceSchema = {
       aria-labelledby="dlouhodoba"
     >
       <Container>
-        <SectionMarker number="02" label="Dlouhodobá spolupráce" />
+        <SectionMarker number="02" label="Po spuštění" />
 
         <div class="mt-10 grid gap-10 md:mt-14 md:grid-cols-12 md:gap-16">
           <div class="md:col-span-7">
@@ -293,13 +256,13 @@ const serviceSchema = {
               id="dlouhodoba"
               class="font-serif text-h2-sm font-medium md:text-h2"
             >
-              Co po šesti měsících.
+              Co po spuštění.
             </h2>
           </div>
           <div class="md:col-span-5">
             <p class="max-w-prose text-body text-text-secondary">
-              Po šestém měsíci si vyberete, jak chcete pokračovat. Mezi tarify
-              se dá kdykoli přejít — nahoru i dolů.
+              Vyberete si, jak chcete pokračovat. Mezi tarify se dá kdykoli
+              přejít, nahoru i dolů.
               <strong class="text-text-primary">Bez smlouvy na rok.</strong>
             </p>
           </div>
@@ -312,7 +275,7 @@ const serviceSchema = {
                 <div class="md:col-span-4">
                   {tier.highlighted && (
                     <p class="font-mono text-small uppercase tracking-[0.08em] text-accent">
-                      Doporučuji
+                      Nejčastější volba
                     </p>
                   )}
                   <h3
@@ -406,7 +369,6 @@ const serviceSchema = {
           class="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8"
         >
           <Button href="/#kontakt" variant="primary">Domluvit konzultaci</Button>
-          <Button href="/jak-to-funguje" variant="link">Jak to funguje</Button>
         </div>
       </Container>
     </section>
@@ -417,45 +379,15 @@ const serviceSchema = {
 
 <style>
   .cenik-price {
-    font-size: clamp(72px, 12vw, 144px);
+    font-size: clamp(56px, 10vw, 112px);
     line-height: 1;
     letter-spacing: -0.03em;
   }
   .cenik-price-unit {
-    font-size: 0.55em;
+    font-size: 0.45em;
     color: theme("colors.text.secondary");
     font-weight: 400;
     letter-spacing: -0.01em;
-  }
-  .cenik-strike {
-    position: relative;
-    display: inline-block;
-  }
-  .cenik-strike::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 50%;
-    width: 0;
-    height: 1px;
-    background: currentColor;
-    transform: translateY(-50%);
-    animation: cenik-strike-draw 700ms cubic-bezier(0.65, 0, 0.35, 1) 600ms
-      forwards;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .cenik-strike::after {
-      animation: none;
-      width: 100%;
-    }
-  }
-  @keyframes cenik-strike-draw {
-    from {
-      width: 0;
-    }
-    to {
-      width: 100%;
-    }
   }
 
   .faq-item > summary {

@@ -1,11 +1,5 @@
 ---
 import Button from "./Button.astro";
-
-const occupations = [
-  "Pojišťovací poradce",
-  "Hypoteční makléře",
-  "Investiční poradce",
-];
 ---
 
 <section
@@ -17,56 +11,30 @@ const occupations = [
 
   <div class="relative mx-auto w-full max-w-6xl">
     <p class="hero__eyebrow font-mono uppercase text-accent">
-      <span class="sr-only"
-        >Pro pojišťovací poradce, hypoteční makléře a investiční poradce.</span
-      >
-      <span aria-hidden="true">
-        Pro <span class="hero__rotator" data-rotator>
-          {
-            occupations.map((label, i) => (
-              <span
-                class:list={[
-                  "hero__rotator-word",
-                  i === 0 && "is-active",
-                  i === 0 && "is-first",
-                ]}
-              >
-                {label}
-              </span>
-            ))
-          }
-        </span>
-      </span>
+      Pro solo podnikatele a malá studia
     </p>
 
     <h1 class="hero__h1 font-serif font-medium text-text-primary">
-      Web, který<br /> <em class="hero__accent-word">přivádí</em> klienty.
+      Webem to pouze<br /> <em class="hero__accent-word">začíná</em>.
     </h1>
 
     <p class="hero__subhead text-text-secondary">
-      Klient z doporučení vám po vygooglení neodejde ke konkurenci. Cizí
-      člověk, který hledá poradce ve vašem kraji, vás najde sám. <strong
-        class="text-text-primary">Tohle web reálně dělá.</strong
+      Spuštěný web sám klienty nepřivede. Je to startovní čára. Design,
+      texty a SEO pak musí pracovat dál, aby vás Google začal nacházet
+      a vy věděli, kdo přišel a proč. <strong class="text-text-primary"
+        >To je práce, kterou s vámi dělám.</strong
       >
     </p>
 
     <div class="hero__ctas">
       <Button href="#kontakt" variant="primary">Domluvit konzultaci</Button>
       <a
-        href="/prace/marketa-barakova"
+        href="/cenik"
         class="hero__secondary-link font-mono text-small uppercase tracking-[0.08em]"
       >
-        Vidět práci pro Markétu
+        Zobrazit ceník
         <span aria-hidden="true">→</span>
       </a>
-    </div>
-
-    <div class="hero__trust-strip" aria-label="Stav zakládajících míst">
-      <span class="hero__trust-dot" aria-hidden="true"></span>
-      <span class="hero__trust-text">
-        <strong>01 / 03</strong> zakládajících klientů obsazeno · zaváděcí cena
-        platí do naplnění
-      </span>
     </div>
   </div>
 
@@ -188,47 +156,6 @@ const occupations = [
     transform: translateX(3px);
   }
 
-  .hero__trust-strip {
-    margin-top: 56px;
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 16px;
-    border: 1px solid theme("colors.border.subtle");
-    border-radius: 999px;
-    background: rgba(20, 25, 35, 0.4);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-  }
-  .hero__trust-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 999px;
-    background: theme("colors.accent.DEFAULT");
-    box-shadow: 0 0 12px theme("colors.accent.DEFAULT");
-    animation: trust-pulse 2.4s ease-in-out infinite;
-    flex-shrink: 0;
-  }
-  .hero__trust-text {
-    font-family: theme("fontFamily.mono");
-    font-size: 12px;
-    color: theme("colors.text.secondary");
-    letter-spacing: 0.02em;
-  }
-  .hero__trust-text strong {
-    color: theme("colors.text.primary");
-    font-weight: 500;
-  }
-  @keyframes trust-pulse {
-    0%, 100% { opacity: 1; box-shadow: 0 0 12px theme("colors.accent.DEFAULT"); }
-    50% { opacity: 0.6; box-shadow: 0 0 4px theme("colors.accent.DEFAULT"); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .hero__trust-dot {
-      animation: none;
-    }
-  }
-
   @media (min-width: 768px) {
     .hero {
       min-height: 90vh;
@@ -246,10 +173,6 @@ const occupations = [
 
     .hero__subhead {
       font-size: 22px;
-    }
-
-    .hero__trust-text {
-      font-size: 13px;
     }
   }
 
@@ -275,157 +198,4 @@ const occupations = [
       bottom: 40px;
     }
   }
-
-  /* ===== Rotating eyebrow occupation =====
-     Underline is statically visible from page load (a quiet anchor).
-     Cycling begins after a short delay so the H1 has reading time first. */
-
-  .hero__rotator {
-    display: inline-grid;
-    grid-template-columns: 1fr;
-    vertical-align: baseline;
-  }
-
-  .hero__rotator-word {
-    grid-column: 1;
-    grid-row: 1;
-    justify-self: start;
-    position: relative;
-    opacity: 0;
-    transform: translateY(8px);
-    white-space: nowrap;
-  }
-
-  .hero__rotator-word.is-active {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .hero__rotator-word::after {
-    content: "";
-    position: absolute;
-    left: -0.15em;
-    right: -0.15em;
-    bottom: -3px;
-    height: 1.5px;
-    background: theme("colors.accent.DEFAULT");
-    opacity: 0;
-    transform: translateY(8px);
-    pointer-events: none;
-  }
-
-  .hero__rotator[data-rotator-init]:not([data-rotator-cycling])
-    .hero__rotator-word.is-active::after {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .hero__rotator[data-rotator-cycling]
-    .hero__rotator-word.is-active.is-first {
-    animation: rotator-word-first 1500ms ease-in-out forwards;
-  }
-
-  .hero__rotator[data-rotator-cycling]
-    .hero__rotator-word.is-active:not(.is-first) {
-    animation: rotator-word 2500ms ease-in-out forwards;
-  }
-
-  .hero__rotator[data-rotator-cycling]
-    .hero__rotator-word.is-active.is-first::after {
-    animation: rotator-underline-first 1500ms ease-in-out forwards;
-  }
-
-  .hero__rotator[data-rotator-cycling]
-    .hero__rotator-word.is-active:not(.is-first)::after {
-    animation: rotator-underline 2500ms ease-in-out forwards;
-  }
-
-  @keyframes rotator-word {
-    0% { opacity: 0; transform: translateY(10px); }
-    12% { opacity: 1; transform: translateY(0); }
-    84% { opacity: 1; transform: translateY(0); }
-    100% { opacity: 0; transform: translateY(-10px); }
-  }
-
-  @keyframes rotator-word-first {
-    0% { opacity: 1; transform: translateY(0); }
-    84% { opacity: 1; transform: translateY(0); }
-    100% { opacity: 0; transform: translateY(-10px); }
-  }
-
-  @keyframes rotator-underline {
-    0% { opacity: 0; transform: translateY(8px); }
-    15% { opacity: 0; transform: translateY(8px); }
-    26% { opacity: 1; transform: translateY(0); }
-    72% { opacity: 1; transform: translateY(0); }
-    80% { opacity: 0; transform: translateY(0); }
-    100% { opacity: 0; transform: translateY(0); }
-  }
-
-  @keyframes rotator-underline-first {
-    0% { opacity: 1; transform: translateY(0); }
-    72% { opacity: 1; transform: translateY(0); }
-    80% { opacity: 0; transform: translateY(0); }
-    100% { opacity: 0; transform: translateY(0); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero__rotator .hero__rotator-word.is-active,
-    .hero__rotator .hero__rotator-word.is-active::after,
-    .hero__rotator .hero__rotator-word.is-active.is-first {
-      animation: none;
-    }
-    .hero__rotator-word.is-active {
-      opacity: 1;
-      transform: none;
-    }
-    .hero__rotator-word.is-active::after {
-      opacity: 1;
-      transform: none;
-    }
-  }
 </style>
-
-<script>
-  // Eyebrow rotator — cycles through professions. Hero content is fully
-  // visible on first paint (no entry animations) for fastest LCP. The
-  // rotator's underline is statically visible from page load; the word
-  // cycling waits 1500ms so the reader's first beat lands on the H1.
-  const rotator = document.querySelector<HTMLElement>(
-    ".hero__rotator[data-rotator]",
-  );
-
-  if (rotator) {
-    const words = rotator.querySelectorAll<HTMLElement>(".hero__rotator-word");
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    if (!prefersReduced && words.length) {
-      rotator.setAttribute("data-rotator-init", "");
-
-      const FIRST_INTERVAL = 1500;
-      const INTERVAL_MS = 2500;
-
-      const transition = () => {
-        const current = Array.from(words).find((w) =>
-          w.classList.contains("is-active"),
-        );
-        if (!current) return;
-        const currentIndex = Array.from(words).indexOf(current);
-        const nextIndex = (currentIndex + 1) % words.length;
-        current.classList.remove("is-active");
-        current.classList.remove("is-first");
-        words[nextIndex].classList.add("is-active");
-      };
-
-      window.setTimeout(() => {
-        rotator.setAttribute("data-rotator-cycling", "");
-        transition();
-        window.setInterval(transition, INTERVAL_MS);
-      }, FIRST_INTERVAL);
-    } else if (prefersReduced) {
-      rotator.setAttribute("data-rotator-init", "");
-    }
-  }
-</script>

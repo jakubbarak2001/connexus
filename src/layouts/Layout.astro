@@ -6,14 +6,14 @@ interface Props {
   description?: string;
   ogImage?: string;
   // Square variant for chat-app previews (WhatsApp, iMessage, Signal,
-  // Telegram). Pass null to skip emitting the square og:image — useful
+  // Telegram). Pass null to skip emitting the square og:image, useful
   // for sub-pages whose primary image isn't square-friendly.
   ogSquare?: string | null;
 }
 
 const {
-  title = "Connexus — Weby pro finanční poradce",
-  description = "Webové stránky pro pojišťovací poradce, hypoteční makléře a investiční poradce v Česku. Stavím je osobně. Šest měsíců po spuštění optimalizuji na reálných datech.",
+  title = "Connexus · Weby, SEO a péče po spuštění",
+  description = "Vlastní weby pro solo podnikatele a malá studia. Stavím je osobně. Po spuštění s vámi zůstanu. SEO, články, optimalizace na reálných datech.",
   ogImage = "/images/og-default.png",
   ogSquare = "/images/og-square.png",
 } = Astro.props;
@@ -92,7 +92,7 @@ const ogSquareUrl = ogSquare ? new URL(ogSquare, Astro.site).href : null;
 
     <slot name="head" />
 
-    {/* Microsoft Clarity — heatmaps + session recordings */}
+    {/* Microsoft Clarity: heatmaps + session recordings */}
     <script is:inline>
       (function (c, l, a, r, i, t, y) {
         c[a] =
@@ -123,7 +123,7 @@ const ogSquareUrl = ogSquare ? new URL(ogSquare, Astro.site).href : null;
         sections.forEach((el) => el.setAttribute("data-fade", ""));
         document.documentElement.classList.add("fade-ready");
 
-        // Use IntersectionObserver for ALL sections — fires synchronously
+        // Use IntersectionObserver for ALL sections; fires synchronously
         // on observe with current intersection state. No manual
         // getBoundingClientRect calls = no forced reflow loop.
         const observer = new IntersectionObserver(

@@ -35,7 +35,7 @@ function buildMailto(data: FormData): string {
   const currentWeb = ((data.get("currentWeb") as string) || "").trim();
   const description = ((data.get("description") as string) || "").trim();
 
-  const subject = name ? `Connexus — ${name}` : "Connexus — poptávka";
+  const subject = name ? `Connexus · ${name}` : "Connexus · poptávka";
   const body = [
     `Jméno: ${name}`,
     `E-mail: ${email}`,

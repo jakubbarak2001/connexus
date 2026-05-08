@@ -3,9 +3,8 @@ import Layout from "../layouts/Layout.astro";
 import Nav from "../components/Nav.astro";
 import Hero from "../components/Hero.astro";
 import SectionProblem from "../components/SectionProblem.astro";
-import SectionBridge from "../components/SectionBridge.astro";
+import SectionServices from "../components/SectionServices.astro";
 import SectionProcessTeaser from "../components/SectionProcessTeaser.astro";
-import SectionFounding from "../components/SectionFounding.astro";
 import SectionTeam from "../components/SectionTeam.astro";
 import SectionContact from "../components/SectionContact.astro";
 import Footer from "../components/Footer.astro";
@@ -16,7 +15,7 @@ const businessSchema = {
   "@id": "https://connexus.cz/#connexus",
   name: "Connexus",
   description:
-    "Webové stránky pro pojišťovací poradce, hypoteční makléře a investiční poradce v Česku. Vlastní design, texty, SEO a šest měsíců péče po spuštění.",
+    "Vlastní weby, SEO a péče po spuštění. Pro solo podnikatele a malá studia v Česku. Stavím je osobně.",
   url: "https://connexus.cz",
   telephone: "+420 774 563 739",
   email: "jakub@connexus.cz",
@@ -34,7 +33,7 @@ const businessSchema = {
     "@type": "Country",
     name: "Česká republika",
   },
-  priceRange: "$$$",
+  priceRange: "$$",
 };
 ---
 
@@ -51,9 +50,8 @@ const businessSchema = {
   <main id="main">
     <Hero />
     <SectionProblem />
-    <SectionBridge />
+    <SectionServices />
     <SectionProcessTeaser />
-    <SectionFounding />
     <SectionTeam />
     <SectionContact />
   </main>
