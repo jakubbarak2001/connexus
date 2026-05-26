@@ -6,68 +6,9 @@ import Container from "../components/Container.astro";
 import SectionMarker from "../components/SectionMarker.astro";
 import Button from "../components/Button.astro";
 
-const HOURLY_RATE = "1 000";
-
-const title = "Ceník · Connexus";
-const description = `Hodinová sazba ${HOURLY_RATE} Kč/hod a typické rozsahy projektů. Po spuštění tarify od 800 do 5 000 Kč/měsíc, nebo žádný plán. Bez smlouvy na rok, bez skrytých položek.`;
-
-interface Tier {
-  name: string;
-  price: string;
-  tagline: string;
-  outcome?: string;
-  bullets: string[];
-  highlighted?: boolean;
-}
-
-const tiers: Tier[] = [
-  {
-    name: "Žádný plán",
-    price: `${HOURLY_RATE} Kč/hod`,
-    tagline: "Bez měsíční platby. Ozvete se, jen když něco potřebujete.",
-    bullets: [
-      "Ad-hoc zásahy podle potřeby",
-      "Vyúčtování po hodině",
-      "Odpověď do 5 pracovních dní",
-      "Bez smlouvy",
-    ],
-  },
-  {
-    name: "Údržba",
-    price: "800 Kč/měsíc",
-    tagline: "Pro klienty, kteří si web spravují sami a chtějí mě po ruce.",
-    bullets: [
-      "Drobné úpravy webu (do 1 hodiny měsíčně)",
-      "Technický monitoring (formuláře, výpadky, chyby)",
-      "Odpověď do 3 pracovních dní",
-      "Bez článků a aktivního marketingu, to řeší Growth",
-    ],
-  },
-  {
-    name: "Growth",
-    price: "5 000 Kč/měsíc",
-    highlighted: true,
-    tagline: "Aby vás Google začal víc nacházet, a vy věděli proč.",
-    outcome:
-      "Po šesti měsících typicky vidíte měřitelný posun v lokálním vyhledávání a jasná data, kde web ztrácí pozornost a co s tím dál.",
-    bullets: [
-      "1 SEO článek měsíčně (~1 200 slov, ručně psaný, cílený na konkrétní klíčové slovo)",
-      "Drobné úpravy webu, texty, obrázky, změny (do 2 hodin měsíčně)",
-      "Měsíční post na Google profilu + reakce na všechny nové recenze do 3 prac. dní",
-      "4× ročně audit chování návštěvníků: kam klikají, kde odpadávají, co opravit",
-      "Měsíční report na 1 stránku: kolik lidí přišlo, odkud, kdo se ozval, co dál",
-      "Odpověď do 2 pracovních dní",
-    ],
-  },
-];
-
-const includedItems = [
-  "Vlastní design a kompletní web",
-  "Texty pro všechny stránky podle vašeho byznysu",
-  "Aby vás Google začal nacházet (SEO)",
-  "Měření, kdo přišel a co je zajímalo (analytika)",
-  "Založení nebo optimalizace Google firemního profilu",
-];
+const title = "Časté otázky · Connexus";
+const description =
+  "Cena se odvíjí od konkrétního zadání. Odpovědi na nejčastější otázky o spolupráci, rozsahu a tom, co se děje po spuštění webu.";
 
 interface Faq {
   question: string;
@@ -76,34 +17,43 @@ interface Faq {
 
 const faqs: Faq[] = [
   {
+    question: "Kolik web stojí?",
+    answer:
+      "Cena se vždy odvíjí od konkrétního zadání a vašeho byznysu. Po krátkém úvodním hovoru posílám písemný odhad rozsahu, ceny a časového rámce. <strong>Bez závazku, bez balíčků na rok</strong>.",
+  },
+  {
     question: "V čem je rozdíl proti šabloně z internetu?",
     answer:
-      "Šablonový web vás dostane online a tím to končí. U mě kupujete strategii, vlastní design, texty psané podle vašeho byznysu a SEO, které šablona nemá. Šablonu si dokáže každý splácat sám za týden, výsledek je plichta s tisíci dalšími. Tohle je <strong>rozdíl mezi vizitkou a nástrojem</strong>, který lidem dává důvod ozvat se právě vám.",
+      "Šablona dostane online vás i osmdesát dalších v oboru. U mě kupujete vlastní strategii, vlastní design a texty psané pro vaši konkrétní klientelu, ne pro generického „majitele firmy\". Šablona je vizitka; <strong>tohle je nástroj, který lidem dává důvod ozvat se právě vám</strong>.",
   },
   {
     question: "Jak rychle uvidím, že to funguje?",
     answer:
-      "První přímé reakce vidíte typicky v týdnech po spuštění. Strategický web přesvědčí lidi, kteří už o vás slyšeli z doporučení, takže se začnou ozývat hned. Organická viditelnost v Googlu narůstá pomaleji: <strong>tři až pět měsíců na konkrétnější dotazy, déle na obecnější</strong>. Proto doporučuju tarif Growth alespoň na prvních šest měsíců. Pravidelné články a optimalizace na datech jsou to, co posun reálně přinese.",
+      "Konverze z přímé návštěvnosti — reklama, doporučení, sociální sítě — uvidíte hned po spuštění. Buď roste, nebo neroste. SEO trvá <strong>tři až devět měsíců</strong> podle oboru a konkurence; pokud vám někdo slibuje rychlejší výsledky v Googlu, lže. Data po 30 dnech vyhodnotíme a směr ladíme.",
+  },
+  {
+    question: "Co se děje po spuštění?",
+    answer:
+      "<strong>30 dnů post-launch ladění je v ceně</strong> — drobné úpravy, oprava chyb, dolad textů podle prvních dat. Pokud chcete pokračovat, nabízím pravidelnou péči (drobné úpravy, články, optimalizace, péče o Google profil, měsíční report), ad-hoc zásahy bez závazku, nebo úplné předání. Rozsah a rytmus si určujete vy.",
   },
   {
     question: "Co když budu chtít přestat?",
     answer:
-      "Žádný problém. Doména je registrovaná na vaše jméno, Google firemní profil pod vámi, do analytiky máte plný přístup, zdrojový kód webu vám předám. Můžete ho přesunout na libovolný hosting. Žádná smlouva na rok, žádný výpovědní rituál. Mezi tarify se dá kdykoli přejít, nahoru i dolů, a kdykoli odejít úplně.",
+      "Doména je registrovaná na vaše jméno. Google firemní profil pod vámi. Do analytiky máte plný přístup. Zdrojový kód předám. Můžete web kdykoli přesunout na libovolný hosting. <strong>Žádná smlouva na rok, žádný výpovědní rituál</strong> — to jsou techniky agentur, které doufají, že odejít je víc práce než zůstat.",
   },
   {
     question: "Můžu platit ve splátkách?",
-    answer:
-      "Ano. Jakmile po prvním hovoru odhadneme rozsah, rozdělíme platbu standardně na tři milníky: <strong>40 % při podpisu, 30 % při schválení designu, 30 % při spuštění</strong>. Pokud máte jiný rytmus cash-flow, domluvíme individuální plán. Stačí říct předem.",
-  },
-  {
-    question: "S kým pracujete?",
-    answer:
-      "Se solo podnikateli a malými studii v jakémkoli expertním oboru postaveném na důvěře a doporučeních: poradci, řemeslníci, terapeuti, advokáti, kouči, drobné firmy. Strategický web funguje stejně, ať jde o jakoukoli profesi, kde si lidi nejdřív ověřují, kdo jste, než se vám ozvou.",
+    answer: "Ano.",
   },
   {
     question: "Jak dlouho to celé trvá?",
     answer:
-      "Záleží na rozsahu. <strong>Menší prezentace typicky 2–3 týdny</strong>: krátká strategie, design a stavba v jednom sledu. <strong>Plnohodnotný strategický web 5–6 týdnů</strong>: týden 1–2 strategie, týden 3–6 stavba, pak web jde živě. Po spuštění následuje postlaunch ladění a podle zvoleného tarifu pokračující péče.",
+      "Tři až šest týdnů podle rozsahu a vaší dostupnosti. Týden 1–2 strategie a design, týden 3–5 stavba, závěr revize a spuštění. Po spuštění je <strong>30 dnů post-launch ladění zahrnuto</strong>. Klienti, kteří odpovídají rychle, jdou živě za tři týdny; klienti, kteří mizí na týden, jdou za šest. Není to mystika, je to o tempu.",
+  },
+  {
+    question: "S kým pracujete?",
+    answer:
+      "Se solo profesionály a malými studii v Česku, kteří chtějí vlastní web místo šablony.",
   },
 ];
 
@@ -119,42 +69,10 @@ const faqSchema = {
     },
   })),
 };
-
-const serviceSchema = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  name: "Vlastní web, SEO a péče po spuštění",
-  description:
-    "Kompletní webová prezentace včetně strategie, designu, textů, SEO a péče po spuštění. Pro solo podnikatele a malá studia.",
-  provider: {
-    "@id": "https://connexus.cz/#connexus",
-  },
-  areaServed: {
-    "@type": "Country",
-    name: "Česká republika",
-  },
-  offers: {
-    "@type": "Offer",
-    priceSpecification: {
-      "@type": "UnitPriceSpecification",
-      price: "1000",
-      priceCurrency: "CZK",
-      unitCode: "HUR",
-      unitText: "hodina",
-    },
-    description:
-      "Hodinová sazba 1 000 Kč. Menší prezentace typicky 15–25 tis. Kč, plnohodnotný strategický web 35–60 tis. Kč podle rozsahu. Splátky individuálně.",
-  },
-};
 ---
 
 <Layout title={title} description={description}>
   <Fragment slot="head">
-    <script
-      type="application/ld+json"
-      is:inline
-      set:html={JSON.stringify(serviceSchema)}
-    />
     <script
       type="application/ld+json"
       is:inline
@@ -178,148 +96,28 @@ const serviceSchema = {
       <Container>
         <div class="max-w-[900px] space-y-8 md:space-y-10">
           <p class="font-mono text-small uppercase tracking-[0.08em] text-accent">
-            Ceník
+            Časté otázky
           </p>
 
           <h1 class="font-serif text-display-sm font-medium leading-[1.05] tracking-tight text-text-primary md:text-display">
-            Ceník
+            Časté otázky.
           </h1>
 
           <p class="max-w-prose text-body-lg text-text-secondary">
-            <strong class="text-text-primary">Sazbu ukazuju rovnou.</strong>
-            Pokud dává smysl, povíme si o vašem byznysu. Pokud ne, ušetřili
-            jsme oba čas.
-          </p>
-        </div>
-      </Container>
-    </section>
-
-    <section class="py-20 md:py-32" aria-labelledby="sazba">
-      <Container>
-        <SectionMarker number="01" label="Sazba a rozsah" />
-
-        <h2 id="sazba" class="sr-only">Sazba a rozsah</h2>
-
-        <div class="mt-10 grid gap-10 md:mt-14 md:grid-cols-12 md:gap-16">
-          <div class="md:col-span-7">
-            <p class="font-mono text-small uppercase tracking-[0.08em] text-text-muted">
-              Hodinová sazba
-            </p>
-            <p class="cenik-price mt-3 font-serif font-medium text-text-primary md:mt-4">
-              {HOURLY_RATE} <span class="cenik-price-unit">Kč/hod</span>
-            </p>
-            <p class="mt-6 max-w-prose text-body-lg text-text-secondary md:mt-8">
-              <strong class="text-text-primary"
-                >Menší prezentace typicky 15–25 tis. Kč.</strong
-              > Plnohodnotný strategický web s vlastními texty a SEO obvykle
-              35–60 tis. Kč podle rozsahu. Přesnou cenu řekneme po prvním
-              hovoru, bez závazku.
-            </p>
-            <p class="mt-6 max-w-prose text-body text-text-secondary">
-              Splátky standardně 40 / 30 / 30: při podpisu, při schválení
-              designu, při spuštění. Jiný rytmus cash-flow domluvíme
-              individuálně.
-            </p>
-          </div>
-
-          <div class="md:col-span-5">
-            <p class="font-mono text-small uppercase tracking-[0.08em] text-text-muted">
-              Co je v projektu
-            </p>
-            <ul class="mt-5 space-y-3 text-body text-text-secondary">
-              {
-                includedItems.map((item) => (
-                  <li class="flex gap-3">
-                    <span class="text-border-strong" aria-hidden="true">
-                      —
-                    </span>
-                    <span>{item}</span>
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
-        </div>
-      </Container>
-    </section>
-
-    <section
-      class="bg-bg-secondary py-20 md:py-32"
-      aria-labelledby="dlouhodoba"
-    >
-      <Container>
-        <SectionMarker number="02" label="Po spuštění" />
-
-        <div class="mt-10 grid gap-10 md:mt-14 md:grid-cols-12 md:gap-16">
-          <div class="md:col-span-7">
-            <h2
-              id="dlouhodoba"
-              class="font-serif text-h2-sm font-medium md:text-h2"
+            Cena se vždy odvíjí od konkrétního zadání a vašeho byznysu. Po
+            krátkém úvodním hovoru posílám písemný odhad rozsahu, ceny
+            a časového rámce.
+            <strong class="text-text-primary"
+              >Bez závazku, bez balíčků na rok.</strong
             >
-              Co po spuštění.
-            </h2>
-          </div>
-          <div class="md:col-span-5">
-            <p class="max-w-prose text-body text-text-secondary">
-              Vyberete si, jak chcete pokračovat. Mezi tarify se dá kdykoli
-              přejít, nahoru i dolů.
-              <strong class="text-text-primary">Bez smlouvy na rok.</strong>
-            </p>
-          </div>
-        </div>
-
-        <div class="mt-14 border-t border-border-subtle md:mt-20">
-          {
-            tiers.map((tier) => (
-              <article class="grid gap-6 border-b border-border-subtle py-10 md:grid-cols-12 md:gap-12 md:py-14">
-                <div class="md:col-span-4">
-                  {tier.highlighted && (
-                    <p class="font-mono text-small uppercase tracking-[0.08em] text-accent">
-                      Nejčastější volba
-                    </p>
-                  )}
-                  <h3
-                    class:list={[
-                      "font-serif text-h2-sm font-medium text-text-primary md:text-h2",
-                      tier.highlighted ? "mt-3" : "",
-                    ]}
-                  >
-                    {tier.name}
-                  </h3>
-                  <p class="mt-3 font-mono text-body text-text-secondary md:mt-4">
-                    {tier.price}
-                  </p>
-                </div>
-                <div class="md:col-span-8 md:pt-2">
-                  <p class="max-w-prose text-body-lg text-text-primary">
-                    {tier.tagline}
-                  </p>
-                  {tier.outcome && (
-                    <p class="mt-3 max-w-prose text-body text-text-secondary md:mt-4">
-                      {tier.outcome}
-                    </p>
-                  )}
-                  <ul class="mt-6 space-y-3 text-body text-text-secondary md:mt-8">
-                    {tier.bullets.map((bullet) => (
-                      <li class="flex gap-3">
-                        <span class="text-border-strong" aria-hidden="true">
-                          —
-                        </span>
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </article>
-            ))
-          }
+          </p>
         </div>
       </Container>
     </section>
 
     <section class="py-20 md:py-32" aria-labelledby="faq">
       <Container>
-        <SectionMarker number="03" label="Časté otázky" />
+        <SectionMarker number="01" label="Co se ptáte" />
 
         <div class="mt-10 grid gap-10 md:mt-14 md:grid-cols-12 md:gap-16">
           <div class="md:col-span-4">
@@ -378,18 +176,6 @@ const serviceSchema = {
 </Layout>
 
 <style>
-  .cenik-price {
-    font-size: clamp(56px, 10vw, 112px);
-    line-height: 1;
-    letter-spacing: -0.03em;
-  }
-  .cenik-price-unit {
-    font-size: 0.45em;
-    color: theme("colors.text.secondary");
-    font-weight: 400;
-    letter-spacing: -0.01em;
-  }
-
   .faq-item > summary {
     list-style: none;
   }

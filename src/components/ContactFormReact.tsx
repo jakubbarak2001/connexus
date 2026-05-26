@@ -5,13 +5,6 @@ const CONTACT_EMAIL = "jakub@connexus.cz";
 const CONTACT_PHONE_DISPLAY = "+420 774 563 739";
 const MIN_DESCRIPTION = 20;
 
-const professions = [
-  "Pojišťovací poradce",
-  "Hypoteční makléř",
-  "Investiční poradce",
-  "Jiné",
-];
-
 const webOptions = [
   "Ano, ale je zastaralý",
   "Ano, ale nefunguje pro byznys",
@@ -117,24 +110,16 @@ export default function ContactFormReact() {
 
       <div>
         <label htmlFor="profession" className={labelCls}>
-          Vaše profese
+          Obor podnikání
         </label>
-        <select
+        <input
           id="profession"
           name="profession"
+          type="text"
           required
-          defaultValue=""
+          placeholder="Např. penzion, ordinace, kavárna, advokátní kancelář…"
           className={fieldCls}
-        >
-          <option value="" disabled>
-            Vyberte…
-          </option>
-          {professions.map((p) => (
-            <option key={p} value={p}>
-              {p}
-            </option>
-          ))}
-        </select>
+        />
       </div>
 
       <fieldset className="space-y-3">
