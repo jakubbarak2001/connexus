@@ -185,6 +185,31 @@ import Button from "./Button.astro";
   .hero__chevron:hover {
     color: theme("colors.text.primary");
   }
+
+  /* Gentle scroll cue: float subtly up and down, looping after the hero
+     has settled. Pauses on hover. */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero__chevron {
+      animation: chevron-float 2.6s ease-in-out 0.9s infinite;
+    }
+    .hero__chevron:hover {
+      animation-play-state: paused;
+    }
+  }
+
+  @keyframes chevron-float {
+    0%,
+    100% {
+      transform: translate(-50%, 0);
+    }
+    25% {
+      transform: translate(-50%, 4px);
+    }
+    75% {
+      transform: translate(-50%, -4px);
+    }
+  }
+
   @media (min-width: 768px) {
     .hero__chevron {
       bottom: 40px;
