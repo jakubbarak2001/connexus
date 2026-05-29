@@ -46,6 +46,7 @@ const phases: Phase[] = [
             <span class="process-icon text-accent" aria-hidden="true">
               {phase.icon === "strategy" && (
                 <svg
+                  class="icon-target"
                   width="32"
                   height="32"
                   viewBox="0 0 32 32"
@@ -65,6 +66,7 @@ const phases: Phase[] = [
               )}
               {phase.icon === "build" && (
                 <svg
+                  class="icon-layers"
                   width="32"
                   height="32"
                   viewBox="0 0 32 32"
@@ -81,6 +83,7 @@ const phases: Phase[] = [
               )}
               {phase.icon === "care" && (
                 <svg
+                  class="icon-chart"
                   width="32"
                   height="32"
                   viewBox="0 0 32 32"
@@ -111,6 +114,14 @@ const phases: Phase[] = [
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .process-icon svg {
+    overflow: visible;
+  }
+  .icon-target {
+    transform-origin: center;
+    transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .process-card {
@@ -118,7 +129,39 @@ const phases: Phase[] = [
     transform: translateY(16px);
     transition:
       opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
-      transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+      transform 700ms cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 250ms ease;
+  }
+
+  @media (hover: hover) {
+    .process-card:hover {
+      border-color: theme("colors.accent.DEFAULT");
+    }
+  }
+
+  .icon-layers path,
+  .icon-chart path {
+    transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .process-card:hover .process-icon {
+      transform: scale(1.06);
+    }
+    .process-card:hover .icon-target {
+      transform: rotate(90deg);
+    }
+    /* Layers spread apart — the stack "assembles". */
+    .process-card:hover .icon-layers path:nth-child(1) {
+      transform: translateY(-2px);
+    }
+    .process-card:hover .icon-layers path:nth-child(3) {
+      transform: translateY(2px);
+    }
+    /* Chart lifts up and to the right — growth. */
+    .process-card:hover .icon-chart path {
+      transform: translate(1.5px, -2px);
+    }
   }
   .process-card.is-visible {
     opacity: 1;
