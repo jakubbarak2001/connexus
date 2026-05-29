@@ -1,5 +1,6 @@
 ---
 interface Props {
+  name?: string;
   role: string;
   lede: string;
   body: string[];
@@ -8,7 +9,8 @@ interface Props {
   reverse?: boolean;
 }
 
-const { role, lede, body, photo, photoAlt, reverse = false } = Astro.props;
+const { name, role, lede, body, photo, photoAlt, reverse = false } =
+  Astro.props;
 ---
 
 <div class="grid gap-12 md:grid-cols-12 md:gap-16">
@@ -50,9 +52,18 @@ const { role, lede, body, photo, photoAlt, reverse = false } = Astro.props;
         : "lg:col-start-6",
     ]}
   >
-    <h2 class="font-serif text-h2-sm font-medium md:text-h2">
-      {role}
-    </h2>
+    <div>
+      {
+        name && (
+          <p class="font-mono text-small uppercase tracking-[0.08em] text-accent">
+            {name}
+          </p>
+        )
+      }
+      <h2 class="mt-3 font-serif text-h2-sm font-medium md:text-h2">
+        {role}
+      </h2>
+    </div>
 
     <div class="max-w-prose space-y-6 text-body text-text-secondary">
       <p
