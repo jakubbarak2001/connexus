@@ -5,22 +5,16 @@ interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
-  // Square variant for chat-app previews (WhatsApp, iMessage, Signal,
-  // Telegram). Pass null to skip emitting the square og:image, useful
-  // for sub-pages whose primary image isn't square-friendly.
-  ogSquare?: string | null;
 }
 
 const {
   title = "Connexus · Weby, SEO a péče po spuštění",
   description = "Vlastní weby pro solo podnikatele a malá studia. Stavím je osobně. Po spuštění s vámi zůstanu. SEO, články, optimalizace na reálných datech.",
   ogImage = "/images/og-default.png",
-  ogSquare = "/images/og-square.png",
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImageUrl = new URL(ogImage, Astro.site).href;
-const ogSquareUrl = ogSquare ? new URL(ogSquare, Astro.site).href : null;
 ---
 
 <!doctype html>
@@ -45,21 +39,15 @@ const ogSquareUrl = ogSquare ? new URL(ogSquare, Astro.site).href : null;
     <meta property="og:locale" content="cs_CZ" />
     <meta property="og:site_name" content="Connexus" />
 
-    {/* Landscape (1.91:1) for LinkedIn, Facebook, X, Slack large unfurl */}
+    {/* Single landscape (1.91:1) image. Emitting a second (square) og:image
+        makes Discord render a cropped two-up gallery instead of one clean
+        card, so we stick to the universal 1200×630. Chat apps that prefer
+        square center-crop this; the centred wordmark survives the crop. */}
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:type" content="image/png" />
-
-    {/* Square (1:1) for WhatsApp, iMessage, Signal, Telegram thumbnails */}
-    {ogSquareUrl && (
-      <>
-        <meta property="og:image" content={ogSquareUrl} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="1200" />
-        <meta property="og:image:type" content="image/png" />
-      </>
-    )}
+    <meta property="og:image:alt" content="Connexus" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />

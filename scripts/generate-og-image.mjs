@@ -14,10 +14,12 @@ import sharp from "sharp";
 // and Georgia was specifically designed for low-resolution rendering,
 // which is exactly what survives social-platform recompression.
 
-const COLOR_BG = "#1A1A1A";
-const COLOR_FG = "#FAF8F5";
-const COLOR_ACCENT = "#B4542A";
-const COLOR_MUTED = "#C9C2B5";
+// Aligned with the live site tokens (tailwind.config.mjs) so the share
+// card reads as the same brand as the page it links to.
+const COLOR_BG = "#0E1218";
+const COLOR_FG = "#F2F0EC";
+const COLOR_ACCENT = "#FF7A45";
+const COLOR_MUTED = "#838894";
 
 function landscapeSvg() {
   return `<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
@@ -44,7 +46,7 @@ function landscapeSvg() {
       font-family="Arial,'Helvetica Neue',sans-serif"
       font-size="34" font-weight="700"
       fill="${COLOR_FG}"
-      letter-spacing="0.5">Weby pro finanční poradce</text>
+      letter-spacing="0.5">Weby, SEO a péče po spuštění</text>
 
     <!-- Bottom URL — small, doesn't need to read at thumbnail -->
     <text x="600" y="565"
@@ -80,7 +82,7 @@ function squareSvg() {
       font-family="Arial,'Helvetica Neue',sans-serif"
       font-size="38" font-weight="700"
       fill="${COLOR_FG}"
-      letter-spacing="0.5">Weby pro finanční poradce</text>
+      letter-spacing="0.5">Weby, SEO a péče po spuštění</text>
 
     <!-- URL -->
     <text x="600" y="1100"
@@ -92,32 +94,20 @@ function squareSvg() {
   </svg>`;
 }
 
-// JPEG settings tuned for OG image durability:
-// - quality 92: high enough that thin serifs survive Meta/LinkedIn re-encode
-// - chromaSubsampling 4:4:4: critical for sharp text edges
-//   (default 4:2:0 smears chroma → fuzzy serifs after recompression)
-// - mozjpeg false: trades smaller file for cleaner edges; OG has no perf budget
-// - progressive false: simpler decode path, more predictable across platforms
-const JPEG_OPTS = {
-  quality: 92,
-  chromaSubsampling: "4:4:4",
-  mozjpeg: false,
-  progressive: false,
-};
-
 const WEBP_OPTS = { quality: 92, effort: 6 };
 
 // Render at 2x then downscale → sharper edges than rasterising directly at
 // target resolution (sharp's SVG path uses librsvg, which benefits from the
-// supersampling step).
-async function renderToFile(svgString, width, height, jpgPath, webpPath) {
+// supersampling step). Output PNG to match the <meta og:image> references
+// in Layout.astro (lossless → no recompression artefacts on thin serifs).
+async function renderToFile(svgString, width, height, pngPath, webpPath) {
   const buf = Buffer.from(svgString);
   const supersampled = await sharp(buf, { density: 288 })
     .resize(width, height, { kernel: "lanczos3" })
     .png()
     .toBuffer();
 
-  await sharp(supersampled).jpeg(JPEG_OPTS).toFile(jpgPath);
+  await sharp(supersampled).png().toFile(pngPath);
   await sharp(supersampled).webp(WEBP_OPTS).toFile(webpPath);
 }
 
@@ -125,7 +115,7 @@ await renderToFile(
   landscapeSvg(),
   1200,
   630,
-  "public/images/og-default.jpg",
+  "public/images/og-default.png",
   "public/images/og-default.webp",
 );
 
@@ -133,12 +123,12 @@ await renderToFile(
   squareSvg(),
   1200,
   1200,
-  "public/images/og-square.jpg",
+  "public/images/og-square.png",
   "public/images/og-square.webp",
 );
 
 console.log("Generated:");
-console.log("  public/images/og-default.jpg (1200×630)");
+console.log("  public/images/og-default.png (1200×630)");
 console.log("  public/images/og-default.webp (1200×630)");
-console.log("  public/images/og-square.jpg (1200×1200)");
+console.log("  public/images/og-square.png (1200×1200)");
 console.log("  public/images/og-square.webp (1200×1200)");
