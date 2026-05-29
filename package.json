@@ -7,11 +7,14 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
+    "preview": "npm run build && wrangler dev",
     "astro": "astro",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "deploy": "npm run build && wrangler deploy",
+    "cf-typegen": "wrangler types"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "11",
     "@astrojs/react": "^3.0.0",
     "@astrojs/sitemap": "^3.2.1",
     "@astrojs/tailwind": "^5.0.0",
@@ -26,6 +29,7 @@
     "prettier": "^3.0.0",
     "prettier-plugin-astro": "^0.13.0",
     "prettier-plugin-tailwindcss": "^0.5.0",
-    "sharp": "^0.34.5"
+    "sharp": "^0.34.5",
+    "wrangler": "^4.95.0"
   }
 }
