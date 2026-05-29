@@ -188,7 +188,8 @@ export default function ContactFormReact() {
           </p>
         )}
         <p className="font-mono text-small text-text-muted">
-          Odpovídám do 1 pracovního dne.
+          Odesláním souhlasíte se zpracováním osobních údajů pro vyřízení
+          vašeho dotazu.
         </p>
       </div>
     </form>
