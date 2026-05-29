@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Metric-matched fallbacks: the system font stands in for the webfont while
+   it loads, sized to occupy ~the same space so text doesn't reflow (jump)
+   when Newsreader/Inter swap in. Listed right after the real font in the
+   Tailwind stacks. */
+@font-face {
+  font-family: "Newsreader Fallback";
+  src: local("Georgia");
+  size-adjust: 96%;
+  ascent-override: 95%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Arial");
+  size-adjust: 107.12%;
+  ascent-override: 90.44%;
+  descent-override: 22.52%;
+  line-gap-override: 0%;
+}
+
 @layer base {
   html {
     font-family: theme("fontFamily.sans");

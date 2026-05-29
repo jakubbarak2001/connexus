@@ -30,8 +30,8 @@ export default {
         },
       },
       fontFamily: {
-        serif: ["Newsreader", "Georgia", "serif"],
-        sans: ["Inter", "system-ui", "sans-serif"],
+        serif: ["Newsreader", '"Newsreader Fallback"', "Georgia", "serif"],
+        sans: ["Inter", '"Inter Fallback"', "system-ui", "sans-serif"],
         mono: ['"JetBrains Mono"', "ui-monospace", "monospace"],
       },
       fontSize: {
