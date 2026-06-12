@@ -7,19 +7,19 @@ import sharp from "sharp";
 // - Must survive double JPEG recompression (LinkedIn, FB re-encode on upload)
 // - Must visually compete with feed clutter
 //
-// Solution: dark high-contrast palette, massive wordmark filling 70%+ of
-// canvas, accent stripe gives a recognizable silhouette even when text
-// is illegible. Uses Georgia (universal Windows/macOS serif) as a
+// Solution: high-contrast ink-on-paper palette, massive wordmark filling
+// 70%+ of canvas, accent stripe gives a recognizable silhouette even when
+// text is illegible. Uses Georgia (universal Windows/macOS serif) as a
 // Newsreader stand-in — at this scale the visual difference is invisible
 // and Georgia was specifically designed for low-resolution rendering,
 // which is exactly what survives social-platform recompression.
 
 // Aligned with the live site tokens (tailwind.config.mjs) so the share
 // card reads as the same brand as the page it links to.
-const COLOR_BG = "#0E1218";
-const COLOR_FG = "#F2F0EC";
-const COLOR_ACCENT = "#FF7A45";
-const COLOR_MUTED = "#838894";
+const COLOR_BG = "#F4F1EA";
+const COLOR_FG = "#181511";
+const COLOR_ACCENT = "#F54A00";
+const COLOR_MUTED = "#6E6859";
 
 function landscapeSvg() {
   return `<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
