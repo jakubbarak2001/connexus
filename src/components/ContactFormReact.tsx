@@ -164,7 +164,7 @@ export default function ContactFormReact() {
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="inline-flex items-center justify-center rounded-soft bg-accent px-7 py-3.5 font-sans text-small font-medium tracking-wide text-bg-primary transition-colors duration-200 ease-out hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary disabled:cursor-not-allowed disabled:opacity-60"
+          className="inline-flex items-center justify-center rounded-soft bg-accent px-7 py-3.5 font-sans text-small font-semibold tracking-wide text-ink transition-colors duration-200 ease-out hover:bg-accent-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary disabled:cursor-not-allowed disabled:opacity-60"
         >
           {status === "submitting" ? "Odesílám…" : "Odeslat zprávu"}
         </button>

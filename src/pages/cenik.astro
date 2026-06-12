@@ -8,7 +8,7 @@ import Button from "../components/Button.astro";
 
 const title = "Časté otázky · Connexus";
 const description =
-  "Cena se odvíjí od konkrétního zadání. Odpovědi na nejčastější otázky o spolupráci, rozsahu a tom, co se děje po spuštění webu.";
+  "Cena se odvíjí od konkrétního zadání. Odpovědi na nejčastější otázky o spolupráci, rozsahu a ceně webu.";
 
 interface Faq {
   question: string;
@@ -22,24 +22,9 @@ const faqs: Faq[] = [
       "Cena se vždy odvíjí od konkrétního zadání a vašeho byznysu. Po krátkém úvodním hovoru posílám písemný odhad rozsahu, ceny a časového rámce. <strong>Bez závazku, bez balíčků na rok</strong>.",
   },
   {
-    question: "V čem je rozdíl proti šabloně z internetu?",
-    answer:
-      "Šablona dostane online vás i osmdesát dalších v oboru. U mě kupujete vlastní strategii, vlastní design a texty psané pro vaši konkrétní klientelu, ne pro generického „majitele firmy\". Šablona je vizitka; <strong>tohle je nástroj, který lidem dává důvod ozvat se právě vám</strong>.",
-  },
-  {
-    question: "Jak rychle uvidím, že to funguje?",
-    answer:
-      "Konverze z přímé návštěvnosti — reklama, doporučení, sociální sítě — uvidíte hned po spuštění. Buď roste, nebo neroste. SEO trvá <strong>tři až devět měsíců</strong> podle oboru a konkurence; pokud vám někdo slibuje rychlejší výsledky v Googlu, lže. Data po 30 dnech vyhodnotíme a směr ladíme.",
-  },
-  {
-    question: "Co se děje po spuštění?",
-    answer:
-      "<strong>30 dnů post-launch ladění je v ceně</strong> — drobné úpravy, oprava chyb, dolad textů podle prvních dat. Pokud chcete pokračovat, nabízím pravidelnou péči (drobné úpravy, články, optimalizace, péče o Google profil, měsíční report), ad-hoc zásahy bez závazku, nebo úplné předání. Rozsah a rytmus si určujete vy.",
-  },
-  {
     question: "Co když budu chtít přestat?",
     answer:
-      "Doména je registrovaná na vaše jméno. Google firemní profil pod vámi. Do analytiky máte plný přístup. Zdrojový kód předám. Můžete web kdykoli přesunout na libovolný hosting. <strong>Žádná smlouva na rok, žádný výpovědní rituál</strong> — to jsou techniky agentur, které doufají, že odejít je víc práce než zůstat.",
+      "Doména je registrovaná na vaše jméno. Google firemní profil pod vámi. Do analytiky máte plný přístup. Zdrojový kód předám. Můžete web kdykoli přesunout na libovolný hosting. <strong>Žádná smlouva na rok, žádný výpovědní rituál</strong> - to jsou techniky agentur, které doufají, že odejít je víc práce než zůstat.",
   },
   {
     question: "Můžu platit ve splátkách?",
@@ -95,7 +80,9 @@ const faqSchema = {
     <section class="pb-12 pt-10 md:pb-20 md:pt-14">
       <Container>
         <div class="max-w-[900px] space-y-8 md:space-y-10">
-          <p class="font-mono text-small uppercase tracking-[0.08em] text-accent">
+          <p
+            class="font-mono text-small uppercase tracking-[0.08em] text-accent-deep"
+          >
             Časté otázky
           </p>
 

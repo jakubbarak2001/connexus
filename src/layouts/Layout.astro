@@ -78,6 +78,22 @@ const ogImageUrl = new URL(ogImage, Astro.site).href;
       />
     </noscript>
 
+    {/* Motion gate: js-anim skryje hero prvky pro GSAP choreografii.
+        Přidává se jen bez reduced-motion; anim-failsafe po 3,5 s odkryje
+        obsah, i kdyby se motion modul nenačetl. */}
+    <script is:inline>
+      (() => {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+          return;
+        document.documentElement.classList.add("js-anim");
+        // motion.ts si timer zruší, jakmile naběhne — failsafe se uplatní
+        // jen když se motion modul vůbec nenačte.
+        window.__animFailsafe = setTimeout(() => {
+          document.documentElement.classList.add("anim-failsafe");
+        }, 3500);
+      })();
+    </script>
+
     <slot name="head" />
 
     {/* Microsoft Clarity: heatmaps + session recordings */}
@@ -98,13 +114,27 @@ const ogImageUrl = new URL(ogImage, Astro.site).href;
   </head>
   <body class="bg-bg-primary text-text-primary antialiased">
     <a href="#main" class="skip-to-main">Přejít na obsah</a>
+    <div class="grain" aria-hidden="true"></div>
     <slot />
+
+    <script>
+      // Motion modul (GSAP + Lenis) se importuje až PO prvním paintu —
+      // jinak jeho exec na pomalém CPU blokuje první vykreslení stránky
+      // (deferred moduly běží před render opportunity u malých stránek).
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          import("../scripts/motion");
+        }, 0);
+      });
+    </script>
 
     <script is:inline>
       (() => {
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-        const sections = document.querySelectorAll("main > section");
+        const sections = document.querySelectorAll(
+          "main > section:not([data-no-fade])",
+        );
         if (!sections.length) return;
 
         // Mark sections + fade-ready in one pass (single style invalidation).

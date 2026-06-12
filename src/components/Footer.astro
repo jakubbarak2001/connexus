@@ -13,23 +13,21 @@ const phoneHref = "tel:+420774563739";
 const emailDisplay = "jakub@connexus.cz";
 ---
 
-<footer class="mt-24 border-t border-border-subtle bg-bg-primary md:mt-32">
+<footer class="bg-ink text-paper">
   <Container class="py-14 md:py-20">
     <div class="grid gap-12 md:grid-cols-12 md:gap-16">
       <div class="md:col-span-5">
-        <p
-          class="font-serif text-h3-sm font-medium text-text-primary md:text-h3"
-        >
+        <p class="font-serif text-h3-sm font-medium text-paper md:text-h3">
           Connexus
         </p>
-        <p class="mt-3 max-w-prose text-body text-text-secondary">
+        <p class="mt-3 max-w-prose text-body text-ink-mutedtext">
           Vlastní weby, SEO a péče po spuštění.
         </p>
       </div>
 
       <nav class="md:col-span-3" aria-label="Patička">
         <p
-          class="font-mono text-small uppercase tracking-[0.08em] text-text-muted"
+          class="font-mono text-small uppercase tracking-[0.08em] text-ink-mutedtext"
         >
           Navigace
         </p>
@@ -39,7 +37,7 @@ const emailDisplay = "jakub@connexus.cz";
               <li>
                 <a
                   href={link.href}
-                  class="text-body text-text-secondary transition-colors hover:text-text-primary"
+                  class="text-body text-ink-mutedtext transition-colors hover:text-paper"
                 >
                   {link.label}
                 </a>
@@ -51,7 +49,7 @@ const emailDisplay = "jakub@connexus.cz";
 
       <div class="md:col-span-4">
         <p
-          class="font-mono text-small uppercase tracking-[0.08em] text-text-muted"
+          class="font-mono text-small uppercase tracking-[0.08em] text-ink-mutedtext"
         >
           Kontakt
         </p>
@@ -59,7 +57,7 @@ const emailDisplay = "jakub@connexus.cz";
           <li>
             <a
               href={`mailto:${emailDisplay}`}
-              class="text-body text-text-secondary transition-colors hover:text-accent"
+              class="text-body text-paper transition-colors hover:text-accent"
             >
               {emailDisplay}
             </a>
@@ -67,7 +65,7 @@ const emailDisplay = "jakub@connexus.cz";
           <li>
             <a
               href={phoneHref}
-              class="font-mono text-body text-text-secondary transition-colors hover:text-accent"
+              class="font-mono text-body text-paper transition-colors hover:text-accent"
             >
               {phoneDisplay}
             </a>
@@ -76,8 +74,8 @@ const emailDisplay = "jakub@connexus.cz";
       </div>
     </div>
 
-    <div class="mt-12 border-t border-border-subtle pt-6 md:mt-16 md:pt-8">
-      <p class="font-mono text-small text-text-muted">
+    <div class="mt-12 border-t border-ink-line pt-6 md:mt-16 md:pt-8">
+      <p class="font-mono text-small text-ink-mutedtext">
         © 2026 Connexus · Jakub Barák · IČO 24995606 · Děčín, Česká republika
       </p>
     </div>

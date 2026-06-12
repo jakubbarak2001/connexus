@@ -2,19 +2,23 @@
 import Container from "./Container.astro";
 ---
 
-<section id="vy" class="bg-bg-secondary py-20 md:py-32">
+<section id="vy" class="overflow-hidden bg-accent py-20 text-ink md:py-32">
   <Container>
-    <div
-      class="flex-statement max-w-[820px] border-l-2 border-accent pl-6 md:pl-10"
-    >
-      <h2
-        class="font-serif text-h2-sm font-medium leading-[1.1] md:text-h2"
+    <div class="flex-statement max-w-[900px]">
+      <p
+        class="font-mono text-small font-medium uppercase tracking-[0.12em] text-ink/70"
       >
-        Žádné balíčky. Žádné <em class="not-italic text-accent">závazky</em>.
+        ● Podmínky
+      </p>
+      <h2
+        class="mt-8 font-serif font-medium leading-[1.02] text-ink md:mt-10"
+        style="font-size: clamp(40px, 7vw, 88px); letter-spacing: -0.03em;"
+      >
+        Žádné balíčky.<br />Žádné <em class="italic">závazky</em>.
       </h2>
-      <p class="mt-6 max-w-prose text-body-lg text-text-secondary md:mt-8">
+      <p class="mt-8 max-w-prose text-body-lg font-medium text-ink/85 md:mt-10">
         Žádná smlouva na rok, žádný výpovědní rituál. Péči po spuštění si
-        určujete vy — pravidelnou, ad-hoc, nebo žádnou.
+        určujete vy - pravidelnou, ad-hoc, nebo žádnou.
       </p>
     </div>
   </Container>

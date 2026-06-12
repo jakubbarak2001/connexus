@@ -1,8 +1,8 @@
----
+﻿---
 interface Props {
   name?: string;
   role: string;
-  lede: string;
+  lede?: string;
   body: string[];
   photo?: string;
   photoAlt: string;
@@ -22,20 +22,26 @@ const { name, role, lede, body, photo, photoAlt, reverse = false } =
   >
     {
       photo ? (
-        <div class="person-photo-frame relative md:max-w-[400px]">
-          <div class="person-photo-clip">
-            <img
-              src={photo}
-              alt={photoAlt}
-              width="400"
-              height="400"
-              class="block aspect-square w-full object-cover"
-            />
-            <span class="person-photo-scan" aria-hidden="true" />
+        <figure class="md:max-w-[400px]">
+          <div class="person-photo-frame relative">
+            <div class="person-photo-clip">
+              <img
+                src={photo}
+                alt={photoAlt}
+                width="400"
+                height="400"
+                class="block aspect-square w-full object-cover"
+              />
+              <span class="person-photo-scan" aria-hidden="true" />
+            </div>
+            <span class="person-photo-corner person-photo-corner--tl" aria-hidden="true" />
+            <span class="person-photo-corner person-photo-corner--br" aria-hidden="true" />
           </div>
-          <span class="person-photo-corner person-photo-corner--tl" aria-hidden="true" />
-          <span class="person-photo-corner person-photo-corner--br" aria-hidden="true" />
-        </div>
+          <figcaption class="mt-4 flex items-baseline justify-between gap-4 font-mono text-[11px] uppercase tracking-[0.14em] text-text-muted">
+            <span>Fig. 01 - zakladatel</span>
+            <span class="text-accent-deep">Děčín, CZ</span>
+          </figcaption>
+        </figure>
       ) : (
         <figure
           class="flex aspect-square w-full items-center justify-center border border-border-subtle bg-bg-tertiary md:max-w-[400px]"
@@ -58,7 +64,9 @@ const { name, role, lede, body, photo, photoAlt, reverse = false } =
     <div>
       {
         name && (
-          <p class="font-mono text-small uppercase tracking-[0.08em] text-accent">
+          <p
+            class="font-mono text-small uppercase tracking-[0.08em] text-accent-deep"
+          >
             {name}
           </p>
         )
@@ -69,12 +77,16 @@ const { name, role, lede, body, photo, photoAlt, reverse = false } =
     </div>
 
     <div class="max-w-prose space-y-6 text-body text-text-secondary">
-      <p
-        class="text-text-primary"
-        style="font-size:22px; font-weight:500; line-height:1.5;"
-      >
-        {lede}
-      </p>
+      {
+        lede && (
+          <p
+            class="font-serif font-medium text-text-primary"
+            style="font-size: clamp(24px, 2.6vw, 32px); line-height: 1.35; letter-spacing: -0.01em;"
+          >
+            {lede}
+          </p>
+        )
+      }
       {body.map((p) => <p set:html={p} />)}
     </div>
   </div>
@@ -82,8 +94,8 @@ const { name, role, lede, body, photo, photoAlt, reverse = false } =
 
 <style>
   .person-photo-frame {
-    border: 1px solid theme("colors.border.subtle");
-    box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.6);
+    border: 1px solid theme("colors.border.strong");
+    box-shadow: 0 30px 80px -40px rgba(24, 21, 17, 0.45);
   }
   .person-photo-clip {
     position: relative;
@@ -100,10 +112,10 @@ const { name, role, lede, body, photo, photoAlt, reverse = false } =
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(255, 122, 69, 0.9),
+      rgba(255, 77, 0, 0.9),
       transparent
     );
-    box-shadow: 0 0 14px 1px rgba(255, 122, 69, 0.5);
+    box-shadow: 0 0 14px 1px rgba(255, 77, 0, 0.5);
     opacity: 0;
     pointer-events: none;
   }
@@ -173,14 +185,14 @@ const { name, role, lede, body, photo, photoAlt, reverse = false } =
       transform: translate(0, 0);
       width: 18px;
       height: 18px;
-      box-shadow: -4px -4px 18px -4px rgba(255, 122, 69, 0.55);
+      box-shadow: -4px -4px 18px -4px rgba(255, 77, 0, 0.55);
     }
     100% {
       opacity: 1;
       transform: translate(0, 0);
       width: 18px;
       height: 18px;
-      box-shadow: 0 0 0 0 rgba(255, 122, 69, 0);
+      box-shadow: 0 0 0 0 rgba(255, 77, 0, 0);
     }
   }
   @keyframes corner-lock-br {
@@ -195,14 +207,14 @@ const { name, role, lede, body, photo, photoAlt, reverse = false } =
       transform: translate(0, 0);
       width: 18px;
       height: 18px;
-      box-shadow: 4px 4px 18px -4px rgba(255, 122, 69, 0.55);
+      box-shadow: 4px 4px 18px -4px rgba(255, 77, 0, 0.55);
     }
     100% {
       opacity: 1;
       transform: translate(0, 0);
       width: 18px;
       height: 18px;
-      box-shadow: 0 0 0 0 rgba(255, 122, 69, 0);
+      box-shadow: 0 0 0 0 rgba(255, 77, 0, 0);
     }
   }
 
@@ -226,27 +238,27 @@ const { name, role, lede, body, photo, photoAlt, reverse = false } =
   @keyframes frame-confirm {
     0%,
     45% {
-      box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.6);
-      border-color: theme("colors.border.subtle");
+      box-shadow: 0 30px 80px -40px rgba(24, 21, 17, 0.45);
+      border-color: theme("colors.border.strong");
     }
-    /* Scan has just finished — the square locks on and holds. */
+    /* Scan has just finished â€” the square locks on and holds. */
     58% {
       box-shadow:
-        0 30px 80px -30px rgba(0, 0, 0, 0.6),
-        0 0 0 2px rgba(255, 122, 69, 0.95),
-        0 0 34px 2px rgba(255, 122, 69, 0.5);
+        0 30px 80px -40px rgba(24, 21, 17, 0.45),
+        0 0 0 2px rgba(255, 77, 0, 0.95),
+        0 0 34px 2px rgba(255, 77, 0, 0.4);
       border-color: theme("colors.accent.DEFAULT");
     }
     80% {
       box-shadow:
-        0 30px 80px -30px rgba(0, 0, 0, 0.6),
-        0 0 0 2px rgba(255, 122, 69, 0.8),
-        0 0 30px 1px rgba(255, 122, 69, 0.4);
+        0 30px 80px -40px rgba(24, 21, 17, 0.45),
+        0 0 0 2px rgba(255, 77, 0, 0.8),
+        0 0 30px 1px rgba(255, 77, 0, 0.3);
       border-color: theme("colors.accent.DEFAULT");
     }
     100% {
-      box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.6);
-      border-color: theme("colors.border.subtle");
+      box-shadow: 0 30px 80px -40px rgba(24, 21, 17, 0.45);
+      border-color: theme("colors.border.strong");
     }
   }
 </style>

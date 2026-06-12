@@ -4,25 +4,40 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Světlé "paper" pozadí — výchozí povrchy stránky.
         bg: {
-          primary: "#0E1218",
-          secondary: "#141923",
-          tertiary: "#1B2230",
-          elevated: "#222B3B",
+          primary: "#F4F1EA",
+          secondary: "#EFEBE1",
+          tertiary: "#E9E4D6",
+          elevated: "#FBF9F4",
         },
         text: {
-          primary: "#F2F0EC",
-          secondary: "#B5B7BD",
-          muted: "#838894",
+          primary: "#181511",
+          secondary: "#4A4538",
+          muted: "#6E6859",
         },
         accent: {
-          DEFAULT: "#FF7A45",
-          hover: "#FF9366",
-          subtle: "#3A2820",
+          DEFAULT: "#F54A00",
+          hover: "#D84100",
+          subtle: "#FFE0D1",
+          // Pro DROBNÝ oranžový text na papíru (mono labely) — splňuje
+          // kontrast 4,5:1; plný akcent tam projde jen u velkých nadpisů.
+          deep: "#C73B00",
         },
         border: {
-          subtle: "#262C38",
-          strong: "#3A4150",
+          subtle: "#DCD6C8",
+          strong: "#A8A18E",
+        },
+        // Explicitní barvy pro invertované (tmavé/oranžové) pásy sekcí.
+        ink: {
+          DEFAULT: "#181511",
+          soft: "#26221B",
+          line: "#3B362C",
+          mutedtext: "#A39C8B",
+        },
+        paper: {
+          DEFAULT: "#F4F1EA",
+          dim: "#D9D4C6",
         },
         chrome: {
           frame: "#0A0E14",

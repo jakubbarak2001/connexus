@@ -1,32 +1,57 @@
 ---
 import Button from "./Button.astro";
+
+// Rotující druhý řádek titulku: "Web, který …" + 3 varianty, které se
+// po pár vteřinách střídají stejnou maskovou animací jako vstup.
+// První varianta je výchozí (vidí ji i návštěvník bez JS), další dvě
+// jsou pro čtečky skryté — obsahově jde o tutéž větu.
+const swapVariants = [
+  { pre: "přivádí ", accent: "klienty", post: "." },
+  { pre: "", accent: "prodává", post: "." },
+  { pre: "je ", accent: "vidět", post: "." },
+];
 ---
 
 <section
   id="uvod"
-  class="hero relative flex items-center overflow-hidden px-6 pt-28 pb-28 md:px-12 md:pt-0 md:pb-0 lg:px-20"
+  data-no-fade
+  class="hero relative flex flex-col overflow-hidden"
 >
-  <div class="hero__backdrop" aria-hidden="true"></div>
-  <div class="hero__grid" aria-hidden="true"></div>
-
-  <div class="relative mx-auto w-full max-w-6xl">
-    <p class="hero__eyebrow font-mono uppercase text-accent">
-      Moderní weby v Astro. Pro firmy, které chtějí výkon
-      a kontrolu, ne šablonu.
+  <div
+    class="hero__content relative z-10 mx-auto flex w-full max-w-[1400px] flex-1 flex-col px-6 pt-32 pb-24 md:px-12 md:pt-40 lg:px-16"
+  >
+    <p class="hero__eyebrow font-mono uppercase text-text-secondary">
+      <span class="text-accent" aria-hidden="true">●</span>&nbsp; Moderní weby
+      v Astro - žádné šablony
     </p>
 
     <h1 class="hero__h1 font-serif font-medium text-text-primary">
-      Web, který přivádí<br /> <em class="hero__accent-word">klienty</em>.
+      <span class="hero-line"
+        ><span class="hero-line__inner">Web, který</span></span
+      >
+      <span class="hero-line hero-line--swap">
+        {
+          swapVariants.map((v, i) => (
+            <span class="hero-line__inner" aria-hidden={i > 0}>
+              {v.pre}<em class="hero__accent-word">{v.accent}</em>{v.post}
+            </span>
+          ))
+        }
+      </span>
     </h1>
 
-    <p class="hero__subhead text-text-secondary">
+    <p
+      class="hero__subhead mt-10 max-w-[560px] text-body text-text-secondary md:mt-12"
+    >
       Máte návštěvnost i poptávky, ale web je nepromění v klienty. <strong
         class="text-text-primary">Postavím web, který prodává</strong> -
       vlastní texty, SEO základ a péče i po spuštění.
     </p>
 
-    <div class="hero__ctas">
-      <Button href="#kontakt" variant="primary">Domluvit konzultaci</Button>
+    <div class="hero__ctas mt-10">
+      <Button href="#kontakt" variant="primary" class="js-magnetic"
+        >Domluvit konzultaci</Button
+      >
     </div>
   </div>
 
@@ -53,118 +78,64 @@ import Button from "./Button.astro";
 
 <style>
   .hero {
-    min-height: 85vh;
-  }
-
-  .hero__backdrop {
-    position: absolute;
-    top: -10%;
-    right: -10%;
-    width: 70%;
-    height: 90%;
-    background: radial-gradient(
-      ellipse at top right,
-      rgba(255, 122, 69, 0.18) 0%,
-      rgba(255, 122, 69, 0.05) 30%,
-      transparent 60%
-    );
-    pointer-events: none;
-    filter: blur(60px);
-    z-index: 0;
-  }
-
-  .hero__grid {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(theme("colors.border.subtle") 1px, transparent 1px),
-      linear-gradient(90deg, theme("colors.border.subtle") 1px, transparent 1px);
-    background-size: 80px 80px;
-    background-position: -1px -1px;
-    opacity: 0.18;
-    mask-image: radial-gradient(
-      ellipse at center,
-      black 30%,
-      transparent 75%
-    );
-    -webkit-mask-image: radial-gradient(
-      ellipse at center,
-      black 30%,
-      transparent 75%
-    );
-    pointer-events: none;
-    z-index: 0;
+    min-height: 100svh;
   }
 
   .hero__eyebrow {
-    font-size: 13px;
-    letter-spacing: 0.08em;
-    margin-bottom: 24px;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    margin-bottom: clamp(24px, 4vh, 56px);
+  }
+  .hero__eyebrow .text-accent {
+    font-size: 8px;
+    vertical-align: 2px;
   }
 
   .hero__h1 {
-    font-size: clamp(38px, 9.5vw, 60px);
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    text-wrap: balance;
+    font-size: clamp(52px, 13vw, 168px);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+  }
+
+  /* Maskované řádky: vnější ořezává, vnitřní vyjíždí zespodu.
+     Padding/margin kompenzace drží dotažnice (p, ý, k) mimo ořez. */
+  .hero-line {
+    display: block;
+    overflow: hidden;
+    padding: 0.12em 0;
+    margin: -0.12em 0;
+  }
+  .hero-line__inner {
+    display: block;
+    will-change: transform;
+  }
+
+  /* Rotující řádek: varianty leží přes sebe v jedné grid buňce,
+     výšku drží ta nejvyšší. Bez JS je vidět jen první. */
+  .hero-line--swap {
+    display: grid;
+  }
+  .hero-line--swap .hero-line__inner {
+    grid-area: 1 / 1;
+  }
+  .hero-line--swap .hero-line__inner:not(:first-child) {
+    visibility: hidden;
   }
 
   .hero__accent-word {
     color: theme("colors.accent.DEFAULT");
     font-style: italic;
     font-weight: 500;
-    padding-right: 0.06em;
+    padding-right: 0.05em;
   }
 
   .hero__subhead {
-    font-size: 18px;
-    line-height: 1.5;
-    max-width: 600px;
-    margin-top: 32px;
+    font-size: 17px;
+    line-height: 1.55;
   }
-
-  .hero__ctas {
-    margin-top: 48px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 24px;
-  }
-
-  .hero__secondary-link {
-    color: theme("colors.text.secondary");
-    transition: color 200ms ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .hero__secondary-link:hover {
-    color: theme("colors.accent.DEFAULT");
-  }
-  .hero__secondary-link span {
-    transition: transform 200ms ease;
-  }
-  .hero__secondary-link:hover span {
-    transform: translateX(3px);
-  }
-
   @media (min-width: 768px) {
-    .hero {
-      min-height: 90vh;
-    }
-
-    .hero__eyebrow {
-      font-size: 14px;
-    }
-
-    .hero__h1 {
-      font-size: clamp(80px, 9vw, 132px);
-      line-height: 1.02;
-      letter-spacing: -0.035em;
-    }
-
     .hero__subhead {
-      font-size: 22px;
+      font-size: 18px;
     }
   }
 
@@ -179,24 +150,27 @@ import Button from "./Button.astro";
     width: 44px;
     height: 44px;
     border-radius: 999px;
-    color: inherit;
+    z-index: 10;
     transition: color 200ms ease;
   }
   .hero__chevron:hover {
     color: theme("colors.text.primary");
   }
+  @media (min-width: 768px) {
+    .hero__chevron {
+      bottom: 40px;
+    }
+  }
 
-  /* Gentle scroll cue: float subtly up and down, looping after the hero
-     has settled. Pauses on hover. */
+  /* Jemný scroll cue: plave nahoru a dolů, po najetí se zastaví. */
   @media (prefers-reduced-motion: no-preference) {
     .hero__chevron {
-      animation: chevron-float 2.6s ease-in-out 0.9s infinite;
+      animation: chevron-float 2.6s ease-in-out 1.6s infinite;
     }
     .hero__chevron:hover {
       animation-play-state: paused;
     }
   }
-
   @keyframes chevron-float {
     0%,
     100% {
@@ -210,9 +184,50 @@ import Button from "./Button.astro";
     }
   }
 
-  @media (min-width: 768px) {
-    .hero__chevron {
-      bottom: 40px;
+  /* Výchozí skryté stavy pro GSAP choreografii. Třídu js-anim přidá
+     inline skript v <head> jen bez reduced-motion — bez JS je obsah
+     viditelný okamžitě. Řádky H1 se skrývají přes visibility, NE přes
+     CSS transform — GSAP by si CSS posun připočetl jako pixelový
+     offset ke svému yPercent. Transform vlastní jen GSAP. */
+  :global(html.js-anim) .hero__eyebrow,
+  :global(html.js-anim) .hero__ctas,
+  :global(html.js-anim) .hero__chevron {
+    opacity: 0;
+  }
+  :global(html.js-anim) .hero-line__inner {
+    visibility: hidden;
+  }
+
+  /* Subhead je LCP element — nesmí startovat z opacity 0 (Lighthouse
+     by čekal na konec choreografie). Čistě CSS nástup z 25 % opacity:
+     vykreslí se hned při prvním paintu, vizuálně ale pořád najíždí
+     až po titulku. Bez JS/s reduced-motion se animace nepouští. */
+  @media (prefers-reduced-motion: no-preference) {
+    :global(html.js-anim) .hero__subhead {
+      animation: subhead-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) 1.1s both;
     }
+  }
+  @keyframes subhead-in {
+    from {
+      opacity: 0.25;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Pojistka: kdyby se motion modul nenačetl, inline skript po 3,5 s
+     přidá anim-failsafe a obsah se odkryje i bez GSAP. U rotujícího
+     řádku se odkrývá jen první varianta. */
+  :global(html.anim-failsafe) .hero__eyebrow,
+  :global(html.anim-failsafe) .hero__ctas,
+  :global(html.anim-failsafe) .hero__chevron {
+    opacity: 1 !important;
+  }
+  :global(html.anim-failsafe) .hero-line__inner:first-child {
+    visibility: visible !important;
+    transform: none !important;
   }
 </style>

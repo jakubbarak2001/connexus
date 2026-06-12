@@ -2,25 +2,19 @@
 import Container from "./Container.astro";
 import SectionMarker from "./SectionMarker.astro";
 
-interface Phase {
-  title: string;
-  body: string;
-  icon: "strategy" | "build" | "care";
-}
-
-const phases: Phase[] = [
+const phases = [
   {
-    icon: "strategy",
+    index: "01",
     title: "Strategie",
     body: "Pochopím váš byznys a klientelu. Z toho vytvořím plán, na kterém stojí všechno další.",
   },
   {
-    icon: "build",
+    index: "02",
     title: "Stavba",
     body: "Vlastní design, vlastní kód, vlastní texty a SEO v základu od startu.",
   },
   {
-    icon: "care",
+    index: "03",
     title: "Péče",
     body: "Po spuštění zůstanu. Pravidelná péče, ad-hoc zásahy, nebo úplné předání. Prvních 30 dní ladění je v ceně.",
   },
@@ -34,221 +28,106 @@ const phases: Phase[] = [
     <h2
       class="mt-10 max-w-[780px] font-serif text-h2-sm font-medium md:mt-14 md:text-h2"
     >
-      Tři fáze. <em class="not-italic text-accent">Tři až šest týdnů</em>.
+      Tři fáze. <em class="font-medium italic text-accent"
+        >Tři až šest týdnů</em
+      >.
     </h2>
+  </Container>
 
-    <div
-      class="process-grid mt-14 grid grid-cols-1 gap-10 md:mt-20 md:grid-cols-3 md:gap-12"
-    >
-      {
-        phases.map((phase) => (
-          <div class="process-card border-t border-border-strong pt-8">
-            <span class="process-icon text-accent" aria-hidden="true">
-              {phase.icon === "strategy" && (
-                <svg
-                  class="icon-target"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 32 32"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.75"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <circle cx="16" cy="16" r="11" />
-                  <circle cx="16" cy="16" r="4" />
-                  <path d="M16 2v4" />
-                  <path d="M16 26v4" />
-                  <path d="M2 16h4" />
-                  <path d="M26 16h4" />
-                </svg>
-              )}
-              {phase.icon === "build" && (
-                <svg
-                  class="icon-layers"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 32 32"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.75"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M16 4 4 10l12 6 12-6-12-6Z" />
-                  <path d="M4 16l12 6 12-6" />
-                  <path d="M4 22l12 6 12-6" />
-                </svg>
-              )}
-              {phase.icon === "care" && (
-                <svg
-                  class="icon-chart"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 32 32"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.75"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M3 24l7-9 6 5 8-12" />
-                  <path d="M18 8h6v6" />
-                </svg>
-              )}
-            </span>
-            <h3 class="mt-5 font-serif text-h3-sm font-medium text-text-primary md:text-h3">
+  <div class="mt-14 md:mt-20">
+    {
+      phases.map((phase) => (
+        <div class="phase-row border-t border-text-primary/25 last:border-b">
+          <div class="phase-row__grid mx-auto grid w-full max-w-content grid-cols-1 gap-4 px-6 py-10 md:grid-cols-12 md:items-center md:gap-10 md:px-10 md:py-14">
+            <p class="phase-row__num font-mono text-small text-accent-deep md:col-span-1">
+              {phase.index}
+            </p>
+            <h3 class="phase-row__title font-serif font-medium md:col-span-6">
               {phase.title}
             </h3>
-            <p class="mt-4 text-body text-text-secondary">{phase.body}</p>
+            <p class="phase-row__body text-body md:col-span-5">{phase.body}</p>
           </div>
-        ))
-      }
-    </div>
-  </Container>
+        </div>
+      ))
+    }
+  </div>
 </section>
 
 <style>
-  .process-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  .phase-row {
+    background: transparent;
+    transition: background-color 350ms cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .process-icon svg {
-    overflow: visible;
+  .phase-row__title {
+    font-size: clamp(36px, 6vw, 72px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: theme("colors.text.primary");
+    transition: color 350ms ease, transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .icon-target {
-    transform-origin: center;
-    transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  .phase-row__body {
+    color: theme("colors.text.secondary");
+    transition: color 350ms ease;
+    max-width: 420px;
   }
-
-  .process-card {
-    opacity: 0;
-    transform: translateY(16px);
-    transition:
-      opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
-      transform 700ms cubic-bezier(0.16, 1, 0.3, 1),
-      border-color 250ms ease;
+  .phase-row__num {
+    transition: color 350ms ease;
   }
 
   @media (hover: hover) {
-    .process-card:hover {
-      border-color: theme("colors.accent.DEFAULT");
+    .phase-row:hover {
+      background: theme("colors.ink.DEFAULT");
+    }
+    .phase-row:hover .phase-row__title {
+      color: theme("colors.paper.DEFAULT");
+      transform: translateX(12px);
+    }
+    .phase-row:hover .phase-row__body {
+      color: theme("colors.ink.mutedtext");
     }
   }
 
-  .icon-layers path,
-  .icon-chart path {
-    transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+  /* Vstupní odkrytí řádků při scrollu. */
+  .phase-row {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      background-color 350ms cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
   }
-
-  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-    .process-card:hover .process-icon {
-      transform: scale(1.06);
-    }
-    .process-card:hover .icon-target {
-      transform: rotate(90deg);
-    }
-    /* Layers spread apart — the stack "assembles". */
-    .process-card:hover .icon-layers path:nth-child(1) {
-      transform: translateY(-2px);
-    }
-    .process-card:hover .icon-layers path:nth-child(3) {
-      transform: translateY(2px);
-    }
-    /* Chart lifts up and to the right — growth. */
-    .process-card:hover .icon-chart path {
-      transform: translate(1.5px, -2px);
-    }
-  }
-
-  /* Discoverability: when a card scrolls into view, its icon plays its
-     motion once — a hint that there's something to hover. */
-  @media (prefers-reduced-motion: no-preference) {
-    .process-card.is-visible .icon-target {
-      animation: hint-rotate 1000ms cubic-bezier(0.16, 1, 0.3, 1) 1000ms 1;
-    }
-    .process-card.is-visible .icon-layers path:nth-child(1) {
-      animation: hint-up 1000ms cubic-bezier(0.16, 1, 0.3, 1) 1000ms 1;
-    }
-    .process-card.is-visible .icon-layers path:nth-child(3) {
-      animation: hint-down 1000ms cubic-bezier(0.16, 1, 0.3, 1) 1000ms 1;
-    }
-    .process-card.is-visible .icon-chart path {
-      animation: hint-chart 1000ms cubic-bezier(0.16, 1, 0.3, 1) 1000ms 1;
-    }
-  }
-
-  @keyframes hint-rotate {
-    0% {
-      transform: rotate(0);
-    }
-    50% {
-      transform: rotate(90deg);
-    }
-    100% {
-      transform: rotate(0);
-    }
-  }
-  @keyframes hint-up {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-2px);
-    }
-  }
-  @keyframes hint-down {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(2px);
-    }
-  }
-  @keyframes hint-chart {
-    0%,
-    100% {
-      transform: translate(0, 0);
-    }
-    50% {
-      transform: translate(1.5px, -2px);
-    }
-  }
-  .process-card.is-visible {
+  .phase-row.is-visible {
     opacity: 1;
     transform: none;
   }
+  /* Stagger jen pro opacity/transform (odkrytí) — background-color musí
+     zůstat bez zpoždění, jinak by se loudal hover invert. Pořadí delayů
+     odpovídá pořadí vlastností v transition výše. */
   @media (min-width: 768px) {
-    .process-card:nth-child(2) {
-      transition-delay: 120ms;
+    .phase-row:nth-child(2) {
+      transition-delay: 0ms, 100ms, 100ms;
     }
-    .process-card:nth-child(3) {
-      transition-delay: 240ms;
+    .phase-row:nth-child(3) {
+      transition-delay: 0ms, 200ms, 200ms;
     }
   }
   @media (prefers-reduced-motion: reduce) {
-    .process-card {
+    .phase-row {
       opacity: 1;
       transform: none;
-      transition: none;
     }
   }
 </style>
 
 <script>
-  const cards = document.querySelectorAll<HTMLElement>("#proces .process-card");
-  if (cards.length) {
+  const rows = document.querySelectorAll<HTMLElement>("#proces .phase-row");
+  if (rows.length) {
     const prefersReduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
 
     if (prefersReduced) {
-      cards.forEach((card) => card.classList.add("is-visible"));
+      rows.forEach((row) => row.classList.add("is-visible"));
     } else {
       const observer = new IntersectionObserver(
         (entries, obs) => {
@@ -261,7 +140,7 @@ const phases: Phase[] = [
         },
         { threshold: 0.2, rootMargin: "0px 0px -10% 0px" },
       );
-      cards.forEach((card) => observer.observe(card));
+      rows.forEach((row) => observer.observe(row));
     }
   }
 </script>

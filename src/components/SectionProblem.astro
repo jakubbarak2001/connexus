@@ -1,6 +1,5 @@
 ---
 import Container from "./Container.astro";
-import SectionMarker from "./SectionMarker.astro";
 
 const cards = [
   {
@@ -23,47 +22,52 @@ const cards = [
 
 <section
   id="problem"
-  class="relative overflow-hidden bg-bg-secondary py-20 md:py-32"
+  class="relative overflow-hidden bg-ink py-20 text-paper md:py-32"
 >
-  <div class="problem-grid" aria-hidden="true"></div>
   <div class="relative z-10">
     <Container>
-    <SectionMarker number="01" label="Problém" />
+      <p
+        class="font-mono text-small font-medium uppercase tracking-[0.12em] text-ink-mutedtext"
+      >
+        <span class="text-accent">● 01</span>
+        <span class="mx-2" aria-hidden="true">-</span>
+        <span>Problém</span>
+      </p>
 
-    <h2
-      class="mt-10 max-w-[900px] font-serif text-h2-sm font-medium md:mt-14 md:text-h2"
-    >
-      Konkurence není lepší. Je jen víc
-      <em class="not-italic text-accent">vidět</em>.
-    </h2>
+      <h2
+        class="mt-10 max-w-[900px] font-serif text-h2-sm font-medium text-paper md:mt-14 md:text-h2"
+      >
+        Konkurence není lepší. Je jen víc
+        <em class="font-medium italic text-accent">vidět</em>.
+      </h2>
 
-    <p
-      class="problem-lead mt-6 max-w-prose text-body text-text-secondary md:mt-8 md:text-body-lg"
-    >
-      Dnes se rozhoduje na webu - ať už nějaký máte, nebo teprve plánujete.
-      Problém není v designu. Je v distribuci.
-    </p>
+      <p
+        class="problem-lead mt-6 max-w-prose text-body text-ink-mutedtext md:mt-8 md:text-body-lg"
+      >
+        Dnes se rozhoduje na webu - ať už nějaký máte, nebo teprve plánujete.
+        Problém není v designu. Je v distribuci.
+      </p>
 
-    <div
-      class="mt-14 grid grid-cols-1 gap-10 md:mt-20 md:grid-cols-3 md:gap-12"
-    >
-      {
-        cards.map((card) => (
-          <div class="problem-card border-t border-border-strong pt-8">
-            <span class="problem-card__num" aria-hidden="true">
-              {card.index}
-            </span>
-            <div class="problem-card__inner">
-              <p class="font-mono text-small text-accent">{card.index}</p>
-              <h3 class="mt-3 font-serif text-h3-sm font-medium text-text-primary md:text-h3">
-                {card.headline}
-              </h3>
-              <p class="mt-4 text-body text-text-secondary">{card.body}</p>
+      <div
+        class="mt-14 grid grid-cols-1 gap-10 md:mt-20 md:grid-cols-3 md:gap-12"
+      >
+        {
+          cards.map((card) => (
+            <div class="problem-card border-t border-ink-line pt-8">
+              <span class="problem-card__num" aria-hidden="true">
+                {card.index}
+              </span>
+              <div class="problem-card__inner">
+                <p class="font-mono text-small text-accent">{card.index}</p>
+                <h3 class="mt-3 font-serif text-h3-sm font-medium text-paper md:text-h3">
+                  {card.headline}
+                </h3>
+                <p class="mt-4 text-body text-ink-mutedtext">{card.body}</p>
+              </div>
             </div>
-          </div>
-        ))
-      }
-    </div>
+          ))
+        }
+      </div>
     </Container>
   </div>
 </section>
@@ -91,17 +95,17 @@ const cards = [
       border-color 250ms ease;
   }
 
-  /* Big ghost numeral behind each card — editorial depth. */
+  /* Velká stínová číslice za kartou — editorialní hloubka. */
   .problem-card__num {
     position: absolute;
     top: 1.75rem;
     right: 0;
     font-family: theme("fontFamily.serif");
-    font-size: 120px;
+    font-size: 140px;
     line-height: 1;
     font-weight: 500;
-    color: theme("colors.text.primary");
-    opacity: 0.05;
+    color: theme("colors.paper.DEFAULT");
+    opacity: 0.07;
     pointer-events: none;
     user-select: none;
     z-index: 0;
@@ -121,7 +125,7 @@ const cards = [
       border-color: theme("colors.accent.DEFAULT");
     }
     .problem-card:hover .problem-card__num {
-      opacity: 0.1;
+      opacity: 0.22;
       color: theme("colors.accent.DEFAULT");
     }
     .problem-card:hover .problem-card__inner {
@@ -129,31 +133,7 @@ const cards = [
     }
   }
 
-  /* Faint grid texture, matching the hero, to lift the section off flat. */
-  .problem-grid {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(theme("colors.border.subtle") 1px, transparent 1px),
-      linear-gradient(
-        90deg,
-        theme("colors.border.subtle") 1px,
-        transparent 1px
-      );
-    background-size: 80px 80px;
-    opacity: 0.1;
-    mask-image: radial-gradient(ellipse at center, black 15%, transparent 80%);
-    -webkit-mask-image: radial-gradient(
-      ellipse at center,
-      black 15%,
-      transparent 80%
-    );
-    pointer-events: none;
-    z-index: 0;
-  }
-  /* Stagger only on desktop, where all three cards enter the viewport together.
-     On mobile they enter one at a time via scroll, so a transition-delay would
-     feel like lag on each individual card. */
+  /* Stagger jen na desktopu, kde karty vstupují společně. */
   @media (min-width: 768px) {
     .problem-card:nth-child(2) {
       transition-delay: 120ms;
